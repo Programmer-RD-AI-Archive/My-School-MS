@@ -1,3 +1,4 @@
+import warnings
 from WEB import *
 from WEB.help_funcs import *
 
@@ -190,50 +191,37 @@ def sign_two_face_auth():
         if request.method == "POST":
             email_code = request.form["email"]
             phone_number_code = request.form["phone_number"]
-            results = [
-                collection.find_one(
-                    {
-                        session["Email"]: int(email_code),
-                        session["Phone Number"]: int(phone_number_code),
-                        "user_name": session["User Name"],
-                    }
-                )
-            ]
+            # results = [
+            #     collection.find_one(
+            #         {
+            #             str(session["2_Fac_Auth_Info"]["email"]): str(email_code),
+            #             str("94766428783"): str(phone_number_code),
+            #             "user_name": session["2_Fac_Auth_Info"]["user_name"],
+            #         }
+            #     )
+            # ]
+            results = ["A", "B"]  # TODO
             if results == [None]:
                 flash("Email or Phone Number code is wrong.", "danger")
                 return redirect("/Sign/In")
-            collection.delete_one(results[0])
+            # collection.delete_one(results[0])
             if session["2FACAUTH"] is False:
                 email = session["2_Fac_Auth_Info"]["email"]
                 user_name = session["2_Fac_Auth_Info"]["user_name"]
                 _id = session["2_Fac_Auth_Info"]["_id"]
                 rank = session["2_Fac_Auth_Info"]["rank"]
                 password = session["2_Fac_Auth_Info"]["password"]
-                try:
-                    session.pop("Email or User Name")
-                    session.pop("Password")
-                except Exception as e:
-                    warnings.filterwarnings(e)
                 session["id"] = _id
                 session["User Name"] = user_name
                 session["Email"] = email
                 session["Password"] = password
                 session["Rank"] = rank
+                session.pop("2FACAUTH")
+                session.pop("2_Fac_Auth_Info")
                 flash("You have loged in successfully", "success")
                 return redirect(f"/Usr/{_id}/")
             else:
-                password = session["2_Fac_Auth_Info"]["password"]
-                email = session["2_Fac_Auth_Info"]["email"]
-                user_name = session["2_Fac_Auth_Info"]["user_name"]
-                account_add = requests.post(
-                    "http://127.0.0.1:5000/api/Accounts",
-                    {"email": email, "password": hp.encode(password), "user_name": user_name},
-                )
-                account_add = account_add.json()
-                session["Email or User Name"] = email
-                session["Password"] = password
-                flash("Your account has been created.", "success")
-                return redirect("/Sign/In")
+                pass
         hf = Help_Funcs()
         hf.two_fac_auth(
             session["2_Fac_Auth_Info"]["user_name"],
@@ -247,8 +235,6 @@ def sign_two_face_auth():
 @app.route("/payment_methods/", methods=["POST", "GET"])
 def payment_methods():
     try:
-        # url_success = "http://emopro.tech/payment_methods_success/" # TODO
-        # url_decline = "http://emopro.tech/payment_methods_decline"
         url_success = "http://127.0.0.1:5000/payment_methods_success/"
         url_decline = "http://127.0.0.1:5000/payment_methods_decline"
         if "payment_methods" in session:
@@ -267,24 +253,7 @@ def payment_methods():
                         }
                     ],
                     mode="subscription",
-                    success_url=url_success + "True",
-                    cancel_url=url_decline,
-                    discounts=[
-                        {
-                            "coupon": session["Coupon"],
-                        }
-                    ],
-                )
-                session_one_time = stripe.checkout.Session.create(
-                    payment_method_types=["card"],
-                    line_items=[
-                        {
-                            "price": "price_1JIr9vJzMECqGOD89SWGX6rN",
-                            "quantity": 1,
-                        }
-                    ],
-                    mode="payment",
-                    success_url=url_success + "False",
+                    success_url=url_success,
                     cancel_url=url_decline,
                     discounts=[
                         {
@@ -303,52 +272,46 @@ def payment_methods():
                         }
                     ],
                     mode="subscription",
-                    success_url=url_success + "True",
+                    success_url=url_success,
                     cancel_url=url_decline,
                 )
-                session_one_time = stripe.checkout.Session.create(
-                    payment_method_types=["card"],
-                    line_items=[
-                        {
-                            "price": "price_1JIr9vJzMECqGOD89SWGX6rN",
-                            "quantity": 1,
-                        }
-                    ],
-                    mode="payment",
-                    success_url=url_success + "False",
-                    cancel_url=url_decline,
-                )
-                session["One Time"] = session_one_time
-                session["Subscription"] = session_subscription
+            session["Subscription"] = session_subscription
             return render_template(
                 "/home/payment_methods.html",
                 checkout_session_id_subscription=session_subscription["id"],
-                checkout_session_id_one_time=session_one_time["id"],
                 checkout_public_key=app.config["STRIPE_PUBLIC_KEY"],
             )
     except:
         return abort(500)
 
 
-@app.route("/payment_methods_success/<payment_id>")
-@app.route("/payment_methods_success/<payment_id>/")
-def payment_methods_success(payment_id):
-    if payment_id == "True":
-        payment_id_info = session["Subscription"]
-    else:
-        payment_id_info = session["One Time"]
-    log_ip_address(
-        url_trying_to_access=f"/payment_methods_success/{payment_id}",
-        ip_address=request.remote_addr,
-    )
+@app.route("/payment_methods_success/")
+@app.route("/payment_methods_success")
+def payment_methods_success():
+    payment_id_info = session["Subscription"]
     if "payment_methods" in session:
         if "Coupon" in session:
             session.pop("Coupon")
-
-        su.add(payment_id=payment_id_info)
         session.pop("payment_methods")
+        password = session["2_Fac_Auth_Info"]["password"]
+        email = session["2_Fac_Auth_Info"]["email"]
+        user_name = session["2_Fac_Auth_Info"]["user_name"]
+        account_add = requests.post(
+            "http://127.0.0.1:5000/api/Accounts",
+            {
+                "email": email,
+                "password": hp.encode(password),
+                "user_name": user_name,
+            },
+        )
+        account_add = account_add.json()
+        session["Email or User Name"] = email
+        session["Password"] = password
+        session.pop("payment_methods")
+        session.pop("Subscription")
+        flash("Your account has been created.", "success")
         flash(
-            "Payment Went Through! \n You will get a email if you get approved",
+            "Payment Went Through!",
             "success",
         )
         return redirect("/")
@@ -358,10 +321,6 @@ def payment_methods_success(payment_id):
 @app.route("/payment_methods_decline")
 def payment_methods_decline():
     try:
-        log_ip_address(
-            url_trying_to_access=f"/payment_methods_decline/",
-            ip_address=request.remote_addr,
-        )
         if "payment_methods" in session:
             flash("Payment Didnt Go Through! \n Try again please.", "success")
             return redirect("/payment_methods")
