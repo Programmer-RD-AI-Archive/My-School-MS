@@ -1,0 +1,165 @@
+<!--
+sumary_line
+
+Keyword arguments:
+argument -- description
+Return: return_description 
+-->
+{% extends "/home/base.html" %} {% block head %}
+<link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='home/css/home.css') }}"
+    />
+    <script src="{{ url_for('static', filename='home/js/home.js') }}"></script>
+<title>Home</title>
+
+{% endblock %} {% block body %}
+<div class="overflow-hidden">
+  <div
+    class="row gx-5 home_row_gx_5_1"
+  >
+    <div
+      class="col home_col_1"
+    >
+      <div
+        class="p-3 bg-light home_p3_bg_light_1"
+      >
+        <h1
+        class="home_main_title_1"
+        >
+          <b
+            >Help you <br />
+            Learn Stuff</b
+          >
+        </h1>
+        <br />
+        <h3>
+          {{description_1}}
+        </h3>
+        <br />
+        <button
+          type="button"
+          class="btn btn-outline-secondary home_btn_outline_secondary_1"
+        >
+          <h2>Learn More</h2>
+        </button>
+      </div>
+    </div>
+    <div class="col home_col_2" >
+      <div class="p-3 bg-light home_p3_bg_light_2">
+        <img src="{{gif_1}}" alt="" />
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+<br />
+<div id="aboutme" class="aboutme">
+  <div class="overflow-hidden">
+    <div
+      class="row gx-5 home_row_gx_5_2"
+    >
+      <div class="col home_col_3" >
+        <div class="p-3 bg-light home_p3_bg_light_3" >
+          <img src="{{gif_2}}" alt="" />
+        </div>
+      </div>
+      <div
+        class="col home_col_4"
+      >
+        <div
+          class="p-3 bg-light home_p3_bg_light_4"
+        >
+          <h1
+          class="home_main_title_2"
+          >
+            <b>About Us</b>
+          </h1>
+          <br />
+          <h3>
+            {{description_2}}
+          </h3>
+          <br />
+          <button
+            type="button"
+            class="btn btn-outline-secondary home_btn_outline_secondary_3"
+          >
+            <h2 class="home_main_title_3" >Getting Started</h2>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+<br />
+<div id="contactus" class="contactus">
+  <div class="overflow-hidden">
+    <div
+      class="row gx-5 home_row_gx_5_3"
+    >
+      <div
+        class="col home_col_5"
+      >
+        <div
+          class="p-3 bg-light home_p3_bg_light_5"
+        >
+          <h1
+          class="home_main_title_4"
+          >
+            <b>Contact Us</b>
+          </h1>
+          <br />
+          <div class="row g-3 align-items-center">
+            <h3>
+            {{description_3}}
+          </h3>
+            <form method="post">
+              <div class="col-auto">
+              <label for="email" class="col-form-label"><h3>Email</h3></label>
+            </div>
+            <div class="col-auto">
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-control"
+                aria-describedby="email"
+                value="{{session['email']}}"
+              />
+            </div>
+            <div class="col-auto">
+              <label for="Question" class="col-form-label"
+                ><h3>Question</h3></label
+              >
+            </div>
+            <div class="col-auto">
+              <input
+                type="text"
+                name="Question"
+                id="Question"
+                class="form-control"
+                aria-describedby="Question"
+                value="{{session['question']}}"
+              />
+            </div>
+            
+          </div>
+          <br />
+          <button
+            type="submit"
+            class="btn btn-outline-secondary home_btn_outline_secondary_2"
+          >
+            <h2 class="home_ask_question_button">Ask Question</h2>
+          </button></form>
+        </div>
+      </div>
+      <div class="col home_col_6">
+        <div class="p-3 bg-light home_p3_bg_light_6">
+          <img src="{{gif_3}}" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
