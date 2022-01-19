@@ -52,21 +52,23 @@ class Help_Funcs:
         sms_random = random.randint(0, 10000000)
         collection.insert_one(
             {
-                email: email_random,
-                phone_numer: sms_random,
-                "user_name": user_name,
+                str(email): str(email_random),
+                str(phone_numer): str(sms_random),
+                "user_name": str(user_name),
                 "time": time,
             }
         )
+        print(email_random)
+        print(sms_random)
         self.send_sms(
-            f"{sms_random} - EmoPro Code for 2Auth \n\n\n\n\n Only for 5 Min",
+            f"{sms_random} - My-School Code for 2Auth \n\n\n\n\n Only for 5 Min",
             # "+" + str(self.decode(phone_numer)),
             "+" + str(phone_numer),
         )  # TODO
         self.send_email(
             f"EmoPro 2Auth Code",
             email,
-            f"{email_random} EmoPro Code for 2Auth \n\n\n\n\n Only for 5 Min",
+            f"{email_random} My-School Code for 2Auth \n\n\n\n\n Only for 5 Min",
         )
         return [sms_random, email_random]
 
