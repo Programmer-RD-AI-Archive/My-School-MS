@@ -33,17 +33,12 @@ def two_fac_auth_checking() -> None:
             if int(time[3]) > 24:  # these are excpetion
                 time[3] = str(int(time[3]) - 24)  # these are excpetion
                 time[2] = str(int(time[2]) + 1)  # these are excpetion
-            now_time = (
-                str(datetime.datetime.now().year)
-                + " "
-                + str(datetime.datetime.now().month)
-                + " "
-                + str(datetime.datetime.now().day)
-                + " "
-                + str(datetime.datetime.now().hour)
-                + " "
-                + str(datetime.datetime.now().minute)
-            )  # getting the current time
+            now_time = (str(datetime.datetime.now().year) + " " +
+                        str(datetime.datetime.now().month) + " " +
+                        str(datetime.datetime.now().day) + " " +
+                        str(datetime.datetime.now().hour) + " " +
+                        str(datetime.datetime.now().minute)
+                        )  # getting the current time
             now_time = now_time.split(
                 " "
             )  # splitting the time to a list so the time and now_time is in same format
