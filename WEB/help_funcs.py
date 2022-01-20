@@ -58,8 +58,6 @@ class Help_Funcs:
                 "time": time,
             }
         )
-        print(email_random)
-        print(sms_random)
         self.send_sms(
             f"{sms_random} - My-School Code for 2Auth \n\n\n\n\n Only for 5 Min",
             # "+" + str(self.decode(phone_numer)),
