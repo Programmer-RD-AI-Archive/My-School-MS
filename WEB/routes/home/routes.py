@@ -103,7 +103,6 @@ def sign_up():
         user_name = request.form["User Name"]
         # remember_password = request.form["Remember Password"]
         remember_password = ""
-        print(remember_password)
         if hp.validate_email(email) is False:
             flash("Invalid Email", "danger")
             return redirect("/Sign/Up")
@@ -145,8 +144,7 @@ def sign_in():
     if request.method == "POST":
         user_name_or_email = request.form["Email or User Name"]
         password = request.form["Password"]
-        remember_password = request.form["Remember Password"]
-        print(remember_password)
+        remember_password = ""  # request.form["Remember Password"]
         already_accounts = requests.get(
             "http://127.0.0.1:5000/api/Accounts",
         )
@@ -212,7 +210,6 @@ def sign_two_face_auth():
                 return redirect("/Sign/In")
             # collection.delete_one(results[0])
             if session["2FACAUTH"] is False:
-                print("A" * 50)
                 email = session["2_Fac_Auth_Info"]["email"]
                 user_name = session["2_Fac_Auth_Info"]["user_name"]
                 _id = session["2_Fac_Auth_Info"]["_id"]
@@ -231,7 +228,6 @@ def sign_two_face_auth():
                 flash("You have loged in successfully", "success")
                 return redirect(f"/Usr/{_id}/")
             else:
-                print("B" * 50)
                 session["payment_methods"] = True
                 return redirect("/payment_methods")
         hf = Help_Funcs()
@@ -297,7 +293,6 @@ def payment_methods():
 @app.route("/payment_methods_success/", methods=["POST", "GET"])
 @app.route("/payment_methods_success", methods=["POST", "GET"])
 def payment_methods_success():
-    print(session)
     payment_id_info = session["Subscription"]
     if "payment_methods" in session:
         if "Coupon" in session:
