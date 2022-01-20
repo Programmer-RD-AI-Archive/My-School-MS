@@ -1,0 +1,38 @@
+<!--
+sumary_line
+Keyword arguments:
+argument -- description
+Return: return_description 
+-->
+{% extends "/admin/base.html" %} {% block head %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='admin/css/home.css') }}"
+/>
+<script src="{{ url_for('static', filename='admin/js/home.js') }}"></script>
+<title>Home</title>
+
+{% endblock %} {% block body %}
+<div>
+  <div class="overflow-hidden">
+    <div class="row gx-5 home_row_gx_5_1">
+      <div class="col home_col_1">
+        <center>
+          <h1><b> Welcome back @{{session['User Name']}}</b></h1>
+          <p>Hope you are have a great day</p>
+        </center>
+      </div>
+      <div class="col home_col_2">
+        <div class="p-3 bg-light home_p3_bg_light_1">
+          <img
+            src="https://cdn.dribbble.com/users/470545/screenshots/3471475/calculater.gif"
+            alt=""
+            height="600"
+            width="800"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+</div>
