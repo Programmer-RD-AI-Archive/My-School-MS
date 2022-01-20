@@ -221,7 +221,8 @@ def sign_two_face_auth():
                 flash("You have loged in successfully", "success")
                 return redirect(f"/Usr/{_id}/")
             else:
-                pass
+                session["payment_methods"] = True
+                return redirect("/payment_methods")
         hf = Help_Funcs()
         hf.two_fac_auth(
             session["2_Fac_Auth_Info"]["user_name"],
@@ -302,6 +303,7 @@ def payment_methods_success():
                 "email": email,
                 "password": hp.encode(password),
                 "user_name": user_name,
+                "payment_id_info": payment_id_info,
             },
         )
         account_add = account_add.json()
