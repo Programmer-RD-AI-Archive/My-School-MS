@@ -1,0 +1,77 @@
+{% extends "/home/base.html" %} {% block head %}
+<link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='home/css/payment_methods.css') }}"
+    />
+
+<title>payment_methods</title>
+{% endblock %} {% block body %}
+<div class="container">
+  <center>
+    <h1>Payment Options</h1></center>
+  <div
+    class="jumbotron"
+    style="
+      margin-top: 10px;
+      border-radius: 100px !important;
+      text-align: center !important;
+    "
+  >
+    <div class="container">
+      <br />
+      <button type="button" class="btn btn-primary btn-lg"  style='font-size: 25px !important;' id="subscription">
+        Purchase
+      </button>
+      <br />
+      <script src="https://js.stripe.com/v3/"></script>
+      <script type="text/javascript">
+        const checkout_public_key = "{{checkout_public_key}}";
+const checkout_session_id_subscription = "{{checkout_session_id_subscription}}";
+const checkout_session_id_one_time = "{{checkout_session_id_one_time}}";
+var stripe = Stripe(checkout_public_key);
+const button_onetime = document.querySelector("#onetime");
+const button_subscription = document.querySelector("#subscription");
+button_onetime.addEventListener("click", (event) => {
+  stripe
+    .redirectToCheckout({
+      sessionId: checkout_session_id_one_time,
+    })
+    .then(function (result) {});
+});
+button_subscription.addEventListener("click", (event) => {
+  stripe
+    .redirectToCheckout({
+      sessionId: checkout_session_id_subscription,
+    })
+    .then(function (result) {});
+});
+
+      </script>
+    </div>
+    <center>
+    <div class="col" style="width: 25% !important">
+      <form method="post" style="text-align: left">
+        <br />
+        <div class="mb-3">
+          <label for="Email" class="form-label">Coupon</label>
+          <input
+            type="text"
+            class="form-control"
+            id="Email"
+            aria-describedby="emailHelp"
+            name="Coupon"
+            required
+          />
+          <br />
+          <button type="submit" class="btn btn-primary">Add Coupon</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="jumbotron">
+    <p>you might be trying to add a credit <br> card to the Stripe payment dont do that becuase it doesnt work becuase <br> I need to add EP as a company and alot of things <br> so you can just type 4242 4242 4242 <br> and add any year and month and any <br> CV and any email and name.</p>
+  </div>
+</div></center>
+{% endblock %}
