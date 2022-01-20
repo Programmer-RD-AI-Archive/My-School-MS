@@ -1,0 +1,69 @@
+<!--
+sumary_line
+Keyword arguments:
+argument -- description
+Return: return_description 
+-->
+{% extends "/admin/base.html" %} {% block head %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='admin/css/subjects.css') }}"
+/>
+<script src="{{ url_for('static', filename='admin/js/subjects.js') }}"></script>
+<title>Home</title>
+
+{% endblock %} {% block body %}
+<div class="container">
+  <div class="form">
+    <form method="POST">
+      <div class="mb-3">
+        <label for="Name" class="form-label">Name</label>
+        <input
+          type="text"
+          name="Name"
+          class="form-control"
+          id="Name"
+          aria-describedby="emailHelp"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="Description" class="form-label">Description</label>
+        <textarea
+          class="form-control"
+          id="Description"
+          name="Description"
+          rows="3"
+        ></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="Link" class="form-label">Link</label>
+        <input type="url" class="form-control" id="Link" name="Link" />
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  <div class="already_existing_subjects">
+    {% for subject in subjects %}
+    <div class="card" style="width: 18rem">
+      <iframe
+        src="{{subject[3]}}"
+        class="card-img-top"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+      <div class="card-body">
+        <h5 class="card-title">{{subject[1]}}</h5>
+        <p class="card-text">{{subject[2]}} ID = {{subject[0]}}</p>
+        <a href="/Admin/Subjects/Edit/{{subject[0]}}" class="btn btn-primary"
+          >Edit</a
+        >
+        <a href="/Admin/Subjects/Delete/{{subject[0]}}" class="btn btn-danger"
+          >Delete</a
+        >
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endblock %}
+</div>
