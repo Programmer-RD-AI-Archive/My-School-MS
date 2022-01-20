@@ -67,7 +67,6 @@ class Accounts(Resource):
         id_new = ids_of_accounts[-1][0]
         id_new += 1
         info = str(args["payment_id_info"])
-        print(info)
         info = bytes(info, encoding="utf-8")
         astorage.create_file(file_name_in_the_cloud=f"{id_new}-payment-details.json", file_rb=info)
         asql.insert_to_table(
