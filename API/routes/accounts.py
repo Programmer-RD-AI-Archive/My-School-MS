@@ -53,7 +53,12 @@ class Accounts(Resource):
         """
         args = accounts_request_parser.parse_args()
         asql = Azure_SQL()
+        hp.table_exists_or_not(
+            """Accounts""",
+            """CREATE TABLE Accounts (ID int IDENTITY(1,1), Rank INT(max), Email varchar(max),User_Name varchar(max), Password varchar(max), payment_id_info varchar(max))""",
+        )
         astorage = Azure_Storage("account")
+        accounts = asql.select_table("""SELECT * FROM [Accounts]""")
         ids_of_accounts = []
         for account in accounts:
             ids_of_accounts.append(account)
@@ -62,12 +67,9 @@ class Accounts(Resource):
         id_new = ids_of_accounts[-1][0]
         id_new += 1
         info = str(args["payment_id_info"])
+        print(info)
         info = bytes(info, encoding="utf-8")
-        astorage.create_file(file_name_in_the_cloud=f"{id_new}-info.txt", file_rb=info)
-        hp.table_exists_or_not(
-            """Accounts""",
-            """CREATE TABLE Accounts (ID int IDENTITY(1,1), Rank INT(max), Email varchar(max),User_Name varchar(max), Password varchar(max), payment_id_info varchar(max))""",
-        )
+        astorage.create_file(file_name_in_the_cloud=f"{id_new}-payment-details.json", file_rb=info)
         asql.insert_to_table(
             f"""INSERT INTO [Accounts]( [Rank],[Email], [User_Name], [Password], [payment_id_info] ) VALUES ( 1,'{args['email']}', '{args['user_name']}', '{args['password']}','{id_new}-info.txt')"""
         )
@@ -75,7 +77,6 @@ class Accounts(Resource):
         accounts = asql.select_table("""SELECT * FROM [Accounts]""")
         for account in accounts:
             newaccounts.append(list(account))
-        accounts = asql.select_table("SELECT * FROM Accounts")
         return {"""message""": newaccounts}
 
 
