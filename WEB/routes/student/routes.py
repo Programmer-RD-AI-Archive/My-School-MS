@@ -1,4 +1,5 @@
 import warnings
+
 from WEB import *
 from WEB.help_funcs import *
 
@@ -15,7 +16,10 @@ def student_home(_id):
     if str(session["id"]) == str(_id):
         subjects = requests.get(
             "http://127.0.0.1:5000/api/azure/sql",
-            {"Type": "Select", "Query": f"SELECT * FROM Subjects"},
+            {
+                "Type": "Select",
+                "Query": f"SELECT * FROM Subjects"
+            },
         )
         subjects = subjects.json()["message"]
         iter_list = []
