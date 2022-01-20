@@ -32,7 +32,8 @@ class Azure_Storage_API(Resource):
     Return: return_description
     """
 
-    def get(self) -> dict:
+    @staticmethod
+    def get() -> dict:
         """sumary_line
 
         Keyword arguments:

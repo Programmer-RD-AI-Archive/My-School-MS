@@ -11,7 +11,8 @@ from API.db.azure_storage import *
 
 
 class Help_Funcs:
-    def validate_email(self, email: str) -> bool:
+    @staticmethod
+    def validate_email(email: str) -> bool:
         """
         Checking if email is valid or real
         """
@@ -21,7 +22,8 @@ class Help_Funcs:
         status = response.json()["status"]  # getting the response
         return status == "valid"
 
-    def log_ip_address(self, url_trying_to_access: str, ip_address: str) -> None:
+    @staticmethod
+    def log_ip_address(url_trying_to_access: str, ip_address: str) -> None:
         respond = requests.post(
             "",
             {
@@ -66,7 +68,8 @@ class Help_Funcs:
         )
         return [sms_random, email_random]
 
-    def encode(self, message: str) -> bytes:
+    @staticmethod
+    def encode(message: str) -> bytes:
         """
         Encode string for privacy and encryption.
         """
@@ -75,7 +78,8 @@ class Help_Funcs:
         string = string_bytes.decode("latin-1")
         return string
 
-    def decode(self, message: str) -> bytes:
+    @staticmethod
+    def decode(message: str) -> bytes:
         """
         Decode string for privacy and encryption.
         """
@@ -84,7 +88,8 @@ class Help_Funcs:
         string = string_bytes.decode("latin-1")
         return string
 
-    def send_email(self, subject: str, email_to: str, body: str) -> None:
+    @staticmethod
+    def send_email(subject: str, email_to: str, body: str) -> None:
         """
         Send Emails for 2 fac auth and other notifications
         """
@@ -117,7 +122,8 @@ class Help_Funcs:
         #         smtp.login(EmailAdd, Pass)
         #         smtp.send_message(msg)
 
-    def send_sms(self, msg: str, number: int) -> str:
+    @staticmethod
+    def send_sms(msg: str, number: int) -> str:
         account_sid = "ACbeeb34a0326adf707ec9a68902be68dc"
         auth_token = "09aee4b52484eb7218008642c35388f3"
         client = Client(account_sid, auth_token)
@@ -125,7 +131,8 @@ class Help_Funcs:
         return message.sid
         # return "Testing"
 
-    def table_exists_or_not(self, table_name: str, query: str) -> bool:
+    @staticmethod
+    def table_exists_or_not(table_name: str, query: str) -> bool:
         """sumary_line
         Keyword arguments:
         argument -- description
