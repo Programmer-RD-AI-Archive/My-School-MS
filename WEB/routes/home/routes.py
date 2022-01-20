@@ -101,6 +101,9 @@ def sign_up():
         email = request.form["Email"]
         password = request.form["Password"]
         user_name = request.form["User Name"]
+        # remember_password = request.form["Remember Password"]
+        remember_password = ""
+        print(remember_password)
         if hp.validate_email(email) is False:
             flash("Invalid Email", "danger")
             return redirect("/Sign/Up")
@@ -115,11 +118,11 @@ def sign_up():
             if already_account[2] == user_name and already_account[3] == hp.encode(password):
                 flash("User Name is already exist.", "danger")
                 return redirect("/Sign/Up")
-
         session["2_Fac_Auth_Info"] = {
             "email": email,
             "user_name": user_name,
             "password": password,
+            "remember_password": remember_password,
         }
         session["2FACAUTH"] = True
         return redirect("/2/Fac/Auth/")
@@ -142,6 +145,8 @@ def sign_in():
     if request.method == "POST":
         user_name_or_email = request.form["Email or User Name"]
         password = request.form["Password"]
+        remember_password = request.form["Remember Password"]
+        print(remember_password)
         already_accounts = requests.get(
             "http://127.0.0.1:5000/api/Accounts",
         )
@@ -175,6 +180,7 @@ def sign_in():
             "_id": _id,
             "rank": rank,
             "password": password,
+            "remember_password": remember_password,
         }
         session["2FACAUTH"] = False
         return redirect("/2/Fac/Auth/")
@@ -212,6 +218,7 @@ def sign_two_face_auth():
                 _id = session["2_Fac_Auth_Info"]["_id"]
                 rank = session["2_Fac_Auth_Info"]["rank"]
                 password = session["2_Fac_Auth_Info"]["password"]
+                remember_password = session["2_Fac_Auth_Info"]["remember_password"]
                 session["id"] = _id
                 session["User Name"] = user_name
                 session["Email"] = email
@@ -219,6 +226,8 @@ def sign_two_face_auth():
                 session["Rank"] = rank
                 session.pop("2FACAUTH")
                 session.pop("2_Fac_Auth_Info")
+                if remember_password == "on":
+                    session.permanent = True
                 flash("You have loged in successfully", "success")
                 return redirect(f"/Usr/{_id}/")
             else:
@@ -250,7 +259,7 @@ def payment_methods():
                 payment_method_types=["card"],
                 line_items=[
                     {
-                        "price": "price_1JIoxDJzMECqGOD83XVcIgop",
+                        "price": "price_1KJtsQJzMECqGOD8ZVu8d6kN",
                         "quantity": 1,
                     }
                 ],
@@ -269,7 +278,7 @@ def payment_methods():
                 payment_method_types=["card"],
                 line_items=[
                     {
-                        "price": "price_1JIoxDJzMECqGOD83XVcIgop",
+                        "price": "price_1KJtsQJzMECqGOD8ZVu8d6kN",
                         "quantity": 1,
                     }
                 ],
@@ -297,6 +306,8 @@ def payment_methods_success():
             session.pop("payment_methods")
         except:
             pass
+        # remember_password = session["2_Fac_Auth_Info"]["remember_password"]
+        remember_password = ""
         password = session["2_Fac_Auth_Info"]["password"]
         email = session["2_Fac_Auth_Info"]["email"]
         user_name = session["2_Fac_Auth_Info"]["user_name"]
@@ -313,12 +324,14 @@ def payment_methods_success():
         session["Email or User Name"] = email
         session["Password"] = password
         session.pop("Subscription")
+        if remember_password == "on":
+            session.permanent = True
         flash("Your account has been created.", "success")
         flash(
             "Payment Went Through!",
             "success",
         )
-        return redirect("/")
+        return redirect(f"/Sign/In")
 
 
 @app.route("/payment_methods_decline/")
