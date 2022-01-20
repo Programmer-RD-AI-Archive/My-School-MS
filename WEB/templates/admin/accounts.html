@@ -1,0 +1,30 @@
+<!--
+sumary_line
+Keyword arguments:
+argument -- description
+Return: return_description 
+-->
+{% extends "/admin/base.html" %} {% block head %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='admin/css/accounts.css') }}"
+/>
+<script src="{{ url_for('static', filename='admin/js/accounts.js') }}"></script>
+<title>Home</title>
+
+{% endblock %} {% block body %}
+<div class="container">
+    {% for account in accounts %}
+<div class="card" style="width: 18rem;">
+  <img src="https://ui-avatars.com/api/?size=128&name={{account[3]}}&background=random" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{account[3]}}</h5>
+    <p class="card-text">{{account[2]}} (Rank {{account[1]}}) ID = {{account[0]}}</p>
+    <a href="/Admin/Accounts/Edit/{{account[0]}}" class="btn btn-primary">Edit</a>
+    <a href="/Admin/Accounts/Delete/{{account[0]}}" class="btn btn-danger">Delete</a>
+  </div>
+</div>
+{% endfor %}
+</div>
+  {% endblock %}
+</div>
