@@ -4,7 +4,7 @@ from WEB.help_funcs import *
 
 
 @app.route("/Usr/<_id>", methods=["GET", "POST"])
-def home(_id):
+def student_home(_id):
     """sumary_line
 
     Keyword arguments:
