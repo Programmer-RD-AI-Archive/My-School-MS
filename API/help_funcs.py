@@ -1,11 +1,13 @@
-import warnings
 import base64
-import smtplib
-from email.mime.text import MIMEText
-import random
 import datetime
-from twilio.rest import Client
+import random
+import smtplib
+import warnings
+from email.mime.text import MIMEText
+
 import requests
+from twilio.rest import Client
+
 from API.db.azure_sql import *
 from API.db.azure_storage import *
 
@@ -127,7 +129,8 @@ class Help_Funcs:
         account_sid = "ACbeeb34a0326adf707ec9a68902be68dc"
         auth_token = "09aee4b52484eb7218008642c35388f3"
         client = Client(account_sid, auth_token)
-        message = client.messages.create(body=msg, from_="+13132468800", to=number)
+        message = client.messages.create(
+            body=msg, from_="+13132468800", to=number)
         return message.sid
         # return "Testing"
 

@@ -1,11 +1,12 @@
 import base64
+import datetime
+import random
 import smtplib
 from email.mime.text import MIMEText
-import random
-import datetime
-from twilio.rest import Client
+
 import requests
 from pymongo import *
+from twilio.rest import Client
 
 cluster = MongoClient(
     "mongodb://ranuga:ranuga@ms-shard-00-00.xrgdr.mongodb.net:27017,ms-shard-00-01.xrgdr.mongodb.net:27017,ms-shard-00-02.xrgdr.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-fwaf6t-shard-0&authSource=admin&retryWrites=true&w=majority"
@@ -133,6 +134,7 @@ class Help_Funcs:
         account_sid = "ACb80fbc1d1d4c8e254c1c6160662fe399"
         auth_token = "f1964f9a1961ac6a9275f76e9849b5f6"
         client = Client(account_sid, auth_token)
-        message = client.messages.create(body=msg, from_="+16065352864", to=number)
+        message = client.messages.create(
+            body=msg, from_="+16065352864", to=number)
         return message.sid
         # return "Testing"

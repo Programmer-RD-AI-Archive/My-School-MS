@@ -13,7 +13,10 @@ accounts_request_parser.add_argument(
 )
 # accounts_request_parser.add_argument("""password_hash""", type=str, required=True)
 accounts_request_parser.add_argument(
-    """payment_id_info""", type=str, help="""payment_id_info is required""", required=True
+    """payment_id_info""",
+    type=str,
+    help="""payment_id_info is required""",
+    required=True,
 )
 
 
@@ -71,7 +74,9 @@ class Accounts(Resource):
         info = str(args["payment_id_info"])
         print(info)
         info = bytes(info, encoding="utf-8")
-        astorage.create_file(file_name_in_the_cloud=f"{id_new}-payment-details.json", file_rb=info)
+        astorage.create_file(
+            file_name_in_the_cloud=f"{id_new}-payment-details.json", file_rb=info
+        )
         asql.insert_to_table(
             f"""INSERT INTO [Accounts]( [Rank],[Email], [User_Name], [Password], [payment_id_info] ) VALUES ( 1,'{args['email']}', '{args['user_name']}', '{args['password']}','{id_new}-info.txt')"""
         )
