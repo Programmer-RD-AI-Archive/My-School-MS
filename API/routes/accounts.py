@@ -77,7 +77,7 @@ class Accounts(Resource):
         accounts = asql.select_table("""SELECT * FROM [Accounts]""")
         for account in accounts:
             newaccounts.append(list(account))
-        return {"""message""": newaccounts}
+        return {"""message""": newaccounts, "id_new": id_new}
 
 
 api.add_resource(Accounts, """/api/Accounts""")
