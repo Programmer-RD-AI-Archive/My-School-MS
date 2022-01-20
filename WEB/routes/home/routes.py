@@ -206,6 +206,7 @@ def sign_two_face_auth():
                 return redirect("/Sign/In")
             # collection.delete_one(results[0])
             if session["2FACAUTH"] is False:
+                print("A" * 50)
                 email = session["2_Fac_Auth_Info"]["email"]
                 user_name = session["2_Fac_Auth_Info"]["user_name"]
                 _id = session["2_Fac_Auth_Info"]["_id"]
@@ -221,6 +222,7 @@ def sign_two_face_auth():
                 flash("You have loged in successfully", "success")
                 return redirect(f"/Usr/{_id}/")
             else:
+                print("B" * 50)
                 session["payment_methods"] = True
                 return redirect("/payment_methods")
         hf = Help_Funcs()
@@ -232,68 +234,69 @@ def sign_two_face_auth():
         return render_template("/home/2_fac_auth.html")
 
 
-@app.route("/payment_methods", methods=["POST", "GET"])
 @app.route("/payment_methods/", methods=["POST", "GET"])
+@app.route("/payment_methods", methods=["POST", "GET"])
 def payment_methods():
-    try:
-        url_success = "http://127.0.0.1:5000/payment_methods_success/"
-        url_decline = "http://127.0.0.1:5000/payment_methods_decline"
-        if "payment_methods" in session:
-            if request.method == "POST":
-                coupon = request.form["Coupon"]
-                session["Coupon"] = coupon
-                flash("OK Coupon Added", "success")
-                return redirect("/payment_methods")
-            try:
-                session_subscription = stripe.checkout.Session.create(
-                    payment_method_types=["card"],
-                    line_items=[
-                        {
-                            "price": "price_1JIoxDJzMECqGOD83XVcIgop",
-                            "quantity": 1,
-                        }
-                    ],
-                    mode="subscription",
-                    success_url=url_success,
-                    cancel_url=url_decline,
-                    discounts=[
-                        {
-                            "coupon": session["Coupon"],
-                        }
-                    ],
-                )
-            except:
-                #
-                session_subscription = stripe.checkout.Session.create(
-                    payment_method_types=["card"],
-                    line_items=[
-                        {
-                            "price": "price_1JIoxDJzMECqGOD83XVcIgop",
-                            "quantity": 1,
-                        }
-                    ],
-                    mode="subscription",
-                    success_url=url_success,
-                    cancel_url=url_decline,
-                )
-            session["Subscription"] = session_subscription
-            return render_template(
-                "/home/payment_methods.html",
-                checkout_session_id_subscription=session_subscription["id"],
-                checkout_public_key=app.config["STRIPE_PUBLIC_KEY"],
+    url_success = "http://127.0.0.1:8986/payment_methods_success/"
+    url_decline = "http://127.0.0.1:8986/payment_methods_decline"
+    if "payment_methods" in session:
+        if request.method == "POST":
+            coupon = request.form["Coupon"]
+            session["Coupon"] = coupon
+            flash("OK Coupon Added", "success")
+            return redirect("/payment_methods")
+        try:
+            session_subscription = stripe.checkout.Session.create(
+                payment_method_types=["card"],
+                line_items=[
+                    {
+                        "price": "price_1JIoxDJzMECqGOD83XVcIgop",
+                        "quantity": 1,
+                    }
+                ],
+                mode="subscription",
+                success_url=url_success,
+                cancel_url=url_decline,
+                discounts=[
+                    {
+                        "coupon": session["Coupon"],
+                    }
+                ],
             )
-    except:
-        return abort(500)
+        except:
+            #
+            session_subscription = stripe.checkout.Session.create(
+                payment_method_types=["card"],
+                line_items=[
+                    {
+                        "price": "price_1JIoxDJzMECqGOD83XVcIgop",
+                        "quantity": 1,
+                    }
+                ],
+                mode="subscription",
+                success_url=url_success,
+                cancel_url=url_decline,
+            )
+        session["Subscription"] = session_subscription
+        return render_template(
+            "/home/payment_methods.html",
+            checkout_session_id_subscription=session_subscription["id"],
+            checkout_public_key=app.config["STRIPE_PUBLIC_KEY"],
+        )
 
 
-@app.route("/payment_methods_success/")
-@app.route("/payment_methods_success")
+@app.route("/payment_methods_success/", methods=["POST", "GET"])
+@app.route("/payment_methods_success", methods=["POST", "GET"])
 def payment_methods_success():
+    print(session)
     payment_id_info = session["Subscription"]
     if "payment_methods" in session:
         if "Coupon" in session:
             session.pop("Coupon")
-        session.pop("payment_methods")
+        try:
+            session.pop("payment_methods")
+        except:
+            pass
         password = session["2_Fac_Auth_Info"]["password"]
         email = session["2_Fac_Auth_Info"]["email"]
         user_name = session["2_Fac_Auth_Info"]["user_name"]
@@ -309,7 +312,6 @@ def payment_methods_success():
         account_add = account_add.json()
         session["Email or User Name"] = email
         session["Password"] = password
-        session.pop("payment_methods")
         session.pop("Subscription")
         flash("Your account has been created.", "success")
         flash(
