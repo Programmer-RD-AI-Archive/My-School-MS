@@ -18,7 +18,7 @@ class Azure_Storage:
         argument -- description
         Return: return_description
         """
-        self.connection_str = """DefaultEndpointsProtocol=https;AccountName=helpyoulearnstuff;AccountKey=WMruG6IqnwGspaRB9vIL+SmhTwzM3iPE7cRtjHkikxpa7WJo5EvQ+rIqjFZIgoPqwmEvOCZ/4KSf42yVX8kkQQ==;EndpointSuffix=core.windows.net"""
+        self.connection_str = """DefaultEndpointsProtocol=https;AccountName=myschoolms;AccountKey=BTtV6o0tm5actSGoIZLm3Ez77c2zQ1xQtdVS1j/tI7hUGAB83xfTPEDV3Qy14INOCWamKfT2xp+xDAMBPRFjqg==;EndpointSuffix=core.windows.net"""
         self.blob_service_client = BlobServiceClient.from_connection_string(
             conn_str=self.connection_str
         )
