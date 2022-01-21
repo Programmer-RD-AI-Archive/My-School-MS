@@ -97,26 +97,45 @@ def home_tutor_sign_in():
         already_accounts = already_accounts.json()
         ok = False
         for already_account in already_accounts["message"]:
-            if already_account[2] == user_name_or_email and already_account[4] == hp.encode(
+            print(already_account[1], already_account[3])
+            print(already_account[2])
+            if already_account[1] == user_name_or_email and already_account[2] == hp.encode(
                 password
             ):
-                email = already_account[2]
+                email = already_account[1]
                 user_name = already_account[3]
                 _id = already_account[0]
-                rank = already_account[1]
+                rank = already_account[9]
+                enabled = already_account[10]
+                phone_number = already_account[8]
+                full_name = already_account[7]
+                profile_picture = already_account[6]
+                qualification = already_account[5]
+                description = already_account[4]
                 ok = True
-            elif already_account[3] == user_name_or_email and already_account[4] == hp.encode(
+                print(enabled, phone_number, full_name, profile_picture, qualification, description)
+            elif already_account[3] == user_name_or_email and already_account[2] == hp.encode(
                 password
             ):
-                email = already_account[2]
+                email = already_account[1]
                 user_name = already_account[3]
                 _id = already_account[0]
-                rank = already_account[1]
+                rank = already_account[9]
+                enabled = already_account[10]
+                phone_number = already_account[8]
+                full_name = already_account[7]
+                profile_picture = already_account[6]
+                qualification = already_account[5]
+                description = already_account[4]
                 ok = True
+                print(enabled, phone_number, full_name, profile_picture, qualification, description)
         if ok is False:
             session["Email or User Name"] = user_name_or_email
             session["Password"] = password
             flash("Email or User Name and Password is wrong.", "danger")
+            return redirect("/Tutor/Sign/In")
+        if enabled == "False":
+            flash("Your Account is Not Enabled yet or Your account is disabled.", "danger")
             return redirect("/Tutor/Sign/In")
         session["2_Fac_Auth_Info"] = {
             "email": email,
@@ -125,6 +144,12 @@ def home_tutor_sign_in():
             "rank": rank,
             "password": password,
             "remember_password": remember_password,
+            "enabled": enabled,
+            "phone_number": phone_number,
+            "full_name": full_name,
+            "profile_picture": profile_picture,
+            "qualification": qualification,
+            "description": description,
         }
         session["2FACAUTH"] = False
         return redirect("/Tutor/2/Fac/Auth/")
@@ -162,11 +187,25 @@ def tutor_two_factor_authentication():
                 rank = session["2_Fac_Auth_Info"]["rank"]
                 password = session["2_Fac_Auth_Info"]["password"]
                 remember_password = session["2_Fac_Auth_Info"]["remember_password"]
+                enabled = session["2_Fac_Auth_Info"]["enabled"]
+                phone_number = session["2_Fac_Auth_Info"]["phone_number"]
+                full_name = session["2_Fac_Auth_Info"]["full_name"]
+                profile_picture = session["2_Fac_Auth_Info"]["profile_picture"]
+                qualification = session["2_Fac_Auth_Info"]["qualification"]
+                description = session["2_Fac_Auth_Info"]["description"]
                 session["id"] = _id
                 session["User Name"] = user_name
                 session["Email"] = email
                 session["Password"] = password
                 session["Rank"] = rank
+                session["Remember Password"] = remember_password
+                session["Enabled"] = enabled
+                session["Phone Number"] = phone_number
+                session["Full Name"] = full_name
+                session["Profile Picture"] = profile_picture
+                session["Qualification"] = qualification
+                session["Description"] = description
+                session["Is_Tutor"] = True
                 session.pop("2FACAUTH")
                 session.pop("2_Fac_Auth_Info")
                 if remember_password == "on":
@@ -182,7 +221,6 @@ def tutor_two_factor_authentication():
                 qualification = session["2_Fac_Auth_Info"]["qualification"]
                 profile_picture = session["2_Fac_Auth_Info"]["profile_picture"]
                 full_name = session["2_Fac_Auth_Info"]["full_name"]
-                contact_number = session["2_Fac_Auth_Info"]["contact_number"]
                 already_accounts = requests.get(
                     "http://127.0.0.1:5000/api/azure/sql",
                     {
@@ -198,12 +236,14 @@ def tutor_two_factor_authentication():
                     },
                 )
                 already_accounts = already_accounts.json()
+                session["Email or User Name"] = user_name
+                session["Password"] = password
                 flash("You will be validated as soon as possible", "success")
-                return redirect(f"/Tutor/{_id}/")
+                return redirect("/Tutor/Sign/In")
         hf = Help_Funcs()
         hf.two_fac_auth(
             session["2_Fac_Auth_Info"]["user_name"],
             session["2_Fac_Auth_Info"]["email"],
-            session["2_Fac_Auth_Info"]["contact_number"],
+            session["2_Fac_Auth_Info"]["phone_number"],
         )  # TODO
         return render_template("/tutor_home/2_fac_auth.html")
