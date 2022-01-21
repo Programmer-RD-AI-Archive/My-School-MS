@@ -74,6 +74,7 @@ def tutor_courses_post(_id):
     if "Is_Tutor" in session:
         request_forms = request.form
         request_forms = dict(request_forms)
+        print(request_forms)
         new_request_forms = ""
         for key, val in zip(request_forms.keys(), request_forms.values()):
             new_request_forms += key
@@ -97,6 +98,7 @@ def tutor_courses_post(_id):
                 "marks": str(marks),
                 "description": str(description),
                 "subject": str(subject),
+                "_id": str(_id),
             },
         ).json()
         flash("Cources added", "success")
@@ -115,7 +117,6 @@ def tutor_question(_id):
     if "Is_Tutor" in session:
         returned_vals = requests.get("http://127.0.0.1:5000/api/questions").json()
         returned_vals = returned_vals["message"]
-        print(subjects)
         return render_template(
             "tutor/question.html",
             config=config,
@@ -159,6 +160,7 @@ def tutor_resources(_id):
             session=session,
             resources=results["message"],
             link_of_resource_dict=link_of_resource_dict,
+            _id=_id,
         )
     return abort(404)
 
