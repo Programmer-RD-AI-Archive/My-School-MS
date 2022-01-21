@@ -1,4 +1,5 @@
 import warnings
+
 from WEB import *
 from WEB.help_funcs import *
 
@@ -15,7 +16,10 @@ def student_home(_id):
     if str(session["id"]) == str(_id):
         subjects = requests.get(
             "http://127.0.0.1:5000/api/azure/sql",
-            {"Type": "Select", "Query": f"SELECT * FROM Subjects"},
+            {
+                "Type": "Select",
+                "Query": f"SELECT * FROM Subjects"
+            },
         )
         subjects = subjects.json()["message"]
         iter_list = []
@@ -28,7 +32,10 @@ def student_home(_id):
             iter_list.append(subject)
             idx += 1
         new_subjects.append(iter_list)
-        return render_template("student/home.html", subjects=new_subjects, session=session, _id=_id)
+        return render_template("student/home.html",
+                               subjects=new_subjects,
+                               session=session,
+                               _id=_id)
 
 
 @app.route("/Usr/<_id>/Subject/<name_of_subject>/", methods=["GET", "POST"])
@@ -43,7 +50,11 @@ def student_subjects(_id, name_of_subject):
     if str(session["id"]) == str(_id):
         courses = requests.get(
             "http://127.0.0.1:5000/api/azure/sql",
-            {"Type": "Select", "Query": f"SELECT * FROM Courses WHERE Subject={name_of_subject}"},
+            {
+                "Type": "Select",
+                "Query":
+                f"SELECT * FROM Courses WHERE Subject={name_of_subject}",
+            },
         )
         courses = courses.json()["message"]
         iter_list = []
@@ -56,11 +67,15 @@ def student_subjects(_id, name_of_subject):
             iter_list.append(course)
             idx += 1
         new_courses.append(iter_list)
-        return render_template("student/subject.html", courses=new_courses, _id=_id)
+        return render_template("student/subject.html",
+                               courses=new_courses,
+                               _id=_id)
 
 
-@app.route("/Usr/<_id>/Subject/<name_of_subject>/Enroll", methods=["GET", "POST"])
-@app.route("/Usr/<_id>/Subject/<name_of_subject>/Enroll/", methods=["GET", "POST"])
+@app.route("/Usr/<_id>/Subject/<name_of_subject>/Enroll",
+           methods=["GET", "POST"])
+@app.route("/Usr/<_id>/Subject/<name_of_subject>/Enroll/",
+           methods=["GET", "POST"])
 def student_subject_enroll(_id, name_of_subject):
     """sumary_line
 
@@ -71,7 +86,10 @@ def student_subject_enroll(_id, name_of_subject):
     if str(session["id"]) == str(_id):
         courses = requests.get(
             "http://127.0.0.1:5000/api/azure/sql",
-            {"Type": "Select", "Query": f"SELECT * FROM Courses WHERE [ID]={name_of_subject}"},
+            {
+                "Type": "Select",
+                "Query": f"SELECT * FROM Courses WHERE [ID]={name_of_subject}",
+            },
         )
         courses = courses.json()["message"][0]
         id_courses = courses[0]
@@ -81,9 +99,12 @@ def student_subject_enroll(_id, name_of_subject):
         print(
             requests.get(
                 "http://127.0.0.1:5000/api/azure/storage",
-                {"Container Name": "account", "file_name": courses[2], "Type": "Download File"},
-            ).json()
-        )
+                {
+                    "Container Name": "account",
+                    "file_name": courses[2],
+                    "Type": "Download File",
+                },
+            ).json())
         # requests.get(
         #     "http://127.0.0.1:5000/api/azure/sql",
         #     {
