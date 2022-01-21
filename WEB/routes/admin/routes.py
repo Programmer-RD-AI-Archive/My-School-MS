@@ -10,6 +10,78 @@ def admin_home():
         return render_template("admin/home.html", session=session)
 
 
+@app.route("/Admin/Tutors")
+@app.route("/Admin/Tutors/")
+def admin_tutors():
+    if "Is_Admin" in session:
+        already_accounts = requests.get(
+            "http://127.0.0.1:5000/api/azure/sql",
+            {"Query": "SELECT * FROM Tutor", "Type": "Select"},
+        )
+        already_accounts = already_accounts.json()["message"]
+        return render_template("admin/tutors.html", tutors=already_accounts)
+
+
+@app.route("/Admin/Tutors/Enable/<_id>")
+@app.route("/Admin/Tutors/Enable/<_id>/")
+def admin_tutors_enable(_id):
+    if "Is_Admin" in session:
+        email = requests.get(
+            "http://127.0.0.1:5000/api/azure/sql",
+            {"Query": f"SELECT * FROM Tutor WHERE ID={_id}", "Type": "Select"},
+        ).json()["message"][0][1]
+        print(email)
+        hp = Help_Funcs()
+        hp.send_email(
+            "Your My School Account is Enabled !",
+            email,
+            "Your My School Account is Enabled ! Go to MySchool and login to your tutor account. \n Congratz. \n Best of Luck",
+        )
+        requests.get(
+            "http://127.0.0.1:5000/api/azure/sql",
+            {
+                "Type": "Insert",
+                "Query": f"""
+                UPDATE Tutor
+                SET Enabled = 'True'
+                WHERE ID={_id};
+            """,
+            },
+        )
+        flash("Enabled", "success")
+        return redirect("/Admin/Tutors")
+
+
+@app.route("/Admin/Tutors/Disable/<_id>")
+@app.route("/Admin/Tutors/Disable/<_id>/")
+def admin_tutors_disable(_id):
+    if "Is_Admin" in session:
+        email = requests.get(
+            "http://127.0.0.1:5000/api/azure/sql",
+            {"Query": f"SELECT * FROM Tutor WHERE ID={_id}", "Type": "Select"},
+        ).json()["message"][0][1]
+        print(email)
+        hp = Help_Funcs()
+        hp.send_email(
+            "Your My School Account is Disabled !",
+            email,
+            "Your My School Account is Disabled ! Go to MySchool and login to your tutor account.",
+        )
+        requests.get(
+            "http://127.0.0.1:5000/api/azure/sql",
+            {
+                "Type": "Insert",
+                "Query": f"""
+                UPDATE Tutor
+                SET Enabled = 'False'
+                WHERE ID={_id};
+            """,
+            },
+        )
+        flash("Disabled", "success")
+        return redirect("/Admin/Tutors")
+
+
 @app.route("/Admin/Accounts")
 @app.route("/Admin/Accounts/")
 def admin_accounts():
