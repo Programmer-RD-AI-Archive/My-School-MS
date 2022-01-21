@@ -1,0 +1,55 @@
+<!--
+sumary_line
+
+Keyword arguments:
+argument -- description
+Return: return_description 
+-->
+{% extends "/tutor_home/base.html" %} {% block head %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='tutor_home/css/home.css') }}"
+/>
+<script src="{{ url_for('static', filename='tutor_home/js/home.js') }}"></script>
+<title>Home</title>
+
+{% endblock %} {% block body %}
+<div class="overflow-hidden">
+  <div class="row gx-5 home_row_gx_5_1">
+    <div class="col home_col_1">
+      <div class="p-3 bg-light home_p3_bg_light_1">
+        <h1 class="home_main_title_1">
+          <b
+            >Help you <br />
+            Learn Stuff <br />
+            Tutor</b
+          >
+        </h1>
+        <br />
+        <h3>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
+          mollitia, molestiae quas vel sint commodi repudiandae consequuntur
+          voluptatum laborum numquam blanditiis harum quisquam eius sed odit
+          fugiat iusto fuga praesentium optio, eaque rerum!
+        </h3>
+        <br />
+        <button
+          type="button"
+          class="btn btn-outline-secondary home_btn_outline_secondary_1"
+        >
+          <h2>Learn More</h2>
+        </button>
+      </div>
+    </div>
+    <div class="col home_col_2">
+      <div class="p-3 bg-light home_p3_bg_light_2">
+        <img
+          src="https://i.pinimg.com/736x/e2/96/18/e29618c03d3754aeb6ecf282c5c4d479.jpg"
+          alt=""
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
