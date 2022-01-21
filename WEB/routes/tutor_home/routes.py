@@ -1,4 +1,5 @@
 import warnings
+
 from WEB import *
 from WEB.help_funcs import *
 
@@ -12,7 +13,8 @@ def home_tutor():
     Return: return_description
     """
     password = "01x2253x6871"
-    config = requests.get("http://127.0.0.1:5000/api/get_config", {"password": password})
+    config = requests.get("http://127.0.0.1:5000/api/get_config",
+                          {"password": password})
     config = config.json()
     return render_template(
         "tutor_home/home.html",
@@ -29,7 +31,8 @@ def home_tutor_sign_up():
     Return: return_description
     """
     password = "01x2253x6871"
-    config = requests.get("http://127.0.0.1:5000/api/get_config", {"password": password})
+    config = requests.get("http://127.0.0.1:5000/api/get_config",
+                          {"password": password})
     config = config.json()
     if request.method == "POST":
         print("grwegrwe")
@@ -48,14 +51,19 @@ def home_tutor_sign_up():
             return redirect("/Tutor/Sign/Up")
         already_accounts = requests.get(
             "http://127.0.0.1:5000/api/azure/sql",
-            {"Query": "SELECT * FROM Tutor", "Type": "Select"},
+            {
+                "Query": "SELECT * FROM Tutor",
+                "Type": "Select"
+            },
         )
         already_accounts = already_accounts.json()
         for already_account in already_accounts["message"]:
-            if already_account[1] == email and already_account[3] == hp.encode(password):
+            if already_account[1] == email and already_account[3] == hp.encode(
+                    password):
                 flash("Email is already exist.", "danger")
                 return redirect("/Tutor/Sign/Up")
-            if already_account[2] == user_name and already_account[3] == hp.encode(password):
+            if already_account[2] == user_name and already_account[
+                    3] == hp.encode(password):
                 flash("User Name is already exist.", "danger")
                 return redirect("/Tutor/Sign/Up")
         session["2_Fac_Auth_Info"] = {
@@ -71,7 +79,9 @@ def home_tutor_sign_up():
         }
         session["2FACAUTH"] = True
         return redirect("/Tutor/2/Fac/Auth/")
-    return render_template("tutor_home/sign_up.html", session=session, config=config)
+    return render_template("tutor_home/sign_up.html",
+                           session=session,
+                           config=config)
 
 
 @app.route("/Tutor/Sign/In", methods=["GET", "POST"])
@@ -84,7 +94,8 @@ def home_tutor_sign_in():
     Return: return_description
     """
     password = "01x2253x6871"
-    config = requests.get("http://127.0.0.1:5000/api/get_config", {"password": password})
+    config = requests.get("http://127.0.0.1:5000/api/get_config",
+                          {"password": password})
     config = config.json()
     if request.method == "POST":
         user_name_or_email = request.form["Email or User Name"]
@@ -92,16 +103,18 @@ def home_tutor_sign_in():
         remember_password = ""  # request.form["Remember Password"]
         already_accounts = requests.get(
             "http://127.0.0.1:5000/api/azure/sql",
-            {"Query": "SELECT * FROM Tutor", "Type": "Select"},
+            {
+                "Query": "SELECT * FROM Tutor",
+                "Type": "Select"
+            },
         )
         already_accounts = already_accounts.json()
         ok = False
         for already_account in already_accounts["message"]:
             print(already_account[1], already_account[3])
             print(already_account[2])
-            if already_account[1] == user_name_or_email and already_account[2] == hp.encode(
-                password
-            ):
+            if already_account[1] == user_name_or_email and already_account[
+                    2] == hp.encode(password):
                 email = already_account[1]
                 user_name = already_account[3]
                 _id = already_account[0]
@@ -113,10 +126,16 @@ def home_tutor_sign_in():
                 qualification = already_account[5]
                 description = already_account[4]
                 ok = True
-                print(enabled, phone_number, full_name, profile_picture, qualification, description)
-            elif already_account[3] == user_name_or_email and already_account[2] == hp.encode(
-                password
-            ):
+                print(
+                    enabled,
+                    phone_number,
+                    full_name,
+                    profile_picture,
+                    qualification,
+                    description,
+                )
+            elif already_account[3] == user_name_or_email and already_account[
+                    2] == hp.encode(password):
                 email = already_account[1]
                 user_name = already_account[3]
                 _id = already_account[0]
@@ -128,14 +147,23 @@ def home_tutor_sign_in():
                 qualification = already_account[5]
                 description = already_account[4]
                 ok = True
-                print(enabled, phone_number, full_name, profile_picture, qualification, description)
+                print(
+                    enabled,
+                    phone_number,
+                    full_name,
+                    profile_picture,
+                    qualification,
+                    description,
+                )
         if ok is False:
             session["Email or User Name"] = user_name_or_email
             session["Password"] = password
             flash("Email or User Name and Password is wrong.", "danger")
             return redirect("/Tutor/Sign/In")
         if enabled == "False":
-            flash("Your Account is Not Enabled yet or Your account is disabled.", "danger")
+            flash(
+                "Your Account is Not Enabled yet or Your account is disabled.",
+                "danger")
             return redirect("/Tutor/Sign/In")
         session["2_Fac_Auth_Info"] = {
             "email": email,
@@ -153,7 +181,9 @@ def home_tutor_sign_in():
         }
         session["2FACAUTH"] = False
         return redirect("/Tutor/2/Fac/Auth/")
-    return render_template("tutor_home/sign_in.html", session=session, config=config)
+    return render_template("tutor_home/sign_in.html",
+                           session=session,
+                           config=config)
 
 
 @app.route("/Tutor/2/Fac/Auth/", methods=["POST", "GET"])
@@ -186,7 +216,8 @@ def tutor_two_factor_authentication():
                 _id = session["2_Fac_Auth_Info"]["_id"]
                 rank = session["2_Fac_Auth_Info"]["rank"]
                 password = session["2_Fac_Auth_Info"]["password"]
-                remember_password = session["2_Fac_Auth_Info"]["remember_password"]
+                remember_password = session["2_Fac_Auth_Info"][
+                    "remember_password"]
                 enabled = session["2_Fac_Auth_Info"]["enabled"]
                 phone_number = session["2_Fac_Auth_Info"]["phone_number"]
                 full_name = session["2_Fac_Auth_Info"]["full_name"]
@@ -216,7 +247,8 @@ def tutor_two_factor_authentication():
                 email = session["2_Fac_Auth_Info"]["email"]
                 user_name = session["2_Fac_Auth_Info"]["user_name"]
                 password = session["2_Fac_Auth_Info"]["password"]
-                remember_password = session["2_Fac_Auth_Info"]["remember_password"]
+                remember_password = session["2_Fac_Auth_Info"][
+                    "remember_password"]
                 description = session["2_Fac_Auth_Info"]["description"]
                 qualification = session["2_Fac_Auth_Info"]["qualification"]
                 profile_picture = session["2_Fac_Auth_Info"]["profile_picture"]
