@@ -1,0 +1,119 @@
+<!--
+sumary_line
+
+Keyword arguments:
+argument -- description
+Return: return_description 
+-->
+{% extends "/tutor/base.html" %} {% block head %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='tutor/css/question.css') }}"
+/>
+<script src="{{ url_for('static', filename='tutor/js/question.js') }}"></script>
+<title>Question</title>
+{% endblock %} {% block body %}
+<div class="container">
+  <div id="content" class="content"></div>
+  <div class="dropdown">
+    <button
+      class="btn btn-secondary dropdown-toggle"
+      type="button"
+      id="dropdownMenuButton1"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+    >
+      Add
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="input">
+      <li>
+        <a type="input" value="input" id="input" class="dropdown-item" href="#"
+          >Input</a
+        >
+      </li>
+      <li>
+        <a type="input" value="text" id="text" class="dropdown-item" href="#"
+          >Text</a
+        >
+      </li>
+      <li>
+        <a
+          type="input"
+          value="checkbox"
+          id="checkbox"
+          class="dropdown-item"
+          href="#"
+          >Check Box</a
+        >
+      </li>
+      <li>
+        <a
+          type="input"
+          value="big_input"
+          id="big_input"
+          class="dropdown-item"
+          href="#"
+          >Big Input</a
+        >
+      </li>
+      <li>
+        <a
+          type="input"
+          value="switches"
+          id="switches"
+          class="dropdown-item"
+          href="#"
+          >Switches</a
+        >
+      </li>
+      <li>
+        <a
+          type="input"
+          value="checks"
+          id="checks"
+          class="dropdown-item"
+          href="#"
+          >Checks</a
+        >
+      </li>
+      <li>
+        <a type="input" value="range" id="range" class="dropdown-item" href="#"
+          >Range</a
+        >
+      </li>
+    </ul>
+  </div>
+  <br />
+  <input
+    class="form-control"
+    id="name"
+    type="text"
+    placeholder="Question Name"
+  />
+  <br />
+  <input class="btn btn-dark" type="submit" value="Submit" id="submit_btn" />
+</div>
+<br />
+<br />
+<div class="container">
+  {% for question in questions %}
+  <div class="jumbotron questions_already_exists">
+    <h2>{{question[2]}}</h2>
+    <!-- <a href="/Tutor/Question/{{question[0]}}/Edit"
+      ><button type="button" class="btn btn-primary">Edit</button>
+    </a> --><!--TODO-->>
+    <br />
+    <br />
+    <a href="/Tutor/{{_id}}/Question/{{question[0]}}/Delete"
+      ><button type="button" class="btn btn-danger">Delete</button>
+    </a>
+    <br />
+    <br />
+    <a href="/Tutor/{{_id}}/Question/{{question[0]}}/Preview"
+      ><button type="button" class="btn btn-primary">Preview</button>
+    </a>
+  </div>
+  {% endfor %}
+</div>
+<script type="text/javascript" src="./question.js"></script>
+{% endblock %}
