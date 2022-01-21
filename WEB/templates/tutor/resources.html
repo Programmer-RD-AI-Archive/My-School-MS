@@ -1,0 +1,121 @@
+<!--
+sumary_line
+
+Keyword arguments:
+argument -- description
+Return: return_description 
+-->
+{% extends "/tutor/base.html" %} {% block head %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='tutor/css/resources.css') }}"
+/>
+<script src="{{ url_for('static', filename='tutor/js/resources.js') }}"></script>
+<title>Resources</title>
+
+{% endblock %} {% block body %}
+<div class="container">
+  <form method="post">
+    <div class="mb-3">
+      <label for="Title" class="form-label">Title</label>
+      <input
+        type="link"
+        class="form-control"
+        id="Title"
+        aria-describedby="emailHelp"
+        name="Title"
+        required
+        value="{{title}}"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="Description" class="form-label">Description</label>
+      <textarea
+        class="form-control"
+        name="Description"
+        id="Description"
+        rows="3"
+      >
+{{description}}</textarea
+      >
+    </div>
+    <div class="mb-3">
+      <label for="Link of Resource" class="form-label">Link of Resource</label>
+      <input
+        type="link"
+        class="form-control"
+        id="Link of Resource"
+        aria-describedby="emailHelp"
+        name="link-of-resource"
+        required
+        value="{{link_of_resource}}"
+      />
+    </div>
+    <select
+      class="form-select"
+      aria-label="Default select example"
+      required
+      name="method-of-resource"
+    >
+      <option>Method of Resource</option>
+      {% if method_of_resource == "1" %}
+      <option selected value="1">Video</option>
+      {% else %}
+      <option value="1">Video</option>
+      {% endif %} {% if method_of_resource == "2" %}
+      <option selected value="2">Image</option>
+      {% else %}
+      <option value="2">Image</option>
+      {% endif %} {% if method_of_resource == "3" %}
+      <option selected value="3">Sound</option>
+      {% else %}
+      <option value="3">Sound</option>
+      {% endif %} {% if method_of_resource == "4" %}
+      <option selected value="4">Website</option>
+      {% else %}
+      <option value="4">Website</option>
+      {% endif %}
+    </select>
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  <br />
+  <div class="content">
+    {% for resource in resources %}
+    <br />
+    <div class="jumbotron resources_already_exists">
+      <h1>{{resource[3]}}</h1>
+      <p><b>{{resource[4]}}</b></p>
+      <p>{{link_of_resource_dict[resource[1]]}}</p>
+      <a href="/Tutor/{{_id}}/Resources/{{resource[0]}}/Edit"
+        ><button type="button" class="btn btn-primary">Edit</button>
+      </a>
+      <a href="/Tutor/{{_id}}/Resources/{{resource[0]}}/Delete"
+        ><button type="button" class="btn btn-danger">Delete</button>
+      </a>
+      <br /><br />
+      {% if link_of_resource_dict[resource[1]] == 'Video' %}
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/{{resource[2]}}"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+      {% else %}
+      <iframe
+        class="resources_iframe_of_resource"
+        width="500"
+        height="500"
+        src="{{resource[2]}}"
+        frameborder="0"
+      ></iframe
+      >{% endif %}
+    </div>
+    <br />
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
