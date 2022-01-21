@@ -6,8 +6,8 @@ argument -- description
 Return: return_description
 */
 
-let idx = 0;
-let idx_iter = 0;
+var idx = 0;
+var idx_iter = 0;
 const idx_val = {};
 function removeElement(idx) {
   const element = document.getElementById(`${idx}`);
@@ -26,10 +26,13 @@ function add_to_content(val) {
       </div>`
   );
 }
-$("#submit_btn").click(function () {
+function add_courses_API_button_submit(_id) {
+  console.log(_id);
   const marks = document.getElementById("Marks Required to Pass").value;
   const image = document.getElementById("Image").value;
   const name = document.getElementById("Name").value;
+  const description = document.getElementById("Description").value;
+  const subject = document.getElementById("Subject").value;
   const info = {};
   for (idx_iter = 1; idx_iter <= idx; idx_iter++) {
     info[idx_iter] = [idx_val[idx_iter]];
@@ -37,15 +40,17 @@ $("#submit_btn").click(function () {
 
   $.ajax({
     type: "POST",
-    url: "/Tutor/Courses/Post/",
+    url: `/Tutor/${_id}/Courses/Post/`,
     data: JSON.stringify({
       info: info,
       whole_content: $("#content").html(),
       marks: marks,
       image: image,
       name: name,
+      description: description,
+      subject: subject,
     }),
   });
   alert("Course Added");
   window.location.reload(0);
-});
+}
