@@ -149,7 +149,7 @@ def sign_in():
             "http://127.0.0.1:5000/api/Accounts",
         )
         already_accounts = already_accounts.json()
-        ok = None
+        ok = False
         for already_account in already_accounts["message"]:
             if already_account[2] == user_name_or_email and already_account[4] == hp.encode(
                 password
