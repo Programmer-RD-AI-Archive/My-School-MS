@@ -1,0 +1,100 @@
+<!--
+sumary_line
+
+Keyword arguments:
+argument -- description
+Return: return_description 
+-->
+{% extends "/tutor/base.html" %} {% block head %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='tutor/css/courses.css') }}"
+/>
+<script src="{{ url_for('static', filename='tutor/js/courses.js') }}"></script>
+<title>Courses</title>
+
+{% endblock %} {% block body %}
+<div class="container">
+  <div class="content courses_content_1" id="content"></div>
+  <hr />
+  <br />
+  <form>
+    <div class="mb-3">
+      <label for="Image" class="form-label">Image</label>
+      <input type="url" class="form-control" id="Image" required />
+    </div>
+    <div class="mb-3">
+      <label for="Name" class="form-label">Name</label>
+      <input type="text" class="form-control" id="Name" required />
+    </div>
+    <div class="mb-3">
+      <label for="Marks Required to Pass" class="form-label"
+        >Marks Required to Pass</label
+      >
+      <input
+        type="number"
+        class="form-control"
+        id="Marks Required to Pass"
+        required
+      />
+    </div>
+    <div class="cources_list_resources">
+      {% for resource in resources %}
+      <br />
+      <button
+        type="button"
+        id="{{resource[0]}}"
+        value="{{resource[3]}},{{resource[0]}},resource"
+        class="btn btn-dark"
+        onclick="add_to_content(this.value)"
+      >
+        {{resource[3]}}
+      </button>
+      <br />
+      {% endfor %}
+    </div>
+    <br />
+    <hr />
+    <br />
+    <div class="cources_list_questions">
+      {% for question in questions %}
+      <button
+        type="button"
+        id="{{question[0]}}"
+        value="{{question[2]}},{{question[0]}},question"
+        class="btn btn-dark"
+        onclick="add_to_content(this.value)"
+      >
+        {{question[2]}}
+      </button>
+      {% endfor %}
+    </div>
+    <br />
+    <button type="submit" id="submit_btn" class="btn btn-primary">
+      Submit
+    </button>
+  </form>
+  <br />
+  <div class="container px-4">
+    {% for course in courses %}
+    <div class="row gx-5">
+      {% for course_iter in course %}
+      <div class="col">
+        <div
+          class="p-3 border bg-light cources_p3_border_bg_light_1"
+          style="background-image: url({{course_iter[3]}}); "
+        >
+          <h1><b>Name : {{course_iter[4]}}</b></h1>
+          <p><b>Marks Required : {{course_iter[5]}}</b></p>
+          <p><b>{{course_iter}}</b></p>
+        </div>
+      </div>
+      <br />
+      {% endfor %}
+    </div>
+    <br />
+    {% endfor %}
+  </div>
+</div>
+<script type="text/javascript" src="./courses.js"></script>
+{% endblock %}
