@@ -91,7 +91,13 @@ Return: return_description
     placeholder="Question Name"
   />
   <br />
-  <input class="btn btn-dark" type="submit" value="Submit" id="submit_btn" />
+  <input
+    class="btn btn-dark"
+    type="submit"
+    value="Submit"
+    id="submit_btn"
+    onclick="submit_info_API({{_id}})"
+  />
 </div>
 <br />
 <br />
@@ -115,5 +121,6 @@ Return: return_description
   </div>
   {% endfor %}
 </div>
-<script type="text/javascript" src="./question.js"></script>
+<script type="text/javascript" src="/WEB/static/tutor/js/question.js"></script>
+<script src="{{ url_for('static', filename='tutor/js/question.js') }}"></script>
 {% endblock %}
