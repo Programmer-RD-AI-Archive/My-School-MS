@@ -6,8 +6,8 @@ argument -- description
 Return: return_description
 */
 
-let idx = 0;
-let idx_iter = 0;
+var idx = 0;
+var idx_iter = 0;
 $("#input").click(function () {
   idx += 1;
 
@@ -19,7 +19,7 @@ $("#input").click(function () {
           </label>
           <input type="text" class="form-control" id="${idx.toString()}-Label">
           <br>
-          <button type="button" class="btn btn-danger" onClick="removeElement(${idx.toString()})">Delete</button>
+          <button type="button" class="btn btn-danger" onClick="removeElement(${idx.toString()})">Devare</button>
           <hr>
         </div>`
   );
@@ -123,7 +123,8 @@ $("#range").click(function () {
         </div>`
   );
 });
-$("#submit_btn").click(function () {
+function submit_info_API(_id) {
+  console.log(_id);
   const info = {};
   for (idx_iter = 1; idx_iter <= idx; idx_iter++) {
     try {
@@ -151,12 +152,13 @@ $("#submit_btn").click(function () {
   info.name = name;
   $.ajax({
     type: "POST",
-    url: "/Tutor/Question/Post/",
+    url: `/Tutor/${_id}/Question/Post/`,
     data: JSON.stringify({ info: info, yourdiv: $("#content").html() }),
   });
+  alert("Are you sure ?");
   alert("Question Added");
   window.location.reload(0);
-});
+}
 function removeElement(idx) {
   const element = document.getElementById(`${idx}`);
   element.remove();
