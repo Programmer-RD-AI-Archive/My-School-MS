@@ -4,7 +4,7 @@ Keyword arguments:
 argument -- description
 Return: return_description 
 -->
-{% extends "/admin/base.html" %} {% block head %}
+{% extends "/student/base.html" %} {% block head %}
 <link
   rel="stylesheet"
   href="{{ url_for('static', filename='student/css/home.css') }}"
@@ -33,6 +33,11 @@ Return: return_description
             <div class="card-body">
               <h5 class="card-title">{{subject[1]}}</h5>
               <p class="card-text">{{subject[2]}} ID = {{subject[0]}}</p>
+              <a href="/Usr/{{session['id']}}/Subject/{{subject[1]}}"
+                ><button class="btn btn-primary">
+                  Find Courses about this Subject
+                </button></a
+              >
             </div>
           </div>
         </center>
