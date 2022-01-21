@@ -1,6 +1,9 @@
+from bs4 import *
 import warnings
 from WEB import *
 from WEB.help_funcs import *
+
+link_of_resource_dict = {1: "Video", 2: "Image", 3: "Sound", 4: "Website"}
 
 
 @app.route("/Tutor/<_id>", methods=["GET", "POST"])
@@ -22,7 +25,7 @@ def tutor_courses(_id):
     argument -- description
     Return: return_description
     """
-    if "Is_Admin" in session:
+    if "Is_Tutor" in session:
         resources = requests.get(
             "http://127.0.0.1:5000/api/azure/sql",
             {"Query": "SELECT * FROM Resources", "Type": "Select"},
@@ -45,12 +48,17 @@ def tutor_courses(_id):
             idx += 1
             iter_cources.append(cource)
         new_cources.append(iter_cources)
+        subjects = requests.get(
+            "http://127.0.0.1:5000/api/azure/sql",
+            {"Query": "SELECT * FROM Subjects", "Type": "Select"},
+        ).json()["message"]
         return render_template(
             "tutor/courses.html",
             resources=resources,
             questions=questions,
             courses=new_cources,
             _id=_id,
+            subjects=subjects,
         )
     return abort(404)
 
@@ -63,7 +71,7 @@ def tutor_courses_post(_id):
     argument -- description
     Return: return_description
     """
-    if "Is_Admin" in session:
+    if "Is_Tutor" in session:
         request_forms = request.form
         request_forms = dict(request_forms)
         new_request_forms = ""
@@ -77,6 +85,8 @@ def tutor_courses_post(_id):
         image = request_forms["image"]
         name = request_forms["name"]
         marks = request_forms["marks"]
+        description = request_forms["description"]
+        subject = request_forms["subject"]
         response = requests.put(
             "http://127.0.0.1:5000/api/courses",
             {
@@ -85,6 +95,8 @@ def tutor_courses_post(_id):
                 "image": str(image),
                 "name": str(name),
                 "marks": str(marks),
+                "description": str(description),
+                "subject": str(subject),
             },
         ).json()
         flash("Cources added", "success")
@@ -100,11 +112,16 @@ def tutor_question(_id):
     argument -- description
     Return: return_description
     """
-    if "Is_Admin" in session:
+    if "Is_Tutor" in session:
         returned_vals = requests.get("http://127.0.0.1:5000/api/questions").json()
         returned_vals = returned_vals["message"]
+        print(subjects)
         return render_template(
-            "tutor/question.html", config=config, session=session, questions=returned_vals, _id=_id
+            "tutor/question.html",
+            config=config,
+            session=session,
+            questions=returned_vals,
+            _id=_id,
         )
     return abort(404)
 
@@ -117,7 +134,7 @@ def tutor_resources(_id):
     argument -- description
     Return: return_description
     """
-    if "Is_Admin" in session:
+    if "Is_Tutor" in session:
         if request.method == "POST":
             method_of_resource = request.form["method-of-resource"]
             link_of_resource = request.form["link-of-resource"]
@@ -133,7 +150,7 @@ def tutor_resources(_id):
                 },
             ).json()
             flash("Resource Added", "success")
-            return redirect(f"/Tutor/{_id}/Resources")
+            return redirect("/Tutor/Resources")
         results = requests.get(
             "http://127.0.0.1:5000/api/resources",
         ).json()
@@ -141,7 +158,6 @@ def tutor_resources(_id):
             "tutor/resources.html",
             session=session,
             resources=results["message"],
-            _id=_id,
             link_of_resource_dict=link_of_resource_dict,
         )
     return abort(404)
@@ -161,7 +177,7 @@ def tutor_resources_delete(_id, _id_resource):
     argument -- description
     Return: return_description
     """
-    if "Is_Admin" in session:
+    if "Is_Tutor" in session:
         results = requests.post(
             "http://127.0.0.1:5000/api/resources",
             {
@@ -187,7 +203,7 @@ def tutor_resources_edit(_id, _id_resource):
     argument -- description
     Return: return_description
     """
-    if "Is_Admin" in session:
+    if "Is_Tutor" in session:
         if request.method == "POST":
             method_of_resource = request.form["method-of-resource"]
             link_of_resource = request.form["link-of-resource"]
@@ -228,6 +244,7 @@ def tutor_question_post(_id):
     """
     flash("Question Added", "success")
     request_form = eval(list(dict(request.form).keys())[0] + list(dict(request.form).values())[0])
+    print(request_form)
     info = request_form["info"]
     yourdiv = request_form["yourdiv"]
     name = info["name"]
@@ -250,6 +267,7 @@ def tutor_question_post(_id):
         except Exception as e:
             warnings.filterwarnings(e)  # TODO Change Make if else statment
         element = soup.find("div", id=f"{idx}")
+        print(element.attrs)
         try:
             del element.attrs['class"mb-3"']
         except Exception as e:
@@ -280,7 +298,7 @@ def tutor_question_preview(_id, _id_question):
     argument -- description
     Return: return_description
     """
-    if "Is_Admin" in session:
+    if "Is_Tutor" in session:
         results = requests.get(
             "http://127.0.0.1:5000/api/azure/sql",
             {"Query": f"SELECT * FROM Questions WHERE ID = {_id_question}", "Type": "Select"},
@@ -299,7 +317,7 @@ def tutor_question_delete(_id, _id_question):
     argument -- description
     Return: return_description
     """
-    if "Is_Admin" in session:
+    if "Is_Tutor" in session:
         results = requests.get(
             "http://127.0.0.1:5000/api/azure/sql",
             {"Query": f"DELETE FROM Questions WHERE ID={_id_question}", "Type": "Insert"},
@@ -327,13 +345,20 @@ def tutor_log_out(_id):
     argument -- description
     Return: return_description
     """
-    if "Is_Admin" in session:
-        session.pop("Is_Admin")
+    if "Is_Tutor" in session:
+        session.pop("Is_Tutor")
         session.pop("id")
         session.pop("User Name")
         session.pop("Email")
         session.pop("Rank")
         session.pop("Password")
+        session.pop("Remember Password")
+        session.pop("Enabled")
+        session.pop("Phone Number")
+        session.pop("Full Name")
+        session.pop("Profile Picture")
+        session.pop("Qualification")
+        session.pop("Description")
         flash("Loged out as tutor", "success")
         return redirect("/")
     return abort(404)
