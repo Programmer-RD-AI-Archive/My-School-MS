@@ -107,13 +107,15 @@ def home_tutor_sign_in():
                 _id = already_account[0]
                 rank = already_account[9]
                 enabled = already_account[10]
-                phone_number = already_account[8]
+                contact_number = already_account[8]
                 full_name = already_account[7]
                 profile_picture = already_account[6]
                 qualification = already_account[5]
                 description = already_account[4]
                 ok = True
-                print(enabled, phone_number, full_name, profile_picture, qualification, description)
+                print(
+                    enabled, contact_number, full_name, profile_picture, qualification, description
+                )
             elif already_account[3] == user_name_or_email and already_account[2] == hp.encode(
                 password
             ):
@@ -122,13 +124,15 @@ def home_tutor_sign_in():
                 _id = already_account[0]
                 rank = already_account[9]
                 enabled = already_account[10]
-                phone_number = already_account[8]
+                contact_number = already_account[8]
                 full_name = already_account[7]
                 profile_picture = already_account[6]
                 qualification = already_account[5]
                 description = already_account[4]
                 ok = True
-                print(enabled, phone_number, full_name, profile_picture, qualification, description)
+                print(
+                    enabled, contact_number, full_name, profile_picture, qualification, description
+                )
         if ok is False:
             session["Email or User Name"] = user_name_or_email
             session["Password"] = password
@@ -145,7 +149,7 @@ def home_tutor_sign_in():
             "password": password,
             "remember_password": remember_password,
             "enabled": enabled,
-            "phone_number": phone_number,
+            "contact_number": contact_number,
             "full_name": full_name,
             "profile_picture": profile_picture,
             "qualification": qualification,
@@ -165,12 +169,12 @@ def tutor_two_factor_authentication():
         collection = db["2FACAUTH"]
         if request.method == "POST":
             email_code = request.form["email"]
-            phone_number_code = request.form["phone_number"]
+            contact_number_code = request.form["phone_number"]
             # results = [
             #     collection.find_one(
             #         {
             #             str(session["2_Fac_Auth_Info"]["email"]): str(email_code),
-            #             str("94766428783"): str(phone_number_code),
+            #             str("94766428783"): str(contact_number_code),
             #             "user_name": session["2_Fac_Auth_Info"]["user_name"],
             #         }
             #     )
@@ -188,7 +192,7 @@ def tutor_two_factor_authentication():
                 password = session["2_Fac_Auth_Info"]["password"]
                 remember_password = session["2_Fac_Auth_Info"]["remember_password"]
                 enabled = session["2_Fac_Auth_Info"]["enabled"]
-                phone_number = session["2_Fac_Auth_Info"]["phone_number"]
+                contact_number = session["2_Fac_Auth_Info"]["contact_number"]
                 full_name = session["2_Fac_Auth_Info"]["full_name"]
                 profile_picture = session["2_Fac_Auth_Info"]["profile_picture"]
                 qualification = session["2_Fac_Auth_Info"]["qualification"]
@@ -200,7 +204,7 @@ def tutor_two_factor_authentication():
                 session["Rank"] = rank
                 session["Remember Password"] = remember_password
                 session["Enabled"] = enabled
-                session["Phone Number"] = phone_number
+                session["Phone Number"] = contact_number
                 session["Full Name"] = full_name
                 session["Profile Picture"] = profile_picture
                 session["Qualification"] = qualification
@@ -221,6 +225,7 @@ def tutor_two_factor_authentication():
                 qualification = session["2_Fac_Auth_Info"]["qualification"]
                 profile_picture = session["2_Fac_Auth_Info"]["profile_picture"]
                 full_name = session["2_Fac_Auth_Info"]["full_name"]
+                contact_number = session["2_Fac_Auth_Info"]["contact_number"]
                 already_accounts = requests.get(
                     "http://127.0.0.1:5000/api/azure/sql",
                     {
@@ -229,7 +234,7 @@ def tutor_two_factor_authentication():
                             [Tutor] ([Email],[Password],[User_Name],[Description],[Qualification],[Profile Picture],[Full Name],[Contact Number],[Rating],[Enabled])
                         VALUES
                             (
-                                '{email}','{password}','{user_name}','{description}','{qualification}','{profile_picture}','{full_name}','{contact_number}','1','False'
+                                '{email}','{hp.encode(password)}','{user_name}','{description}','{qualification}','{profile_picture}','{full_name}','{contact_number}','1','False'
                             );
                         """,
                         "Type": "Insert",
@@ -240,10 +245,11 @@ def tutor_two_factor_authentication():
                 session["Password"] = password
                 flash("You will be validated as soon as possible", "success")
                 return redirect("/Tutor/Sign/In")
+        print(session["2_Fac_Auth_Info"])
         hf = Help_Funcs()
         hf.two_fac_auth(
             session["2_Fac_Auth_Info"]["user_name"],
             session["2_Fac_Auth_Info"]["email"],
-            session["2_Fac_Auth_Info"]["phone_number"],
+            session["2_Fac_Auth_Info"]["contact_number"],
         )  # TODO
         return render_template("/tutor_home/2_fac_auth.html")
