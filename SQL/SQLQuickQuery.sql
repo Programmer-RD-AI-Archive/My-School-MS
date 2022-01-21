@@ -8,16 +8,26 @@
 --        5,'go2ranuga@gmail.com','Ranuga','UmFudWdh'
 --     );
 
-SELECT
-    *
-FROM
-    Accounts;
+-- SELECT
+--     *
+-- FROM
+--     Accounts;
 
 
 -- CREATE TABLE Subjects (ID int IDENTITY(1,1), [Name] varchar(max), [Description] varchar(max), [Image] varchar(max))
-SELECT * FROM Subjects;
-
--- CREATE TABLE Courses (ID int IDENTITY(1,1), [Title] varchar(max), [Description] varchar(max), [Image] varchar(max),[Content] varchar(max))
+-- SELECT * FROM Subjects;
+-- DROP TABLE Courses;
+-- CREATE TABLE Courses
+-- (
+--     [ID] int IDENTITY(1,1),
+--     [Whole_Content] varchar(max),
+--     [Info] varchar(max),
+--     [Image] varchar(max),
+--     [Name] varchar(max),
+--     [Marks] varchar(max),
+--     [Description] varchar(max),
+--     [Subject] varchar(max)
+-- )
 -- DROP TABLE Tutor
 -- CREATE TABLE Tutor 
 -- (
@@ -34,4 +44,25 @@ SELECT * FROM Subjects;
 --     [Enabled] varchar(max)
 -- );
 
-SELECT * FROM Tutor
+-- SELECT * FROM Tutor;
+
+-- DROP TABLE Courses
+-- CREATE TABLE Courses
+-- (
+--     [ID] int IDENTITY(1,1),
+--     [Whole_Content] varchar(max),
+--     [Info] varchar(max),
+--     [Image] varchar(max),
+--     [Name] varchar(max),
+--     [Marks] varchar(max),
+--     [Description] varchar(max)
+-- );
+-- SELECT * FROM Courses;
+
+-- SELECT * FROM Questions;
+
+-- SELECT * FROM Resources;
+
+CREATE TABLE Enrolled (
+    [ID] int IDENTITY(1,1)
+)
