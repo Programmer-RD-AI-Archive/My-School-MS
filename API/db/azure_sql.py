@@ -18,9 +18,9 @@ class Azure_SQL:
     def __init__(
         self,
         driver: str = """{ODBC Driver 17 for SQL Server}""",
-        server_name: str = """help-you-learn-stuff""",
-        database_name: str = """Help-You-Learn-Stuff""",
-        username: str = """help-you-learn-stuff""",
+        server_name: str = """myschool-ms""",
+        database_name: str = """My-School-MS""",
+        username: str = """myschool-ms""",
         password: str = """ranuga-2008""",
         connection_timeout: int = 30,
     ) -> None:
