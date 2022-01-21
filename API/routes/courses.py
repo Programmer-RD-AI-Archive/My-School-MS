@@ -9,6 +9,7 @@ courses.add_argument("name", type=str, help="name is required", required=True)
 courses.add_argument("marks", type=str, help="marks is required", required=True)
 courses.add_argument("description", type=str, help="description is required", required=True)
 courses.add_argument("subject", type=str, help="subject is required", required=True)
+courses.add_argument("_id", type=str, help="_id is required", required=True)
 
 
 class Courses(Resource):
@@ -40,7 +41,8 @@ class Courses(Resource):
                 [Image] varchar(max),
                 [Name] varchar(max),
                 [Marks] varchar(max),
-                [Description] varchar(max)
+                [Description] varchar(max),
+                [Tutor ID] varchar(max)
             )
             """,
         )
@@ -68,7 +70,8 @@ class Courses(Resource):
                 [Image] varchar(max),
                 [Name] varchar(max),
                 [Marks] varchar(max),
-                [Description] varchar(max)
+                [Description] varchar(max),
+                [Tutor ID] varchar(max)
             )
             """,
         )
@@ -82,7 +85,8 @@ class Courses(Resource):
                 [Name],
                 [Marks],
                 [Description],
-                [Subject]
+                [Subject],
+                [Tutor ID]
             ) 
             VALUES 
             ( 
@@ -92,7 +96,8 @@ class Courses(Resource):
                 '{args['name']}',
                 '{args['marks']}',
                 '{args['description']}',
-                '{args['subject']}'
+                '{args['subject']}',
+                '{args['_id']}'
             )
             """
         )
