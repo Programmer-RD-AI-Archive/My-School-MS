@@ -40,6 +40,7 @@ class Azure_Storage_API(Resource):
         Return: return_description
         """
         args = azure_storage_request_parser.parse_args()
+        print(args)
         astorage = Azure_Storage(args["""Container Name"""])
         if args["""Type"""] == """Create File""":
             return {
