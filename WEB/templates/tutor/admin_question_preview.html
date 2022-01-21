@@ -1,0 +1,25 @@
+<!--
+sumary_line
+
+Keyword arguments:
+argument -- description
+Return: return_description 
+-->
+
+{% extends "/tutor/base.html" %} {% block head %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='tutor/css/admin_question_preview.css') }}"
+/>
+<script src="{{ url_for('static', filename='tutor/js/admin_question_preview.js') }}"></script>
+<title>Tutor Question Preview</title>
+
+{% endblock %} {% block body %}
+<div class="container">
+  <a href="/Tutor/{{_id}}/Question/"
+    ><button type="button" class="btn btn-primary"><- Go Back</button>
+  </a>
+  <hr />
+  {{code|safe}}
+</div>
+{% endblock %}
