@@ -1,0 +1,35 @@
+<!--
+sumary_line
+Keyword arguments:
+argument -- description
+Return: return_description 
+-->
+{% extends "/admin/base.html" %} {% block head %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='admin/css/tutor.css') }}"
+/>
+<script src="{{ url_for('static', filename='admin/js/tutor.js') }}"></script>
+<title>Home</title>
+
+{% endblock %} {% block body %}
+<div class="container">
+    {% for tutor in tutors %}
+<div class="card" style="width: 18rem;">
+
+  <img src="{{tutor[6]}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{tutor[3]}}</h5>
+    <p class="card-text">{{tutor[1]}} <br> {{tutor[4]}} <br>{{tutor[5]}} <br>{{tutor[7]}} <br>{{tutor[8]}} </p>
+    {% if tutor[10] == 'False' %}
+    <a href="/Admin/Tutors/Enable/{{tutor[0]}}" class="btn btn-primary">Enable</a>
+    {% else %}
+    <a href="/Admin/Tutors/Disable/{{tutor[0]}}" class="btn btn-danger">Disable</a>
+    {% endif %}
+    <!-- <a href="/Admin/Tutors/Delete/{{tutor[0]}}" class="btn btn-danger">Delete</a> -->
+  </div>
+</div>
+{% endfor %}
+</div>
+  {% endblock %}
+</div>
