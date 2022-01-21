@@ -1,0 +1,43 @@
+<!--
+sumary_line
+Keyword arguments:
+argument -- description
+Return: return_description 
+-->
+{% extends "/student/base.html" %} {% block head %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='student/css/subject.css') }}"
+/>
+<script src="{{ url_for('static', filename='student/js/subject.js') }}"></script>
+<title>Home</title>
+
+{% endblock %} {% block body %}
+<div class="container px-4">
+  {% for course_iter in courses %}
+  <div class="row gx-5">
+    {% for course in course_iter %}
+    <div class="col">
+      <div class="p-3 border bg-light">
+        <center>
+          <div class="card" style="width: 18rem">
+            <img src="{{course[3]}}" class="card-img-top" />
+            <div class="card-body">
+              <h5 class="card-title">{{course[4]}}</h5>
+              <p class="card-text">
+                {{course[6]}} <br />
+                Marks Required to Pass - {{course[5]}}
+              </p>
+              <a href="/Usr/{{_id}}/Subject/{{course[0]}}/Enroll"
+                ><button class="btn btn-primary">Enroll</button></a
+              >
+            </div>
+          </div>
+        </center>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
