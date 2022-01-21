@@ -71,17 +71,26 @@ def student_subject_enroll(_id, name_of_subject):
     if str(session["id"]) == str(_id):
         courses = requests.get(
             "http://127.0.0.1:5000/api/azure/sql",
-            {"Type": "Select", "Query": f"SELECT * FROM Courses WHERE Subject={name_of_subject}"},
+            {"Type": "Select", "Query": f"SELECT * FROM Courses WHERE [ID]={name_of_subject}"},
         )
-        courses = courses.json()["message"]
-        iter_list = []
-        new_courses = []
-        idx = 0
-        for course in courses:
-            if idx % 3 == 0:
-                new_courses.append(iter_list)
-                iter_list = []
-            iter_list.append(course)
-            idx += 1
-        new_courses.append(iter_list)
-        return render_template("student/subject.html", courses=new_courses)
+        courses = courses.json()["message"][0]
+        id_courses = courses[0]
+        id_tutor = courses[-1]
+        id_student = _id
+        print(courses)
+        print(
+            requests.get(
+                "http://127.0.0.1:5000/api/azure/storage",
+                {"Container Name": "account", "file_name": courses[2], "Type": "Download File"},
+            ).json()
+        )
+        # requests.get(
+        #     "http://127.0.0.1:5000/api/azure/sql",
+        #     {
+        #         "Type": "Insert",
+        #         "Query": f"INSERT INTO [Enrolled]( [Student Id],[Course Id], [Tutor Id], [Current Lesson], [Total Lesson], [Paid] ) VALUES ({id_student}, {id_courses}, {id_tutor}, 0, 0, 'False')",
+        #     },
+        # )
+
+
+# Driver={ODBC Driver 13 for SQL Server};Server=tcp:,1433;Database=My-School-MS;Uid=myschool-ms;Pwd={your_password_here};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;
