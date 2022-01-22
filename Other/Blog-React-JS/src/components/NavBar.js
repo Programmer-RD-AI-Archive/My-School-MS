@@ -1,8 +1,6 @@
 const NavBar = ({ lists }) => {
   return (
-    <nav
-      className="navbar_styles navbar navbar-expand-lg navbar-light bg-light"
-    >
+    <nav className="navbar_styles navbar navbar-expand-lg navbar-light bg-light">
       <div style={{ marginLeft: 10 }}>
         <a class="navbar-brand" href="#">
           <img
@@ -27,14 +25,14 @@ const NavBar = ({ lists }) => {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span className="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon" />
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             {lists.map((list) => (
               <li className="nav-item">
                 <a className="nav-link" href={list.URL}>
-                  {list["Name"]}
+                  {list.Name}
                 </a>
               </li>
             ))}

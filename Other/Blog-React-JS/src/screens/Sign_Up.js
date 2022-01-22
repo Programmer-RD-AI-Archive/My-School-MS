@@ -11,7 +11,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
-  signInWithPopup
+  signInWithPopup,
 } from "firebase/auth";
 
 const Sign_Up = () => {
@@ -51,7 +51,7 @@ const Sign_Up = () => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
         const user = result.user;
-        console.log(user)
+        console.log(user);
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -112,10 +112,7 @@ const Sign_Up = () => {
           {IsError && <p>{error}</p>}
         </form>
         <br />
-        <button onClick={googleauth}>
-          Login with Google
-        </button>
-
+        <button onClick={googleauth}>Login with Google</button>
       </div>
     </>
   );

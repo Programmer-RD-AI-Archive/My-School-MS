@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import Home from "./screens/Home";
 import Sign_Up from "./screens/Sign_Up";
-import useFirebase from "./db/useFirebase"
+import useFirebase from "./db/useFirebase";
 function App() {
   const { app, firebaseConfig, analytics } = useFirebase();
   return (
