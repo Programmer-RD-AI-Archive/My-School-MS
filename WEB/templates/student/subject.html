@@ -25,12 +25,18 @@ Return: return_description
             <div class="card-body">
               <h5 class="card-title">{{course[4]}}</h5>
               <p class="card-text">
-                {{course[6]}} <br />
+                {{course[6]}} <br /><br />
                 Marks Required to Pass - {{course[5]}}
               </p>
+              {% if course[0] in enrolled_courses %}
+              <a href="/Usr/{{_id}}/Subject/{{course[0]}}/Login"
+                ><button class="btn btn-dark">Check</button></a
+              >
+              {% else %}
               <a href="/Usr/{{_id}}/Subject/{{course[0]}}/Enroll"
                 ><button class="btn btn-primary">Enroll</button></a
               >
+              {% endif %}
             </div>
           </div>
         </center>
