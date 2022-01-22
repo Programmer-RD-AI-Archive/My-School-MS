@@ -67,8 +67,10 @@ class Accounts(Resource):
         id_new = ids_of_accounts[-1][0]
         id_new += 1
         info = str(args["payment_id_info"])
+        print(info)
         # info = args["payment_id_info"]
         info = bytes(info, encoding="utf-8")
+        print(info)
         astorage.create_file(info, f"{id_new}-payment-details.json")
         asql.insert_to_table(
             f"""INSERT INTO [Accounts]( [Rank],[Email], [User_Name], [Password], [payment_id_info] ) VALUES ( 1,'{args['email']}', '{args['user_name']}', '{args['password']}','{id_new}-info.txt')"""
