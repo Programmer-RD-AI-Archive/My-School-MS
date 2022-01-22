@@ -27,4 +27,4 @@ SELECT
     *
 FROM
     Accounts;
-SELECT * FROM Enrolled;
+SELECT * FROM Tutor;
