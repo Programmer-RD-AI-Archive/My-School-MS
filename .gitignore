@@ -130,3 +130,4 @@ dmypy.json
 Models/Random_Profile_Picture_Generator_GAN/data
 Models/Rock_Paper_Scissors/data
 Models/Sign_Language_Recognition/data
+Models/Summarize/data/data.csv
