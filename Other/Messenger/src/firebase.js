@@ -7,7 +7,7 @@ const firebaseConfig = {
   storageBucket: "messenger-app-react-js-rd.appspot.com",
   messagingSenderId: "782371269785",
   appId: "1:782371269785:web:614c84fe3b8f40c12ddc08",
-  measurementId: "G-LD1DKS637P"
+  measurementId: "G-LD1DKS637P",
 };
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const db = firebaseApp.firestore();

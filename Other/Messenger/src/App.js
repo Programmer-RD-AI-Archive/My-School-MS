@@ -36,28 +36,28 @@ function App() {
     <div className="App">
       <Head username={username} />
       <center>
-          <form className="app__form">
-            <FormControl className="app__formControl">
-              <Input
-                className="app__input"
-                placeholder="Enter Message..."
-                value={input}
-                onChange={(event) => {
-                  setInput(event.target.value);
-                }}
-              />
-              <IconButton
-                className="app__iconButton"
-                type="submit"
-                variant="contained"
-                color="primary"
-                onClick={sendMessage}
-                disabled={!input}
-              >
-                <SendIcon />
-              </IconButton>
-            </FormControl>
-          </form>
+        <form className="app__form">
+          <FormControl className="app__formControl">
+            <Input
+              className="app__input"
+              placeholder="Enter Message..."
+              value={input}
+              onChange={(event) => {
+                setInput(event.target.value);
+              }}
+            />
+            <IconButton
+              className="app__iconButton"
+              type="submit"
+              variant="contained"
+              color="primary"
+              onClick={sendMessage}
+              disabled={!input}
+            >
+              <SendIcon />
+            </IconButton>
+          </FormControl>
+        </form>
       </center>
       <FlipMove>
         {messages.map(({ id, message }) => (

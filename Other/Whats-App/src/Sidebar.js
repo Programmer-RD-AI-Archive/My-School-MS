@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Sidebar.css";
 import { Avatar, IconButton } from "@material-ui/core";
-import {
-  DonutLarge,
-  MoreVert,
-  SearchOutlined
-} from "@material-ui/icons";
+import { DonutLarge, MoreVert, SearchOutlined } from "@material-ui/icons";
 import ChatIcon from "@material-ui/icons/Chat";
 import SidebarChat from "./SidebarChat";
 import { db } from "./firebase";
@@ -29,7 +25,7 @@ function Sidebar() {
   return (
     <div className="sidebar">
       <div className="sidebar__header">
-        <Avatar src={user?.photoURL}/>
+        <Avatar src={user?.photoURL} />
         <div className="sidebar__headerRight">
           <IconButton>
             <DonutLarge />
@@ -52,7 +48,12 @@ function Sidebar() {
       <div className="sidebar__chats">
         <SidebarChat addNewChat />
         {rooms.map((room) => (
-          <SidebarChat key={room.id} id={room.id} name={room.data.name} image={room.data.image} />
+          <SidebarChat
+            key={room.id}
+            id={room.id}
+            name={room.data.name}
+            image={room.data.image}
+          />
         ))}
       </div>
     </div>

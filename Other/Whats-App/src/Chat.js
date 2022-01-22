@@ -35,9 +35,10 @@ function Chat() {
         .doc(roomId)
         .collection("messages")
         .orderBy("timestamp", "asc")
-        .onSnapshot((snapshot) =>
-          //setMessages()
-          console.log(snapshot.docs[0].data())//snapshot.docs.map((doc) => doc.data()))
+        .onSnapshot(
+          (snapshot) =>
+            // setMessages()
+            console.log(snapshot.docs[0].data()) // snapshot.docs.map((doc) => doc.data()))
         );
     }
   }, [roomId]);

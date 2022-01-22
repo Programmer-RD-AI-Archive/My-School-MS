@@ -1,1 +1,33 @@
-{"ast":null,"code":"import React, { useState } from \"react\";\nimport StyleSheet from \"react-native-web/dist/exports/StyleSheet\";\nimport View from \"react-native-web/dist/exports/View\";\nimport Text from \"react-native-web/dist/exports/Text\";\n\nvar Header = function Header() {\n  return React.createElement(View, {\n    style: styles.header\n  }, React.createElement(Text, {\n    style: styles.title\n  }, \"My Todos\"));\n};\n\nvar styles = StyleSheet.create({\n  header: {\n    height: 80,\n    paddingTop: 38,\n    backgroundColor: \"coral\"\n  },\n  title: {\n    textAlign: \"center\",\n    color: \"gray\",\n    fontSize: 20,\n    fontWeight: \"bold\"\n  }\n});\nexport default Header;","map":{"version":3,"sources":["/media/indika/Sync/Programming/Projects/Python/All/My-School-MS/Other/Todo-App-React-Native/components/header.js"],"names":["React","useState","Header","styles","header","title","StyleSheet","create","height","paddingTop","backgroundColor","textAlign","color","fontSize","fontWeight"],"mappings":"AAAA,OAAOA,KAAP,IAAgBC,QAAhB,QAAgC,OAAhC;;;;;AAEA,IAAMC,MAAM,GAAG,SAATA,MAAS,GAAM;AACnB,SACE,oBAAC,IAAD;AAAM,IAAA,KAAK,EAAEC,MAAM,CAACC;AAApB,KACE,oBAAC,IAAD;AAAM,IAAA,KAAK,EAAED,MAAM,CAACE;AAApB,gBADF,CADF;AAKD,CAND;;AAOA,IAAMF,MAAM,GAAGG,UAAU,CAACC,MAAX,CAAkB;AAC/BH,EAAAA,MAAM,EAAE;AACNI,IAAAA,MAAM,EAAE,EADF;AAENC,IAAAA,UAAU,EAAE,EAFN;AAGNC,IAAAA,eAAe,EAAE;AAHX,GADuB;AAM/BL,EAAAA,KAAK,EAAE;AACLM,IAAAA,SAAS,EAAE,QADN;AAELC,IAAAA,KAAK,EAAE,MAFF;AAGLC,IAAAA,QAAQ,EAAE,EAHL;AAILC,IAAAA,UAAU,EAAE;AAJP;AANwB,CAAlB,CAAf;AAaA,eAAeZ,MAAf","sourcesContent":["import React, { useState } from \"react\";\nimport { StyleSheet, View, Text } from \"react-native\";\nconst Header = () => {\n  return (\n    <View style={styles.header}>\n      <Text style={styles.title}>My Todos</Text>\n    </View>\n  );\n};\nconst styles = StyleSheet.create({\n  header: {\n    height: 80,\n    paddingTop: 38,\n    backgroundColor: \"coral\",\n  },\n  title: {\n    textAlign: \"center\",\n    color: \"gray\",\n    fontSize: 20,\n    fontWeight: \"bold\",\n  },\n});\nexport default Header;\n\n"]},"metadata":{},"sourceType":"module"}
+{
+  "ast": null,
+  "code": "import React, { useState } from \"react\";\nimport StyleSheet from \"react-native-web/dist/exports/StyleSheet\";\nimport View from \"react-native-web/dist/exports/View\";\nimport Text from \"react-native-web/dist/exports/Text\";\n\nvar Header = function Header() {\n  return React.createElement(View, {\n    style: styles.header\n  }, React.createElement(Text, {\n    style: styles.title\n  }, \"My Todos\"));\n};\n\nvar styles = StyleSheet.create({\n  header: {\n    height: 80,\n    paddingTop: 38,\n    backgroundColor: \"coral\"\n  },\n  title: {\n    textAlign: \"center\",\n    color: \"gray\",\n    fontSize: 20,\n    fontWeight: \"bold\"\n  }\n});\nexport default Header;",
+  "map": {
+    "version": 3,
+    "sources": [
+      "/media/indika/Sync/Programming/Projects/Python/All/My-School-MS/Other/Todo-App-React-Native/components/header.js"
+    ],
+    "names": [
+      "React",
+      "useState",
+      "Header",
+      "styles",
+      "header",
+      "title",
+      "StyleSheet",
+      "create",
+      "height",
+      "paddingTop",
+      "backgroundColor",
+      "textAlign",
+      "color",
+      "fontSize",
+      "fontWeight"
+    ],
+    "mappings": "AAAA,OAAOA,KAAP,IAAgBC,QAAhB,QAAgC,OAAhC;;;;;AAEA,IAAMC,MAAM,GAAG,SAATA,MAAS,GAAM;AACnB,SACE,oBAAC,IAAD;AAAM,IAAA,KAAK,EAAEC,MAAM,CAACC;AAApB,KACE,oBAAC,IAAD;AAAM,IAAA,KAAK,EAAED,MAAM,CAACE;AAApB,gBADF,CADF;AAKD,CAND;;AAOA,IAAMF,MAAM,GAAGG,UAAU,CAACC,MAAX,CAAkB;AAC/BH,EAAAA,MAAM,EAAE;AACNI,IAAAA,MAAM,EAAE,EADF;AAENC,IAAAA,UAAU,EAAE,EAFN;AAGNC,IAAAA,eAAe,EAAE;AAHX,GADuB;AAM/BL,EAAAA,KAAK,EAAE;AACLM,IAAAA,SAAS,EAAE,QADN;AAELC,IAAAA,KAAK,EAAE,MAFF;AAGLC,IAAAA,QAAQ,EAAE,EAHL;AAILC,IAAAA,UAAU,EAAE;AAJP;AANwB,CAAlB,CAAf;AAaA,eAAeZ,MAAf",
+    "sourcesContent": [
+      "import React, { useState } from \"react\";\nimport { StyleSheet, View, Text } from \"react-native\";\nconst Header = () => {\n  return (\n    <View style={styles.header}>\n      <Text style={styles.title}>My Todos</Text>\n    </View>\n  );\n};\nconst styles = StyleSheet.create({\n  header: {\n    height: 80,\n    paddingTop: 38,\n    backgroundColor: \"coral\",\n  },\n  title: {\n    textAlign: \"center\",\n    color: \"gray\",\n    fontSize: 20,\n    fontWeight: \"bold\",\n  },\n});\nexport default Header;\n\n"
+    ]
+  },
+  "metadata": {},
+  "sourceType": "module"
+}
