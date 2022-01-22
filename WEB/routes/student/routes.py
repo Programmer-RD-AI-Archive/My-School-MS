@@ -77,11 +77,15 @@ def student_subject_enroll(_id, name_of_subject):
         id_courses = courses[0]
         id_tutor = courses[-1]
         id_student = _id
-        print(courses)
+        print(id_student, id_tutor, id_courses, courses[2])
         print(
             requests.get(
                 "http://127.0.0.1:5000/api/azure/storage",
-                {"Container Name": "account", "file_name": courses[2], "Type": "Download File"},
+                {
+                    "Container Name": "account",
+                    "file_name": f"{id_student}-payment-details.json",
+                    "Type": "Download File",
+                },
             ).json()
         )
         # requests.get(

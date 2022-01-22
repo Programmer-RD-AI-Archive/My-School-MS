@@ -55,9 +55,8 @@ class Courses(Resource):
             ids_of_cources = [[0]]
         id_new = ids_of_cources[-1][0]
         id_new += 1
-
         info = str(args["info"])
-        info = bytes(info, encoding="utf-8")
+        # info = bytes(info, encoding="utf-8")
         astorage.create_file(file_name_in_the_cloud=f"{id_new}-info.txt", file_rb=info)
         hp.table_exists_or_not(
             "Contact_Us",

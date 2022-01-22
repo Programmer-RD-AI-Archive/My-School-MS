@@ -10,6 +10,22 @@ from tqdm import tqdm
 # print(asql.select_table())
 # print(asql.get_tables())
 # print(asql.close_connection())
+astorage = Azure_Storage("account")
+# info = str("gergergre")
+# info = bytes(info, encoding="utf-8")  # open("./requirements.txt", "rb")
+print(astorage.create_file("info", "requirements.txt"))
+# print(astorage.download_file("requirements.txt"))
+# print(
+#     requests.get(
+#         "http://127.0.0.1:5000/api/azure/storage",
+#         {
+#             "Container Name": "account",
+#             "blob_name": "test.txt",
+#             "file_rb": "grwegreg",
+#             "Type": "Create File",
+#         },
+#     ).json()
+# )
 
 
 class Create_Multiple:
