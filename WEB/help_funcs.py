@@ -21,7 +21,8 @@ class Help_Funcs:
             "https://isitarealemail.com/api/email/validate", params={"email": email}
         )  # validating if a email is valid
         status = response.json()["status"]  # getting the response
-        return status == "valid"
+        # return status == "valid" # TODO
+        return True
 
     def log_ip_address(self, url_trying_to_access: str, ip_address: str) -> None:
         respond = requests.post(
