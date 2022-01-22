@@ -268,6 +268,7 @@ def payment_methods():
                     }
                 ],
             )
+            print(session_subscription)
         except:
             #
             session_subscription = stripe.checkout.Session.create(
@@ -282,6 +283,8 @@ def payment_methods():
                 success_url=url_success,
                 cancel_url=url_decline,
             )
+            print(session_subscription)
+        print(session_subscription)
         session["Subscription"] = session_subscription
         return render_template(
             "/home/payment_methods.html",
@@ -293,7 +296,7 @@ def payment_methods():
 @app.route("/payment_methods_success/", methods=["POST", "GET"])
 @app.route("/payment_methods_success", methods=["POST", "GET"])
 def payment_methods_success():
-    payment_id_info = session["Subscription"]
+    print(session["Subscription"])
     if "payment_methods" in session:
         if "Coupon" in session:
             session.pop("Coupon")
@@ -312,7 +315,7 @@ def payment_methods_success():
                 "email": email,
                 "password": hp.encode(password),
                 "user_name": user_name,
-                "payment_id_info": payment_id_info,
+                "payment_id_info": str(session["Subscription"]),
             },
         )
         account_add = account_add.json()
