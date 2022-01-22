@@ -1,7 +1,8 @@
-import speech_recognition as sr  # recognise speech
-import playsound  # to play an audio file
-from gtts import gTTS  # google text to speech
 import os  # to remove created audio files
+
+import playsound  # to play an audio file
+import speech_recognition as sr  # recognise speech
+from gtts import gTTS  # google text to speech
 
 
 class person:
@@ -18,6 +19,8 @@ def there_exists(terms):
 
 
 r = sr.Recognizer()  # initialise a recogniser
+
+
 # listen for audio and convert it to text:
 def record_audio():
     with sr.AudioFile("./example.wav") as source:  # microphone as source
