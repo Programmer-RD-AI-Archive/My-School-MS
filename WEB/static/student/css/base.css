@@ -24,3 +24,6 @@ Return: return_description
   margin-right: 12px !important;
   color: lightgray !important;
 }
+.body {
+  padding: 12.5px !important;
+}
