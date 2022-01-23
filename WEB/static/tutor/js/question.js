@@ -9,6 +9,12 @@ Return: return_description
 var idx = 0;
 var idx_iter = 0;
 $("#input").click(function () {
+  /**
+   * Function to add two numbers
+   * @param a The first number to add
+   * @param b The second number to add
+   * @returns The sum of two numbers
+   */
   idx += 1;
 
   document.getElementById("content").insertAdjacentHTML(
@@ -25,6 +31,12 @@ $("#input").click(function () {
   );
 });
 $("#text").click(function () {
+  /**
+   * Function to add two numbers
+   * @param a The first number to add
+   * @param b The second number to add
+   * @returns The sum of two numbers
+   */
   idx += 1;
 
   document.getElementById("content").insertAdjacentHTML(
@@ -40,6 +52,12 @@ $("#text").click(function () {
   );
 });
 $("#checkbox").click(function () {
+  /**
+   * Function to add two numbers
+   * @param a The first number to add
+   * @param b The second number to add
+   * @returns The sum of two numbers
+   */
   idx += 1;
 
   document.getElementById("content").insertAdjacentHTML(
@@ -57,6 +75,12 @@ $("#checkbox").click(function () {
   );
 });
 $("#big_input").click(function () {
+  /**
+   * Function to add two numbers
+   * @param a The first number to add
+   * @param b The second number to add
+   * @returns The sum of two numbers
+   */
   idx += 1;
 
   document.getElementById("content").insertAdjacentHTML(
@@ -74,6 +98,12 @@ $("#big_input").click(function () {
   );
 });
 $("#switches").click(function () {
+  /**
+   * Function to add two numbers
+   * @param a The first number to add
+   * @param b The second number to add
+   * @returns The sum of two numbers
+   */
   idx += 1;
 
   document.getElementById("content").insertAdjacentHTML(
@@ -91,6 +121,12 @@ $("#switches").click(function () {
   );
 });
 $("#checks").click(function () {
+  /**
+   * Function to add two numbers
+   * @param a The first number to add
+   * @param b The second number to add
+   * @returns The sum of two numbers
+   */
   idx += 1;
 
   document.getElementById("content").insertAdjacentHTML(
@@ -110,6 +146,12 @@ $("#checks").click(function () {
   );
 });
 $("#range").click(function () {
+  /**
+   * Function to add two numbers
+   * @param a The first number to add
+   * @param b The second number to add
+   * @returns The sum of two numbers
+   */
   idx += 1;
 
   document.getElementById("content").insertAdjacentHTML(
@@ -124,6 +166,12 @@ $("#range").click(function () {
   );
 });
 function submit_info_API(_id) {
+  /**
+   * Function to add two numbers
+   * @param a The first number to add
+   * @param b The second number to add
+   * @returns The sum of two numbers
+   */
   console.log(_id);
   const info = {};
   for (idx_iter = 1; idx_iter <= idx; idx_iter++) {
@@ -160,6 +208,12 @@ function submit_info_API(_id) {
   window.location.reload(0);
 }
 function removeElement(idx) {
+  /**
+   * Function to add two numbers
+   * @param a The first number to add
+   * @param b The second number to add
+   * @returns The sum of two numbers
+   */
   const element = document.getElementById(`${idx}`);
   element.remove();
 } // TODO Redirect the POST Request to the API
