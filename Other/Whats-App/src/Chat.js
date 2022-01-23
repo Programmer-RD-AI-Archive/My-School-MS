@@ -93,7 +93,7 @@ function Chat() {
       </div>
       <div className="chat__body">
         {messages.map((message) => (
-          <div>
+          <div key={message}>
             <br />
             <p
               className={`chat__message ${
