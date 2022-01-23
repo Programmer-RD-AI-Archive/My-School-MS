@@ -128,4 +128,3 @@ def train(epochs, X_train, y_train, X_test, y_test, model, criterion,
         model.train()
     wandb.finish()
     torch.cuda.empty_cache()
-    return None

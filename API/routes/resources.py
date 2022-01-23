@@ -71,7 +71,6 @@ class Resources(Resource):
         asql.insert_to_table(
             f"INSERT INTO [Resources]( [method_of_resource], [link_of_resource], [title], [description] ) VALUES ( '{args['method_of_resource']}', '{args['link_of_resource']}','{args['title']}','{args['description']}')"
         )
-        return None
 
 
 api.add_resource(Resources, "/api/resources")

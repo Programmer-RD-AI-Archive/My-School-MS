@@ -54,7 +54,6 @@ class Param_Tunning:
         metrics = model.train()
         ap = metrics["metrics_coco"]["bbox.AP"]
         tune.report(average_precisions=ap)
-        return None
 
     def ray_tune(self):
         "https://docs.ray.io/en/latest/tune/user-guide.html"
@@ -67,4 +66,3 @@ class Param_Tunning:
         analysis.get_best_results(metrics="average_precisions", model="max")
         df = analysis.results_df
         df.to_csv("./Logs.csv")
-        return None

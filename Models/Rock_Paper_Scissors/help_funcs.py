@@ -62,4 +62,3 @@ def train(epochs, batch_size, model, optimizer, criterion, X_train, y_train,
             wandb.log(
                 {f"Img/{file}": wandb.Image(cv2.imread(f"./preds/{file}"))})
     wandb.finish()
-    return None
