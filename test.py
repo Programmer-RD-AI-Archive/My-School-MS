@@ -85,3 +85,6 @@ class Create_Multiple:
         accounts = asql.select_table("""SELECT * FROM [Accounts]""")
         for account in accounts:
             newaccounts.append(list(account))
+
+
+print("SELECT admin FROM users WHERE username = %s'", ("username",))

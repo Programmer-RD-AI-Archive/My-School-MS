@@ -88,7 +88,7 @@ def home():
 
 @app.route("/Sign/Up", methods=["GET", "POST"])
 @app.route("/Sign/Up/", methods=["GET", "POST"])
-def sign_up():
+def home_sign_up():
     """sumary_line
 
     Keyword arguments:
@@ -132,7 +132,7 @@ def sign_up():
 
 @app.route("/Sign/In", methods=["GET", "POST"])
 @app.route("/Sign/In/", methods=["GET", "POST"])
-def sign_in():
+def home_sign_in():
     """sumary_line
 
     Keyword arguments:
@@ -188,7 +188,7 @@ def sign_in():
 
 @app.route("/2/Fac/Auth/", methods=["POST", "GET"])
 @app.route("/2/Fac/Auth", methods=["POST", "GET"])
-def sign_two_face_auth():
+def home_sign_two_face_auth():
     """sumary_line
 
     Keyword arguments:
@@ -248,7 +248,7 @@ def sign_two_face_auth():
 
 @app.route("/payment_methods/", methods=["POST", "GET"])
 @app.route("/payment_methods", methods=["POST", "GET"])
-def payment_methods():
+def home_payment_methods():
     """sumary_line
 
     Keyword arguments:
@@ -308,7 +308,7 @@ def payment_methods():
 
 @app.route("/payment_methods_success/", methods=["POST", "GET"])
 @app.route("/payment_methods_success", methods=["POST", "GET"])
-def payment_methods_success():
+def home_payment_methods_success():
     """sumary_line
 
     Keyword arguments:
@@ -353,7 +353,7 @@ def payment_methods_success():
 
 @app.route("/payment_methods_decline/")
 @app.route("/payment_methods_decline")
-def payment_methods_decline():
+def home_payment_methods_decline():
     """sumary_line
 
     Keyword arguments:
