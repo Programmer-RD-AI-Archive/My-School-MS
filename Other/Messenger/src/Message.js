@@ -10,6 +10,12 @@ import { Card, CardContent, Typography } from "@material-ui/core";
 import "./Message.css";
 
 const Message = forwardRef(({ username, message }, ref) => {
+  /**
+   * Function to add two numbers
+   * @param a The first number to add
+   * @param b The second number to add
+   * @returns The sum of two numbers
+   */
   const isUser = username === message.username;
   return (
     <div ref={ref} className={`message ${isUser && "message__user"} `}>
