@@ -39,6 +39,7 @@ class Azure_Storage:
             container=self.container_name, blob=file_name_in_the_cloud
         )
         blob_client.upload_blob(file_rb, overwrite=True)
+        return None
 
     def find_file(self) -> None:
         """sumary_line
@@ -74,3 +75,4 @@ class Azure_Storage:
         Return: return_description
         """
         self.container_client.delete_container()
+        return None
