@@ -2,6 +2,12 @@ from Models.Sign_Language_Recognition import *
 
 
 def other_loading_data_proccess(data):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     X = []
     y = []
     print("going through the data..")
@@ -25,6 +31,12 @@ def other_loading_data_proccess(data):
 
 
 def load_data(img_size=112):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     data = []
     index = -1
     labels = {}
@@ -47,24 +59,30 @@ def load_data(img_size=112):
     return other_loading_data_proccess(data)
 
 
-def train(X_train, y_train, X_test, y_test, model, criterion, optimizer,
-          epochs, batch_size):
+def train(X_train, y_train, X_test, y_test, model, criterion, optimizer, epochs, batch_size):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     wandb.init(project=PROJECT_NAME, name="Final")
     for _ in tqdm(range(epochs)):
         for i in tqdm(range(0, len(X_train), batch_size)):
-            X_batch = X_train[i:i + batch_size].view(-1, 1, 112,
-                                                     112).to(device)
-            y_batch = y_train[i:i + batch_size].to(device)
+            X_batch = X_train[i : i + batch_size].view(-1, 1, 112, 112).to(device)
+            y_batch = y_train[i : i + batch_size].to(device)
             model.to(device)
             preds = model(X_batch.float())
             loss = criterion(preds, y_batch)
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
-            wandb.log({
-                "loss": loss.item(),
-                "accuracy": test(model, X_train, y_train) * 100,
-                "val_accuracy": test(model, X_test, y_test) * 100,
-                "val_loss": get_loss(criterion, y_test, model, X_test),
-            })
+            wandb.log(
+                {
+                    "loss": loss.item(),
+                    "accuracy": test(model, X_train, y_train) * 100,
+                    "val_accuracy": test(model, X_test, y_test) * 100,
+                    "val_loss": get_loss(criterion, y_test, model, X_test),
+                }
+            )
     wandb.finish()

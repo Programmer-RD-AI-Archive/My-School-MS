@@ -6,6 +6,13 @@ from gtts import gTTS  # google text to speech
 
 
 class person:
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
+
     name = ""
 
     def setName(self, name):
@@ -13,6 +20,12 @@ class person:
 
 
 def there_exists(terms):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     for term in terms:
         if term in voice_data:
             return True

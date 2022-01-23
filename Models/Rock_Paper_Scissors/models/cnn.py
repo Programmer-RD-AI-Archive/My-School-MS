@@ -2,7 +2,20 @@ from Models.Rock_Paper_Scissors import *
 
 
 class Model(Module):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
+
     def __init__(self):
+        """sumary_line
+
+        Keyword arguments:
+        argument -- description
+        Return: return_description
+        """
         super().__init__()
         self.max_pool2d = MaxPool2d((2, 2), (2, 2))
         self.activation = ReLU()
@@ -25,14 +38,16 @@ class Model(Module):
         self.output = Linear(1024, 3)
 
     def forward(self, X):
-        preds = self.max_pool2d(
-            self.activation(self.conv1batchnorm(self.conv1(X))))
-        preds = self.max_pool2d(
-            self.activation(self.conv2batchnorm(self.conv2(preds))))
-        preds = self.max_pool2d(
-            self.activation(self.conv3batchnorm(self.conv3(preds))))
-        preds = self.max_pool2d(
-            self.activation(self.conv4batchnorm(self.conv4(preds))))
+        """sumary_line
+
+        Keyword arguments:
+        argument -- description
+        Return: return_description
+        """
+        preds = self.max_pool2d(self.activation(self.conv1batchnorm(self.conv1(X))))
+        preds = self.max_pool2d(self.activation(self.conv2batchnorm(self.conv2(preds))))
+        preds = self.max_pool2d(self.activation(self.conv3batchnorm(self.conv3(preds))))
+        preds = self.max_pool2d(self.activation(self.conv4batchnorm(self.conv4(preds))))
         #         print(preds.shape)
         preds = preds.view(-1, 15 * 3 * 3)
         preds = self.activation(self.linear1batchnorm(self.linear1(preds)))

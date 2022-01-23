@@ -1,3 +1,10 @@
+/*
+sumary_line
+
+Keyword arguments:
+argument -- description
+Return: return_description
+*/
 import React, { createContext, useContext, useReducer } from "react";
 export const StateContext = createContext();
 export const StateProvider = ({ reducer, initialState, children }) => (

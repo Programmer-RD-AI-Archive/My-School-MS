@@ -1,3 +1,10 @@
+/*
+sumary_line
+
+Keyword arguments:
+argument -- description
+Return: return_description
+*/
 import React, { forwardRef } from "react";
 import { Card, CardContent, Typography } from "@material-ui/core";
 import "./Message.css";

@@ -2,14 +2,32 @@ from Models.Positive_or_Negative import *
 
 
 def tokenize(sentence):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     return nltk.word_tokenize(sentence)
 
 
 def stem(word):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     return stemmer.stem(word.lower())
 
 
 def bag_of_words(tokenized_words, all_words):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     tokenized_words = [stem(w) for w in tokenized_words]
     bag = np.zeros(len(all_words))
     for idx, w in enumerate(all_words):
@@ -19,6 +37,12 @@ def bag_of_words(tokenized_words, all_words):
 
 
 def load_data():
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     data = pd.read_csv("./data.csv").dropna()[:10000]
     data = data.sample(frac=1)
     X = data["im getting on borderlands and i will murder you all ,"]
@@ -60,6 +84,12 @@ def load_data():
 
 def train(epochs, X_train, y_train, X_test, y_test, model, optimizer,
           criterion, batch_size):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     wandb.init(project=PROJECT_NAME, name="baseline")
     for _ in tqdm(range(epochs)):
         for i in range(0, len(X_train), batch_size):

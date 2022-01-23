@@ -2,7 +2,20 @@ from Models.Chat_Bot import *
 
 
 class NeuralNet(nn.Module):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
+
     def __init__(self, input_size, hidden_size, num_classes):
+        """sumary_line
+
+        Keyword arguments:
+        argument -- description
+        Return: return_description
+        """
         super(NeuralNet, self).__init__()
         self.l1 = nn.Linear(input_size, hidden_size)
         self.l2 = nn.Linear(hidden_size, hidden_size)
@@ -10,6 +23,12 @@ class NeuralNet(nn.Module):
         self.relu = nn.ReLU()
 
     def forward(self, x):
+        """sumary_line
+
+        Keyword arguments:
+        argument -- description
+        Return: return_description
+        """
         out = self.l1(x)
         out = self.relu(out)
         out = self.l2(out)

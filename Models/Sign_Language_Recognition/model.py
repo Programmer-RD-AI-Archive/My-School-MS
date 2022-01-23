@@ -2,7 +2,20 @@ from Models.Sign_Language_Recognition import *
 
 
 class Model(nn.Module):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
+
     def __init__(self):
+        """sumary_line
+
+        Keyword arguments:
+        argument -- description
+        Return: return_description
+        """
         super().__init__()
         self.pool = nn.MaxPool2d((2, 2))
         self.conv1 = nn.Conv2d(1, 32, 5)

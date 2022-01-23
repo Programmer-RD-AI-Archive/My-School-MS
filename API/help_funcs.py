@@ -11,6 +11,13 @@ from API.db.azure_storage import *
 
 
 class Help_Funcs:
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
+
     def validate_email(self, email: str) -> bool:
         """
         Checking if email is valid or real
@@ -22,6 +29,12 @@ class Help_Funcs:
         return status == "valid"
 
     def log_ip_address(self, url_trying_to_access: str, ip_address: str) -> None:
+        """sumary_line
+
+        Keyword arguments:
+        argument -- description
+        Return: return_description
+        """
         respond = requests.post(
             "",
             {
@@ -33,6 +46,12 @@ class Help_Funcs:
         return respond.json()
 
     def two_fac_auth(self, user_name: str, email: str, phone_number: str) -> list:
+        """sumary_line
+
+        Keyword arguments:
+        argument -- description
+        Return: return_description
+        """
         time = (
             str(datetime.datetime.now().year)
             + " "
@@ -118,6 +137,12 @@ class Help_Funcs:
         #         smtp.send_message(msg)
 
     def send_sms(self, msg: str, number: int) -> str:
+        """sumary_line
+
+        Keyword arguments:
+        argument -- description
+        Return: return_description
+        """
         account_sid = "ACbeeb34a0326adf707ec9a68902be68dc"
         auth_token = "09aee4b52484eb7218008642c35388f3"
         client = Client(account_sid, auth_token)

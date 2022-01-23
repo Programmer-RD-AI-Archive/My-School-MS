@@ -1,4 +1,10 @@
 def get_loss(model, X, y, criterion):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     preds = model(X)
     loss = criterion(preds, y)
     return loss.item()
@@ -9,6 +15,12 @@ def get_accuracy(
     X,
     y,
 ):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     preds = model(X)
     correct = 0
     total = 0

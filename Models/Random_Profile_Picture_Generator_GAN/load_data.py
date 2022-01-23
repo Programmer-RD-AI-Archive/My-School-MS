@@ -2,6 +2,12 @@ from Models.Random_Profile_Picture_Generator_GAN import *
 
 
 def load_data(directory="./data/", IMG_SIZE=56, transforms=transforms):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     idx = -1
     data = []
     for file in tqdm(os.listdir(directory)):

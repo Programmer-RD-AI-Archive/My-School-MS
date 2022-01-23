@@ -1,5 +1,21 @@
+from Models.Random_Profile_Picture_Generator_GAN import *
+
+
 class Gen(nn.Module):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
+
     def __init__(self, z_dim, activation=nn.LeakyReLU, starter=256):
+        """sumary_line
+
+        Keyword arguments:
+        argument -- description
+        Return: return_description
+        """
         super().__init__()
         self.gen = nn.Sequential(
             nn.Linear(z_dim, starter),
@@ -15,4 +31,10 @@ class Gen(nn.Module):
         )
 
     def forward(self, x):
+        """sumary_line
+
+        Keyword arguments:
+        argument -- description
+        Return: return_description
+        """
         return self.gen(x)

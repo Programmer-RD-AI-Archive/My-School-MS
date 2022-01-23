@@ -2,14 +2,32 @@ from Models.Summarize_V2 import *
 
 
 def tokenize(sentence):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     return nltk.word_tokenize(sentence)
 
 
 def stem(word):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     return stemmer.stem(word.lower())
 
 
 def bag_of_words(tokenized_words, all_words):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     tokenized_words = [stem(w) for w in tokenized_words]
     bag = np.zeros(len(all_words))
     for idx, w in enumerate(all_words):
@@ -19,6 +37,12 @@ def bag_of_words(tokenized_words, all_words):
 
 
 def load_data():
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     data = pd.read_csv("./data.csv")
     X = data["Abstract"]
     y = data["Title"]
@@ -60,11 +84,17 @@ def load_data():
 
 
 def train(epochs, X, y, model, criterion, optimizer, batch_size):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     wandb.init(project=PROJECT_NAME, name="baseline")
     for _ in tqdm(range(epochs)):
         for idx in range(0, len(X), batch_size):
-            X_batch = X[idx:idx + batch_size].to(device).float()
-            y_batch = y[idx:idx + batch_size].to(device).float()
+            X_batch = X[idx : idx + batch_size].to(device).float()
+            y_batch = y[idx : idx + batch_size].to(device).float()
             preds = model(X_batch)
             loss = criterion(preds, y_batch)
             optimizer.zero_grad()

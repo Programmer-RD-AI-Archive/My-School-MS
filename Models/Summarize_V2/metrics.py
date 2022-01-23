@@ -2,6 +2,12 @@ from Models.Summarize_V2 import *
 
 
 def accuracy(model, X, y):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     correct = 0
     total = 0
     preds = model(X)

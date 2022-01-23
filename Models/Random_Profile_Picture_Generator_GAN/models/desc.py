@@ -2,7 +2,20 @@ from Models.Random_Profile_Picture_Generator_GAN import *
 
 
 class Desc(nn.Module):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
+
     def __init__(self, activation=nn.LeakyReLU, starter=16):
+        """sumary_line
+
+        Keyword arguments:
+        argument -- description
+        Return: return_description
+        """
         super().__init__()
         self.dis = nn.Sequential(
             nn.Conv2d(3, 4, 3),
@@ -22,6 +35,12 @@ class Desc(nn.Module):
         )
 
     def forward(self, x, shape=False):
+        """sumary_line
+
+        Keyword arguments:
+        argument -- description
+        Return: return_description
+        """
         x = x.view(-1, 3, IMG_SIZE, IMG_SIZE)
         x = self.dis(x)
         if shape:

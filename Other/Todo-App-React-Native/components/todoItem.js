@@ -1,3 +1,10 @@
+/*
+sumary_line
+
+Keyword arguments:
+argument -- description
+Return: return_description
+*/
 import React, { useState } from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";

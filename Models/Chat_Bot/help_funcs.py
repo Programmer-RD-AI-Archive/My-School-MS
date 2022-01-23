@@ -4,14 +4,32 @@ stemmer = PorterStemmer()
 
 
 def tokenize(sentence):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     return nltk.word_tokenize(sentence)
 
 
 def stem(word):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     return stemmer.stem(word.lower())
 
 
 def bag_of_words(tokenized_sentence, words):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     sentence_words = [stem(word) for word in tokenized_sentence]
     bag = np.zeros(len(words), dtype=np.float32)
     for idx, w in enumerate(words):
@@ -22,6 +40,12 @@ def bag_of_words(tokenized_sentence, words):
 
 
 def load_data():
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     with open("./data/data.json", "r") as f:
         intents = json.load(f)
     all_words = []
@@ -53,20 +77,53 @@ def load_data():
 
 
 class ChatDataset(Dataset):
-    def __init__(self, ):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
+
+    def __init__(
+        self,
+    ):
+        """sumary_line
+
+        Keyword arguments:
+        argument -- description
+        Return: return_description
+        """
         X_train, y_train, _, _ = load_data()
         self.n_samples = len(X_train)
         self.x_data = X_train
         self.y_data = y_train
 
     def __getitem__(self, index):
+        """sumary_line
+
+        Keyword arguments:
+        argument -- description
+        Return: return_description
+        """
         return self.x_data[index], self.y_data[index]
 
     def __len__(self):
+        """sumary_line
+
+        Keyword arguments:
+        argument -- description
+        Return: return_description
+        """
         return self.n_samples
 
 
 def train(num_epochs, train_loader, model, optimizer, criterion):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     for epoch in range(num_epochs):
         for (words, labels) in train_loader:
             words = words.to(device)

@@ -2,7 +2,20 @@ from Models.Will_Answer_Solve_Issue import *
 
 
 class Model(Module):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
+
     def __init__(self):
+        """sumary_line
+
+        Keyword arguments:
+        argument -- description
+        Return: return_description
+        """
         super().__init__()
         self.hidden = 8
         self.activation = ReLU()

@@ -2,7 +2,20 @@ from Models.Summarize import *
 
 
 class Model(Module):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
+
     def __init__(self):
+        """sumary_line
+
+        Keyword arguments:
+        argument -- description
+        Return: return_description
+        """
         super().__init__()
         self.activation = ReLU()
         self.iters = 10

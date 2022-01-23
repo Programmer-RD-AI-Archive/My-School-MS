@@ -29,6 +29,13 @@ print(astorage.create_file("info", "requirements.txt"))
 
 
 class Create_Multiple:
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
+
     def accounts(
         self,
         email=random.choice(
@@ -45,6 +52,12 @@ class Create_Multiple:
             ).json()
         ),
     ):
+        """sumary_line
+
+        Keyword arguments:
+        argument -- description
+        Return: return_description
+        """
         iter.set_description("Getting")
         iter.set_description("Getting Payment Id Info")
         payment_id_info = {"info": "test.py"}

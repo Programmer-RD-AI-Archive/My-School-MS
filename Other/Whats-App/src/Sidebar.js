@@ -1,3 +1,10 @@
+/*
+sumary_line
+
+Keyword arguments:
+argument -- description
+Return: return_description
+*/
 import React, { useEffect, useState } from "react";
 import "./Sidebar.css";
 import { Avatar, IconButton } from "@material-ui/core";

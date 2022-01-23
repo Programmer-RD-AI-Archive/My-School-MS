@@ -14,6 +14,12 @@ if one 2 fac == to current time:
 
 
 def two_fac_auth_checking() -> None:
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     mongodb_link = "mongodb://ranuga:ranuga@ms-shard-00-00.xrgdr.mongodb.net:27017,ms-shard-00-01.xrgdr.mongodb.net:27017,ms-shard-00-02.xrgdr.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-fwaf6t-shard-0&authSource=admin&retryWrites=true&w=majority"
     cluster = pymongo.MongoClient(mongodb_link)
     db = cluster["2FACAUTH"]

@@ -163,6 +163,12 @@ def home_tutor_sign_in():
 @app.route("/Tutor/2/Fac/Auth/", methods=["POST", "GET"])
 @app.route("/Tutor/2/Fac/Auth", methods=["POST", "GET"])
 def tutor_two_factor_authentication():
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     # try:
     if "2FACAUTH" in session:
         db = cluster["2FACAUTH"]

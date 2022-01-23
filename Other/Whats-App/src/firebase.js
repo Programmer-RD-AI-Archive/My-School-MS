@@ -1,3 +1,10 @@
+/*
+sumary_line
+
+Keyword arguments:
+argument -- description
+Return: return_description
+*/
 import firebase from "firebase";
 const firebaseConfig = {
   apiKey: "AIzaSyAVe1C9_swxYfRTH1xI1Q6YuzxuFRUakuc",

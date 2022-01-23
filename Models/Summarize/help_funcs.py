@@ -2,14 +2,32 @@ from Models.Summarize import *
 
 
 def tokenize(sentence):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     return nltk.word_tokenize(sentence)
 
 
 def stem(word):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     return stemmer.stem(word.lower())
 
 
 def bag_of_words(tokenized_words, all_words):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     tokenized_words = [stem(w) for w in tokenized_words]
     bag = np.zeros(len(all_words))
     for idx, w in enumerate(all_words):
@@ -19,6 +37,12 @@ def bag_of_words(tokenized_words, all_words):
 
 
 def load_data():
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     data = pd.read_csv("./data/data.csv").dropna()
     data = data[:1000]
     X = data["Text"]
@@ -46,10 +70,7 @@ def load_data():
     for X_batch, y_batch in tqdm(data):
         X.append(bag_of_words(X_batch, X_words))
         y.append(bag_of_words(y_batch, y_words))
-    X_train, X_test, y_train, y_test = train_test_split(X,
-                                                        y,
-                                                        test_size=0.25,
-                                                        shuffle=False)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, shuffle=False)
     X_train = torch.from_numpy(np.array(X_train)).to(device).float()
     y_train = torch.from_numpy(np.array(y_train)).to(device).float()
     X_test = torch.from_numpy(np.array(X_test)).to(device).float()
@@ -72,6 +93,12 @@ def load_data():
 
 
 def matrix_to_words(words, matrix):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     word = []
     for idx, m in enumerate(matrix):
         m = int(torch.argmax(m))
@@ -93,11 +120,17 @@ def train(
     criterion,
     optimizer,
 ):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     wandb.init(project=PROJECT_NAME, name="baseline")
     for _ in tqdm(range(epochs)):
         for i in range(0, len(X_train), batch_size):
-            X_batch = X_train[i:i + batch_size].to(device)
-            y_batch = y_train[i:i + batch_size].to(device)
+            X_batch = X_train[i : i + batch_size].to(device)
+            y_batch = y_train[i : i + batch_size].to(device)
             preds = model(X_batch)
             loss = criterion(preds, y_batch)
             optimizer.zero_grad()

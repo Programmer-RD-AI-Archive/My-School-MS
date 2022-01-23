@@ -18,10 +18,7 @@ def student_home(_id):
     if str(session["id"]) == str(_id):
         subjects = requests.get(
             "http://127.0.0.1:5000/api/azure/sql",
-            {
-                "Type": "Select",
-                "Query": f"SELECT * FROM Subjects"
-            },
+            {"Type": "Select", "Query": f"SELECT * FROM Subjects"},
         )
         subjects = subjects.json()["message"]
         iter_list = []
@@ -34,10 +31,7 @@ def student_home(_id):
             iter_list.append(subject)
             idx += 1
         new_subjects.append(iter_list)
-        return render_template("student/home.html",
-                               subjects=new_subjects,
-                               session=session,
-                               _id=_id)
+        return render_template("student/home.html", subjects=new_subjects, session=session, _id=_id)
 
 
 @app.route("/Usr/<_id>/Subject/<name_of_subject>/", methods=["GET", "POST"])
@@ -54,8 +48,7 @@ def student_subjects(_id, name_of_subject):
             "http://127.0.0.1:5000/api/azure/sql",
             {
                 "Type": "Select",
-                "Query":
-                f"SELECT * FROM Courses WHERE Subject={name_of_subject}",
+                "Query": f"SELECT * FROM Courses WHERE Subject={name_of_subject}",
             },
         )
         courses = courses.json()["message"]
@@ -74,10 +67,8 @@ def student_subjects(_id, name_of_subject):
                 requests.get(
                     "http://127.0.0.1:5000/api/azure/sql",
                     {
-                        "Type":
-                        "Select",
-                        "Query":
-                        f"SELECT * FROM [Enrolled] WHERE [Student Id]={_id}",
+                        "Type": "Select",
+                        "Query": f"SELECT * FROM [Enrolled] WHERE [Student Id]={_id}",
                     },
                 ).json()["message"],
                 columns=[
@@ -89,7 +80,8 @@ def student_subjects(_id, name_of_subject):
                     "total_lesson",
                     "paid",
                 ],
-            )["course_id"])
+            )["course_id"]
+        )
         print(enrolled_courses)
         return render_template(
             "student/subject.html",
@@ -99,48 +91,46 @@ def student_subjects(_id, name_of_subject):
         )
 
 
-# @app.route("/Usr/<_id>/Subject/<name_of_subject>/Enroll", methods=["GET", "POST"])
-# @app.route("/Usr/<_id>/Subject/<name_of_subject>/Enroll/", methods=["GET", "POST"])
-# def student_subject_enroll(_id, name_of_subject):
-#     """sumary_line
+@app.route("/Usr/<_id>/Subject/<name_of_subject>/Enroll", methods=["GET", "POST"])
+@app.route("/Usr/<_id>/Subject/<name_of_subject>/Enroll/", methods=["GET", "POST"])
+def student_subject_enroll(_id, name_of_subject):
+    """sumary_line
 
-#     Keyword arguments:
-#     argument -- description
-#     Return: return_description
-#     """
-#     if str(session["id"]) == str(_id):
-#         courses = requests.get(
-#             "http://127.0.0.1:5000/api/azure/sql",
-#             {"Type": "Select", "Query": f"SELECT * FROM Courses WHERE [ID]={name_of_subject}"},
-#         )
-#         courses = courses.json()["message"][0]
-#         id_courses = courses[0]
-#         id_tutor = courses[-1]
-#         id_student = _id
-#         courses_content = eval(
-#             requests.get(
-#                 "http://127.0.0.1:5000/api/azure/storage",
-#                 {
-#                     "Container Name": "cource",
-#                     "file_name": f"{id_courses}-info.txt",
-#                     "Type": "Download File",
-#                 },
-#             ).json()["message"]
-#         )
-#         requests.get(
-#             "http://127.0.0.1:5000/api/azure/sql",
-#             {
-#                 "Type": "Insert",
-#                 "Query": f"INSERT INTO [Enrolled]( [Student Id],[Course Id], [Tutor Id], [Current Lesson], [Total Lesson], [Paid] ) VALUES ({id_student}, {id_courses}, {id_tutor}, 0, {len(courses_content.keys())}, 'False')",
-#             },
-#         )
-#         return redirect(f"/Usr/{_id}/Subject/{name_of_subject}/")
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
+    if str(session["id"]) == str(_id):
+        courses = requests.get(
+            "http://127.0.0.1:5000/api/azure/sql",
+            {"Type": "Select", "Query": f"SELECT * FROM Courses WHERE [ID]={name_of_subject}"},
+        )
+        courses = courses.json()["message"][0]
+        id_courses = courses[0]
+        id_tutor = courses[-1]
+        id_student = _id
+        courses_content = eval(
+            requests.get(
+                "http://127.0.0.1:5000/api/azure/storage",
+                {
+                    "Container Name": "cource",
+                    "file_name": f"{id_courses}-info.txt",
+                    "Type": "Download File",
+                },
+            ).json()["message"]
+        )
+        requests.get(
+            "http://127.0.0.1:5000/api/azure/sql",
+            {
+                "Type": "Insert",
+                "Query": f"INSERT INTO [Enrolled]( [Student Id],[Course Id], [Tutor Id], [Current Lesson], [Total Lesson], [Paid] ) VALUES ({id_student}, {id_courses}, {id_tutor}, 0, {len(courses_content.keys())}, 'False')",
+            },
+        )
+        return redirect(f"/Usr/{_id}/Subject/{name_of_subject}/")
 
 
-@app.route("/Usr/<_id>/Subject/<name_of_subject>/Login",
-           methods=["GET", "POST"])
-@app.route("/Usr/<_id>/Subject/<name_of_subject>/Login/",
-           methods=["GET", "POST"])
+@app.route("/Usr/<_id>/Subject/<name_of_subject>/Login", methods=["GET", "POST"])
+@app.route("/Usr/<_id>/Subject/<name_of_subject>/Login/", methods=["GET", "POST"])
 def student_subject_login(_id, name_of_subject):
     """sumary_line
 
@@ -162,10 +152,7 @@ def student_subject_login(_id, name_of_subject):
         id_student = _id
         tutor = requests.get(
             "http://127.0.0.1:5000/api/azure/sql",
-            {
-                "Type": "Select",
-                "Query": f"SELECT * FROM Tutor WHERE [ID]={id_tutor}"
-            },
+            {"Type": "Select", "Query": f"SELECT * FROM Tutor WHERE [ID]={id_tutor}"},
         ).json()["message"]
         courses = requests.get(
             "http://127.0.0.1:5000/api/azure/sql",

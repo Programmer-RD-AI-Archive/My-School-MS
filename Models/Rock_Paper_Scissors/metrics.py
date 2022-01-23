@@ -2,12 +2,24 @@ from Models.Rock_Paper_Scissors import *
 
 
 def get_loss(model, X, y, criterion):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     preds = model(X)
     loss = criterion(preds, y)
     return loss.item()
 
 
 def get_accuracy(model, X, y):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     correct = 0
     total = 0
     preds = model(X)
@@ -21,12 +33,17 @@ def get_accuracy(model, X, y):
 
 
 def get_pred(model):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     model.eval()
     for file in os.listdir("./test_data/"):
         img = cv2.imread(f"./test_data/{file}")
         img = cv2.resize(img, (112, 112))
-        img = (torch.from_numpy(np.array(img / 255.0)).to(device).view(
-            -1, 3, 112, 112).float())
+        img = torch.from_numpy(np.array(img / 255.0)).to(device).view(-1, 3, 112, 112).float()
         pred = model(img)
         pred = torch.argmax(pred)
         plt.figure(figsize=(12, 6))

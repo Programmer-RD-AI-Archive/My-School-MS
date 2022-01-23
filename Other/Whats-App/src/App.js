@@ -1,3 +1,10 @@
+/*
+sumary_line
+
+Keyword arguments:
+argument -- description
+Return: return_description
+*/
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Chat from "./Chat";

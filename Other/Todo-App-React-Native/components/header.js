@@ -1,3 +1,10 @@
+/*
+sumary_line
+
+Keyword arguments:
+argument -- description
+Return: return_description
+*/
 import React, { useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 const Header = () => {
@@ -21,4 +28,3 @@ const styles = StyleSheet.create({
   },
 });
 export default Header;
-

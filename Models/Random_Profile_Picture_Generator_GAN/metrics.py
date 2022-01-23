@@ -2,6 +2,12 @@ from Models.Random_Profile_Picture_Generator_GAN import *
 
 
 def accuracy_fake(desc_fake):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     correct = 0
     total = 0
     preds = np.round(np.array(desc_fake.cpu().detach().numpy()))
@@ -13,6 +19,12 @@ def accuracy_fake(desc_fake):
 
 
 def accuracy_real(desc_real):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     correct = 0
     total = 0
     preds = np.round(np.array(desc_real.cpu().detach().numpy()))

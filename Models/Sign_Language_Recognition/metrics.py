@@ -2,6 +2,12 @@ from Models.Sign_Language_Recognition import *
 
 
 def test(net, X, y):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     device = "cpu"
     net.to(device)
     correct = 0
@@ -22,6 +28,12 @@ def test(net, X, y):
 
 
 def get_loss(criterion, y, model, X):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     model.to("cpu")
     preds = model(X.view(-1, 1, 112, 112).to("cpu").float())
     preds.to("cpu")
