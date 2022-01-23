@@ -20,7 +20,7 @@ def train(
     argument -- description
     Return: return_description
     """
-    wandb.init(project=PROJECT_NAME, name=f"baseline-with-backward-pass-gen")
+    wandb.init(project=PROJECT_NAME, name="baseline-with-backward-pass-gen")
     for epoch in tqdm(epochs):
         for idx in range(0, len(X), batch_size):
             X_batch = (

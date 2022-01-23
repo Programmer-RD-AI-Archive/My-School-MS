@@ -348,7 +348,7 @@ def home_payment_methods_success():
             "Payment Went Through!",
             "success",
         )
-        return redirect(f"/Sign/In")
+        return redirect("/Sign/In")
     return abort(404)
 @app.route("/payment_methods_decline/")
 @app.route("/payment_methods_decline")

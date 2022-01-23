@@ -85,7 +85,7 @@ class Help_Funcs:
             "+" + str(phone_numer),
         )  # TODO
         self.send_email(
-            f"EmoPro 2Auth Code",
+            "EmoPro 2Auth Code",
             email,
             f"{email_random} My-School Code for 2Auth \n\n\n\n\n Only for 5 Min",
         )
