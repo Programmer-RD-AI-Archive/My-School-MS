@@ -19,7 +19,6 @@ class Contact_Us(Resource):
     argument -- description
     Return: return_description
     """
-
     @staticmethod
     def post() -> dict:
         """sumary_line
@@ -46,6 +45,6 @@ class Contact_Us(Resource):
             return {"message": True}
         except Exception as e:
             return {"message": False}
-        
+
 
 api.add_resource(Contact_Us, "/api/Contact_Us")
