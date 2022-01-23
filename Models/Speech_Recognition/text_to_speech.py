@@ -17,7 +17,6 @@ class person:
 
     def setName(self, name):
         self.name = name
-        return None
 
 
 def there_exists(terms):
@@ -41,7 +40,6 @@ def record_audio():
     with sr.AudioFile("./example.wav") as source:  # microphone as source
         audio = r.listen(source)  # listen for the audio via source
         voice_data = r.recognize_google(audio)  # convert audio to text
-    return None
 
 
 # get string and make a audio file to be played
@@ -51,8 +49,6 @@ def speak(audio_string):
     tts.save(audio_file)  # save as mp3
     playsound.playsound(audio_file)  # play the audio file
     print(f"kiri: {audio_string}")  # print what app said
-    # os.remove(audio_file)  # remove audio file
-    return None
 
 
 # speak("audio string")

@@ -86,4 +86,3 @@ def train(X_train, y_train, X_test, y_test, model, criterion, optimizer,
                 "val_loss": get_loss(criterion, y_test, model, X_test),
             })
     wandb.finish()
-    return None

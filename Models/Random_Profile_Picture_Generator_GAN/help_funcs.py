@@ -48,4 +48,3 @@ def train(
         fake = gen(noise).view(-1, 3, IMG_SIZE, IMG_SIZE)
         img_grid_fake = torchvision.utils.make_grid(fake, normalize=True)
         wandb.log({"img": wandb.Image(img_grid_fake)})
-    return None

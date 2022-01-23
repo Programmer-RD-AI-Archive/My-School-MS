@@ -81,7 +81,6 @@ def train(epochs, X_train, y_train, X_test, y_test, batch_size, model,
         torch.cuda.empty_cache()
         model.train()
     wandb.finish()
-    return None
 
 
 def save(model, X_train, X_test, y_train, y_test):
