@@ -45,7 +45,7 @@ function add_courses_API_button_submit(_id) {
    * @param b The second number to add
    * @returns The sum of two numbers
    */
-  console.log(_id);
+  
   const marks = document.getElementById("Marks Required to Pass").value;
   const image = document.getElementById("Image").value;
   const name = document.getElementById("Name").value;

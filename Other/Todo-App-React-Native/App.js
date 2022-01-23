@@ -44,7 +44,7 @@ export default function App() {
       });
     } else {
       Alert.alert("OOPS!", "Todos must be over 3 characters long", [
-        { text: "UnderStood", onPress: () => console.log("alert closed") },
+        { text: "UnderStood", onPress: () =>  },
       ]);
     }
   };

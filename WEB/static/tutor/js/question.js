@@ -172,7 +172,7 @@ function submit_info_API(_id) {
    * @param b The second number to add
    * @returns The sum of two numbers
    */
-  console.log(_id);
+  
   const info = {};
   for (idx_iter = 1; idx_iter <= idx; idx_iter++) {
     try {
