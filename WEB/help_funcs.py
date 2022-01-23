@@ -1,11 +1,12 @@
 import base64
+import datetime
+import random
 import smtplib
 from email.mime.text import MIMEText
-import random
-import datetime
-from twilio.rest import Client
+
 import requests
 from pymongo import *
+from twilio.rest import Client
 
 cluster = MongoClient(
     "mongodb://ranuga:ranuga@ms-shard-00-00.xrgdr.mongodb.net:27017,ms-shard-00-01.xrgdr.mongodb.net:27017,ms-shard-00-02.xrgdr.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-fwaf6t-shard-0&authSource=admin&retryWrites=true&w=majority"
@@ -18,13 +19,14 @@ class Help_Funcs:
         Checking if email is valid or real
         """
         response = requests.get(
-            "https://isitarealemail.com/api/email/validate", params={"email": email}
-        )  # validating if a email is valid
+            "https://isitarealemail.com/api/email/validate",
+            params={"email": email})  # validating if a email is valid
         status = response.json()["status"]  # getting the response
         # return status == "valid" # TODO
         return True
 
-    def log_ip_address(self, url_trying_to_access: str, ip_address: str) -> None:
+    def log_ip_address(self, url_trying_to_access: str,
+                       ip_address: str) -> None:
         respond = requests.post(
             "",
             {
@@ -35,30 +37,23 @@ class Help_Funcs:
         )
         return respond.json()
 
-    def two_fac_auth(self, user_name: str, email: str, phone_numer: str) -> list:
-        time = (
-            str(datetime.datetime.now().year)
-            + " "
-            + str(datetime.datetime.now().month)
-            + " "
-            + str(datetime.datetime.now().day)
-            + " "
-            + str(datetime.datetime.now().hour)
-            + " "
-            + str(datetime.datetime.now().minute)
-        )
+    def two_fac_auth(self, user_name: str, email: str,
+                     phone_numer: str) -> list:
+        time = (str(datetime.datetime.now().year) + " " +
+                str(datetime.datetime.now().month) + " " +
+                str(datetime.datetime.now().day) + " " +
+                str(datetime.datetime.now().hour) + " " +
+                str(datetime.datetime.now().minute))
         db = cluster["2FACAUTH"]
         collection = db["2FACAUTH"]
         email_random = random.randint(0, 10000000)
         sms_random = random.randint(0, 10000000)
-        collection.insert_one(
-            {
-                str(email): str(email_random),
-                str(phone_numer): str(sms_random),
-                "user_name": str(user_name),
-                "time": time,
-            }
-        )
+        collection.insert_one({
+            str(email): str(email_random),
+            str(phone_numer): str(sms_random),
+            "user_name": str(user_name),
+            "time": time,
+        })
         self.send_sms(
             f"{sms_random} - My-School Code for 2Auth \n\n\n\n\n Only for 5 Min",
             # "+" + str(self.decode(phone_numer)),
@@ -126,6 +121,8 @@ class Help_Funcs:
         account_sid = "ACb80fbc1d1d4c8e254c1c6160662fe399"
         auth_token = "f1964f9a1961ac6a9275f76e9849b5f6"
         client = Client(account_sid, auth_token)
-        message = client.messages.create(body=msg, from_="+16065352864", to=number)
+        message = client.messages.create(body=msg,
+                                         from_="+16065352864",
+                                         to=number)
         return message.sid
         # return "Testing"
