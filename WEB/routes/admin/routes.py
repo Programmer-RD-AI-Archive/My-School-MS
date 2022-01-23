@@ -199,7 +199,7 @@ def admin_subjects():
             subjects = subjects.json()["message"]
         subjects = requests.get(
             "http://127.0.0.1:5000/api/azure/sql",
-            {"Type": "Select", "Query": f"SELECT * FROM Subjects"},
+            {"Type": "Select", "Query": "SELECT * FROM Subjects"},
         )
         subjects = subjects.json()["message"]
         return render_template("/admin/subjects.html", subjects=subjects)
