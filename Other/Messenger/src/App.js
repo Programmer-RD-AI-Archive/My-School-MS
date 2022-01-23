@@ -15,6 +15,12 @@ import firebase from "firebase";
 import FlipMove from "react-flip-move";
 import SendIcon from "@material-ui/icons/Send";
 function App() {
+  /**
+   * Function to add two numbers
+   * @param a The first number to add
+   * @param b The second number to add
+   * @returns The sum of two numbers
+   */
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const [username, setUsername] = useState("");
