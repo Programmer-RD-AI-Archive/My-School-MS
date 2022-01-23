@@ -133,3 +133,4 @@ Models/Sign_Language_Recognition/data
 Models/Summarize/data/data.csv
 Models/Will_Answer_Solve_Issue/data/data.csv
 Models/People_Object_Detection/Model/dataset/Img/
+Models/People_Object_Detection/Model/dataset/data/BBOX.csv
