@@ -8,6 +8,12 @@ Return: return_description
 import React, { useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 const Header = () => {
+  /**
+   * Function to add two numbers
+   * @param a The first number to add
+   * @param b The second number to add
+   * @returns The sum of two numbers
+   */
   return (
     <View style={styles.header}>
       <Text style={styles.title}>My Todos</Text>
