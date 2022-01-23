@@ -197,11 +197,11 @@ def home_sign_two_face_auth():
     """
     # try:
     if "2FACAUTH" in session:
-        db = cluster["2FACAUTH"]
-        collection = db["2FACAUTH"]
+        # db = cluster["2FACAUTH"]
+        # collection = db["2FACAUTH"]
         if request.method == "POST":
-            email_code = request.form["email"]
-            phone_number_code = request.form["phone_number"]
+            # email_code = request.form["email"]
+            # phone_number_code = request.form["phone_number"]
             # results = [
             #     collection.find_one(
             #         {
