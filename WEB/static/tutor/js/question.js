@@ -6,7 +6,7 @@ Return: return_description
 */
 
 let idx = 0;
-let idx_iter = 0;
+const idx_iter = 0;
 $("#input").click(function () {
   idx += 1;
 
