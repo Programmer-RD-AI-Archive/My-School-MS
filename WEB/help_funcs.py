@@ -20,7 +20,7 @@ class Help_Funcs:
     argument -- description
     Return: return_description
     """
-    @staticmethod
+    @staticmethod   
     def validate_email(email: str) -> bool:
         "Checking if email is valid or real"
         response = requests.get(
