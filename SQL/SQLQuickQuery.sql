@@ -35,3 +35,4 @@ SELECT
     *
 FROM
     Tutor;
+CREATE TABLE Podcasts ([ID] int IDENTITY(1,1),[Audio_File_Name] varchar(max),[Subtitles] varchar(max),[Title] varchar(max),[Description] varchar(max), [Tutor] varchar(max))

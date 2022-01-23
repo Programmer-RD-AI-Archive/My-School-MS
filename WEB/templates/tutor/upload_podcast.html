@@ -1,0 +1,53 @@
+<!--
+sumary_line
+Keyword arguments:
+argument -- description
+Return: return_description 
+-->
+{% extends "/tutor/base.html" %} {% block head %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='tutor/css/upload_podcast.css') }}"
+/>
+<script src="{{ url_for('static', filename='tutor/js/upload_podcast.js') }}"></script>
+<title>Home</title>
+
+{% endblock %} {% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Upload an Podcast</h1>
+      <hr />
+
+      <form method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+          <label for="Title" class="form-label">Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="Title"
+            name="Title"
+            aria-describedby="Title"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="Description" class="form-label">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            id="Description"
+            name="Description"
+            aria-describedby="Description"
+          />
+        </div>
+        <div class="input-group mb-3">
+          <input type="file" class="form-control" id="audio" name="audio" />
+          <label class="input-group-text" for="audio">Upload</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Upload</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

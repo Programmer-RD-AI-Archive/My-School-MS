@@ -1,7 +1,14 @@
+import speech_recognition as sr
+from werkzeug.utils import secure_filename
 from bs4 import *
 import warnings
 from WEB import *
 from WEB.help_funcs import *
+
+app.config["ALLOWED_AUDIO_EXTENSIONS"] = [
+    "MP3",
+    "WAV",
+]
 
 link_of_resource_dict = {1: "Video", 2: "Image", 3: "Sound", 4: "Website"}
 
@@ -365,4 +372,54 @@ def tutor_log_out(_id):
         session.pop("Description")
         flash("Loged out as tutor", "success")
         return redirect("/")
+    return abort(404)
+
+
+@app.route("/Tutor/<_id>/Podcast", methods=["POST", "GET"])
+@app.route("/Tutor/<_id>/Podcast/", methods=["POST", "GET"])
+def tutor_podcast(_id):
+    """sumary_line
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
+    if "Is_Tutor" in session:
+        if request.files:
+            title = request.form["Title"]
+            description = request.form["Description"]
+            audio = request.files["audio"]
+            filename = secure_filename(audio.filename)
+            results = requests.get(
+                "http://127.0.0.1:5000/api/azure/sql",
+                {"Query": f"SELECT * FROM Podcasts WHERE Tutor = {_id}", "Type": "Select"},
+            ).json()["message"]
+            idxs = [-1]
+            for result in results:
+                idxs.append(result[0])
+            idx = idxs[-1] + 1
+            print(idx)
+            try:
+                recognizer = sr.Recognizer()
+                audioFile = sr.AudioFile(audio)
+                with audioFile as source:
+                    data = recognizer.record(source)
+                transcript = recognizer.recognize_google(data, key=None)
+            except:
+                transcript = ""
+            audio.save(f"/files/{idx}-{filename}.wav")
+            results = requests.get(
+                "http://127.0.0.1:5000/api/azure/sql",
+                {
+                    "Query": f"""
+                INSERT INTO
+                    [Accounts] ([Audio_File_Name],[Subtitles], [Title], [Description],[Tutor])
+                VALUES
+                    (
+                        '{idx}-{filename}.wav','{transcript}','{title}','{description}','{_id}'
+                    );
+                 """,
+                    "Type": "Insert",
+                },
+            ).json()["message"]
+        return render_template("tutor/upload_podcast.html", _id=_id)
     return abort(404)

@@ -1,6 +1,5 @@
 /*
 sumary_line
-
 Keyword arguments:
 argument -- description
 Return: return_description
@@ -9,12 +8,6 @@ Return: return_description
 let idx = 0;
 let idx_iter = 0;
 $("#input").click(function () {
-  /**
-   * Function to add two numbers
-   * @param a The first number to add
-   * @param b The second number to add
-   * @returns The sum of two numbers
-   */
   idx += 1;
 
   document.getElementById("content").insertAdjacentHTML(
@@ -25,18 +18,12 @@ $("#input").click(function () {
           </label>
           <input type="text" class="form-control" id="${idx.toString()}-Label">
           <br>
-          <button type="button" class="btn btn-danger" onClick="removeElement(${idx.toString()})">Devare</button>
+          <button type="button" class="btn btn-danger" onClick="removeElement(${idx.toString()})">Delete</button>
           <hr>
         </div>`
   );
 });
 $("#text").click(function () {
-  /**
-   * Function to add two numbers
-   * @param a The first number to add
-   * @param b The second number to add
-   * @returns The sum of two numbers
-   */
   idx += 1;
 
   document.getElementById("content").insertAdjacentHTML(
@@ -52,12 +39,6 @@ $("#text").click(function () {
   );
 });
 $("#checkbox").click(function () {
-  /**
-   * Function to add two numbers
-   * @param a The first number to add
-   * @param b The second number to add
-   * @returns The sum of two numbers
-   */
   idx += 1;
 
   document.getElementById("content").insertAdjacentHTML(
@@ -75,12 +56,6 @@ $("#checkbox").click(function () {
   );
 });
 $("#big_input").click(function () {
-  /**
-   * Function to add two numbers
-   * @param a The first number to add
-   * @param b The second number to add
-   * @returns The sum of two numbers
-   */
   idx += 1;
 
   document.getElementById("content").insertAdjacentHTML(
@@ -98,12 +73,6 @@ $("#big_input").click(function () {
   );
 });
 $("#switches").click(function () {
-  /**
-   * Function to add two numbers
-   * @param a The first number to add
-   * @param b The second number to add
-   * @returns The sum of two numbers
-   */
   idx += 1;
 
   document.getElementById("content").insertAdjacentHTML(
@@ -121,12 +90,6 @@ $("#switches").click(function () {
   );
 });
 $("#checks").click(function () {
-  /**
-   * Function to add two numbers
-   * @param a The first number to add
-   * @param b The second number to add
-   * @returns The sum of two numbers
-   */
   idx += 1;
 
   document.getElementById("content").insertAdjacentHTML(
@@ -146,12 +109,6 @@ $("#checks").click(function () {
   );
 });
 $("#range").click(function () {
-  /**
-   * Function to add two numbers
-   * @param a The first number to add
-   * @param b The second number to add
-   * @returns The sum of two numbers
-   */
   idx += 1;
 
   document.getElementById("content").insertAdjacentHTML(
@@ -174,17 +131,21 @@ function submit_info_API(_id) {
    */
 
   const info = {};
-  for (idx_iter = 1; idx_iter <= idx; idx_iter++) {
+  for (
+    idx_iter_question = 1;
+    idx_iter_question <= idx_question;
+    idx_iter_question++
+  ) {
     try {
       var label = document.getElementById(
-        `${idx_iter.toString()}-Input-Name`
+        `${idx_iter_question.toString()}-Input-Name`
       ).value;
     } catch (error) {
       var label = "None";
     }
     try {
       var content = document.getElementById(
-        `${idx_iter.toString()}-Label`
+        `${idx_iter_question.toString()}-Label`
       ).value;
     } catch (error) {
       var content = "None";
@@ -195,7 +156,7 @@ function submit_info_API(_id) {
       var name = "None";
     }
 
-    info[idx_iter] = [label, content];
+    info[idx_iter_question] = [label, content];
   }
   info.name = name;
   $.ajax({
@@ -207,13 +168,13 @@ function submit_info_API(_id) {
   alert("Question Added");
   window.location.reload(0);
 }
-function removeElement(idx) {
+function removeElement(idx_question) {
   /**
    * Function to add two numbers
    * @param a The first number to add
    * @param b The second number to add
    * @returns The sum of two numbers
    */
-  const element = document.getElementById(`${idx}`);
+  const element = document.getElementById(`${idx_question}`);
   element.remove();
 } // TODO Redirect the POST Request to the API
