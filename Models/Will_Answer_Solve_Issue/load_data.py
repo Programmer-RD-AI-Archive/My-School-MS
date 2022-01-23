@@ -29,7 +29,9 @@ def load_data():
         for Xb in X_batch:
             new_X.append(stem(Xb))
         words.extend(new_X)
-        data.append([new_X, np.eye(labels[y_batch], len(labels))[labels[y_batch] - 1]])
+        data.append(
+            [new_X,
+             np.eye(labels[y_batch], len(labels))[labels[y_batch] - 1]])
     words = sorted(set(words))
     np.random.shuffle(data)
 
@@ -39,7 +41,10 @@ def load_data():
         X.append(bag_of_words(d[0], words))
         y.append(d[1])
 
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.125, shuffle=False)
+    X_train, X_test, y_train, y_test = train_test_split(X,
+                                                        y,
+                                                        test_size=0.125,
+                                                        shuffle=False)
     X_train = torch.from_numpy(np.array(X_train)).to(device).float()
     y_train = torch.from_numpy(np.array(y_train)).to(device).float()
     X_test = torch.from_numpy(np.array(X_test)).to(device).float()

@@ -84,9 +84,7 @@ class ChatDataset(Dataset):
     Return: return_description
     """
 
-    def __init__(
-        self,
-    ):
+    def __init__(self, ):
         """sumary_line
 
         Keyword arguments:

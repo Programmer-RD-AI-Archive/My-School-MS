@@ -1,8 +1,10 @@
 import random
+
 import requests
+from tqdm import tqdm
+
 from API.db.azure_sql import *
 from API.db.azure_storage import *
-from tqdm import tqdm
 
 # asql = Azure_SQL()
 # print(asql.create_new_table())
@@ -39,18 +41,17 @@ class Create_Multiple:
     def accounts(
         self,
         email=random.choice(
-            requests.get("https://www.1secmail.com/api/v1/?action=genRandomMailbox&count=10").json()
-        ),
+            requests.get(
+                "https://www.1secmail.com/api/v1/?action=genRandomMailbox&count=10"
+            ).json()),
         password=random.choice(
             requests.get(
                 f"https://random-word-api.herokuapp.com/word?number={random.randint(23,56)}&swear=0"
-            ).json()
-        ),
+            ).json()),
         user_name=random.choice(
             requests.get(
                 f"https://random-word-api.herokuapp.com/word?number={random.randint(59,85)}&swear=0"
-            ).json()
-        ),
+            ).json()),
     ):
         """sumary_line
 
@@ -77,7 +78,9 @@ class Create_Multiple:
         id_new += 1
         info = str(payment_id_info)
         info = bytes(info, encoding="utf-8")
-        astorage.create_file(file_name_in_the_cloud=f"{id_new}-payment-details.json", file_rb=info)
+        astorage.create_file(
+            file_name_in_the_cloud=f"{id_new}-payment-details.json",
+            file_rb=info)
         asql.insert_to_table(
             f"""INSERT INTO [Accounts]( [Rank],[Email], [User_Name], [Password], [payment_id_info] ) VALUES ( 1,'{email}', '{user_name}', '{password}','{id_new}-info.txt')"""
         )
