@@ -136,3 +136,4 @@ def train(num_epochs, train_loader, model, optimizer, criterion):
         if (epoch + 1) % 100 == 0:
             print(f"Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item():.4f}")
         print(f"final loss: {loss.item():.4f}")
+    return None
