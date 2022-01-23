@@ -6,8 +6,8 @@ argument -- description
 Return: return_description
 */
 
-var idx = 0;
-var idx_iter = 0;
+let idx = 0;
+let idx_iter = 0;
 $("#input").click(function () {
   /**
    * Function to add two numbers
