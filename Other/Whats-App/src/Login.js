@@ -28,7 +28,10 @@ function Login() {
           alt=""
         />
         <div className="login__text">
-          <h1> <b> Sign In to Whatsapp Web Clone </b> </h1>
+          <h1>
+            {" "}
+            <b> Sign In to Whatsapp Web Clone </b>{" "}
+          </h1>
         </div>
         <Button onClick={signIn}>
           <h1>

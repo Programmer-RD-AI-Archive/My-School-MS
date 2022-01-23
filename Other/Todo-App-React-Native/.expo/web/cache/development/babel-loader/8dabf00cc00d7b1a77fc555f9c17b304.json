@@ -1,1 +1,17 @@
-{"ast":null,"code":"import registerRootComponent from 'expo/build/launch/registerRootComponent';\nimport App from \"../../App\";\nregisterRootComponent(App);","map":{"version":3,"sources":["/media/indika/Sync/Programming/Projects/Python/All/My-School-MS/Other/Todo-App-React-Native/node_modules/expo/AppEntry.js"],"names":["registerRootComponent","App"],"mappings":"AAAA,OAAOA,qBAAP,MAAkC,yCAAlC;AAEA,OAAOC,GAAP;AAEAD,qBAAqB,CAACC,GAAD,CAArB","sourcesContent":["import registerRootComponent from 'expo/build/launch/registerRootComponent';\n\nimport App from '../../App';\n\nregisterRootComponent(App);\n"]},"metadata":{},"sourceType":"module"}
+{
+  "ast": null,
+  "code": "import registerRootComponent from 'expo/build/launch/registerRootComponent';\nimport App from \"../../App\";\nregisterRootComponent(App);",
+  "map": {
+    "version": 3,
+    "sources": [
+      "/media/indika/Sync/Programming/Projects/Python/All/My-School-MS/Other/Todo-App-React-Native/node_modules/expo/AppEntry.js"
+    ],
+    "names": ["registerRootComponent", "App"],
+    "mappings": "AAAA,OAAOA,qBAAP,MAAkC,yCAAlC;AAEA,OAAOC,GAAP;AAEAD,qBAAqB,CAACC,GAAD,CAArB",
+    "sourcesContent": [
+      "import registerRootComponent from 'expo/build/launch/registerRootComponent';\n\nimport App from '../../App';\n\nregisterRootComponent(App);\n"
+    ]
+  },
+  "metadata": {},
+  "sourceType": "module"
+}
