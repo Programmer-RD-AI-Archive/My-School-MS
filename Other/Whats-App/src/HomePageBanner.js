@@ -8,6 +8,12 @@ Return: return_description
 import React from "react";
 import "./HomePageBanner.css";
 function HomePageBanner() {
+  /**
+   * Function to add two numbers
+   * @param a The first number to add
+   * @param b The second number to add
+   * @returns The sum of two numbers
+   */
   return (
     <div className="banner">
       <img
