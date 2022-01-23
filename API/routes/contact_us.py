@@ -20,7 +20,8 @@ class Contact_Us(Resource):
     Return: return_description
     """
 
-    def post(self) -> dict:
+    @staticmethod
+    def post() -> dict:
         """sumary_line
 
         Keyword arguments:

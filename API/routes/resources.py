@@ -32,7 +32,8 @@ class Resources(Resource):
     Return: return_description
     """
 
-    def get(self) -> dict:
+    @staticmethod
+    def get() -> dict:
         """sumary_line
 
         Keyword arguments:
@@ -42,7 +43,8 @@ class Resources(Resource):
         asql = Azure_SQL()
         return {"message": asql.select_table("SELECT * FROM [Resources]")}
 
-    def post(self):
+    @staticmethod
+    def post():
         """sumary_line
 
         Keyword arguments:
@@ -57,7 +59,8 @@ class Resources(Resource):
                 f"DELETE FROM Resources WHERE ID={args['id']}")
         }  # TODO
 
-    def put(self):
+    @staticmethod
+    def put():
         """sumary_line
 
         Keyword arguments:

@@ -36,8 +36,8 @@ class Create_Multiple:
     Return: return_description
     """
 
+    @staticmethod
     def accounts(
-        self,
         email=random.choice(
             requests.get("https://www.1secmail.com/api/v1/?action=genRandomMailbox&count=10").json()
         ),

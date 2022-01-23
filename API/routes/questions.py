@@ -14,7 +14,8 @@ class Questions(Resource):
     Return: return_description
     """
 
-    def get(self) -> dict:
+    @staticmethod
+    def get() -> dict:
         """sumary_line
 
         Keyword arguments:
@@ -36,7 +37,8 @@ class Questions(Resource):
             )
         return {"message": asql.select_table("SELECT * FROM Questions")}
 
-    def post(self):
+    @staticmethod
+    def post():
         """sumary_line
 
         Keyword arguments:
