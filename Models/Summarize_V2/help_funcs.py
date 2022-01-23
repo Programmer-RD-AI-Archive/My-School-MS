@@ -103,3 +103,4 @@ def train(epochs, X, y, model, criterion, optimizer, batch_size):
         wandb.log({"Loss": loss.item()})
     #     wandb.log({'Accuracy':accuracy(model,X,y)})
     wandb.finish()
+    return None
