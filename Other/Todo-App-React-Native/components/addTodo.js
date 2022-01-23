@@ -14,6 +14,12 @@ import {
   Button,
 } from "react-native";
 const AddTodo = ({ submitHandler }) => {
+  /**
+   * Function to add two numbers
+   * @param a The first number to add
+   * @param b The second number to add
+   * @returns The sum of two numbers
+   */
   const [text, setText] = useState(null);
   const ChangeHandler = (value) => {
     setText(value);
