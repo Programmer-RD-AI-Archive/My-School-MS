@@ -88,7 +88,7 @@ def tutor_courses_post(_id):
         marks = request_forms["marks"]
         description = request_forms["description"]
         subject = request_forms["subject"]
-        response = requests.put(
+        requests.put(
             "http://127.0.0.1:5000/api/courses",
             {
                 "whole_content": str(whole_content),
@@ -180,7 +180,7 @@ def tutor_resources_delete(_id, _id_resource):
     Return: return_description
     """
     if "Is_Tutor" in session:
-        results = requests.post(
+        requests.post(
             "http://127.0.0.1:5000/api/resources",
             {
                 "id": int(_id_resource),
@@ -284,7 +284,7 @@ def tutor_question_post(_id):
         for input_ in inputs:
             input_.attrs["answer"] = info[str(idx)][1]
             input_.attrs["name"] = input_.attrs["id"]
-    returned_vals = requests.post(
+    requests.post(
         "http://127.0.0.1:5000/api/questions", {"html": str(soup), "name": str(name)}
     ).json()
     return ("", 200)
@@ -320,7 +320,7 @@ def tutor_question_delete(_id, _id_question):
     Return: return_description
     """
     if "Is_Tutor" in session:
-        results = requests.get(
+        requests.get(
             "http://127.0.0.1:5000/api/azure/sql",
             {"Query": f"DELETE FROM Questions WHERE ID={_id_question}", "Type": "Insert"},
         ).json()
