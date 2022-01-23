@@ -10,10 +10,22 @@ var idx = 0;
 var idx_iter = 0;
 const idx_val = {};
 function removeElement(idx) {
+  /**
+   * Function to add two numbers
+   * @param a The first number to add
+   * @param b The second number to add
+   * @returns The sum of two numbers
+   */
   const element = document.getElementById(`${idx}`);
   element.remove();
 }
 function add_to_content(val) {
+  /**
+   * Function to add two numbers
+   * @param a The first number to add
+   * @param b The second number to add
+   * @returns The sum of two numbers
+   */
   val = val.split(",");
   idx += 1;
   idx_val[idx] = val;
@@ -27,6 +39,12 @@ function add_to_content(val) {
   );
 }
 function add_courses_API_button_submit(_id) {
+  /**
+   * Function to add two numbers
+   * @param a The first number to add
+   * @param b The second number to add
+   * @returns The sum of two numbers
+   */
   console.log(_id);
   const marks = document.getElementById("Marks Required to Pass").value;
   const image = document.getElementById("Image").value;
