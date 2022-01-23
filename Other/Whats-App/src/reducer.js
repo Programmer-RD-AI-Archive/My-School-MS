@@ -18,8 +18,7 @@ const reducer = (state, action) => {
    * @param b The second number to add
    * @returns The sum of two numbers
    */
-  
-  
+
   switch (action.type) {
     case actionTypes.SET_USER:
       return {

@@ -6,8 +6,8 @@ argument -- description
 Return: return_description
 */
 
-var idx = 0;
-var idx_iter = 0;
+let idx = 0;
+let idx_iter = 0;
 const idx_val = {};
 function removeElement(idx) {
   /**
@@ -45,7 +45,7 @@ function add_courses_API_button_submit(_id) {
    * @param b The second number to add
    * @returns The sum of two numbers
    */
-  
+
   const marks = document.getElementById("Marks Required to Pass").value;
   const image = document.getElementById("Image").value;
   const name = document.getElementById("Name").value;
