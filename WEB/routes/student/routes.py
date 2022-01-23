@@ -30,6 +30,7 @@ def student_home(_id):
             idx += 1
         new_subjects.append(iter_list)
         return render_template("student/home.html", subjects=new_subjects, session=session, _id=_id)
+    return abort(404)
 
 
 @app.route("/Usr/<_id>/Subject/<name_of_subject>/", methods=["GET", "POST"])
@@ -87,6 +88,7 @@ def student_subjects(_id, name_of_subject):
             _id=_id,
             enrolled_courses=enrolled_courses,
         )
+    return abort(404)
 
 
 @app.route("/Usr/<_id>/Subject/<name_of_subject>/Enroll", methods=["GET", "POST"])
@@ -125,6 +127,7 @@ def student_subject_enroll(_id, name_of_subject):
             },
         )
         return redirect(f"/Usr/{_id}/Subject/{name_of_subject}/")
+    return abort(404)
 
 
 @app.route("/Usr/<_id>/Subject/<name_of_subject>/Login", methods=["GET", "POST"])
@@ -174,3 +177,4 @@ def student_subject_login(_id, name_of_subject):
             tutor=tutor[0],
             student=student[0],
         )
+    return abort(404)
