@@ -12,6 +12,12 @@ import { auth, provider } from "./firebase";
 import { useStateValue } from "./StateProvider";
 import { actionTypes } from "./reducer";
 function Login() {
+  /**
+   * Function to add two numbers
+   * @param a The first number to add
+   * @param b The second number to add
+   * @returns The sum of two numbers
+   */
   const [{}, dispatch] = useStateValue();
   const signIn = () => {
     auth
