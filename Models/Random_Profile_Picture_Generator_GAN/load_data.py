@@ -16,3 +16,4 @@ def load_data(directory="./data/", IMG_SIZE=56, transforms=transforms):
         img = cv2.resize(img, (IMG_SIZE, IMG_SIZE))
         data.append(np.array(transforms(np.array(img))))
     return data
+    
