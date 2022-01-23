@@ -2,13 +2,28 @@ from API import *
 
 hp = Help_Funcs()
 courses = reqparse.RequestParser()
-courses.add_argument("whole_content", type=str, help="whole_content is required", required=True)
+courses.add_argument("whole_content",
+                     type=str,
+                     help="whole_content is required",
+                     required=True)
 courses.add_argument("info", help="info is required", required=True, type=str)
-courses.add_argument("image", type=str, help="image is required", required=True)
+courses.add_argument("image",
+                     type=str,
+                     help="image is required",
+                     required=True)
 courses.add_argument("name", type=str, help="name is required", required=True)
-courses.add_argument("marks", type=str, help="marks is required", required=True)
-courses.add_argument("description", type=str, help="description is required", required=True)
-courses.add_argument("subject", type=str, help="subject is required", required=True)
+courses.add_argument("marks",
+                     type=str,
+                     help="marks is required",
+                     required=True)
+courses.add_argument("description",
+                     type=str,
+                     help="description is required",
+                     required=True)
+courses.add_argument("subject",
+                     type=str,
+                     help="subject is required",
+                     required=True)
 courses.add_argument("_id", type=str, help="_id is required", required=True)
 
 
@@ -19,7 +34,6 @@ class Courses(Resource):
     argument -- description
     Return: return_description
     """
-
     @staticmethod
     def put() -> dict:
         """sumary_line
@@ -58,7 +72,8 @@ class Courses(Resource):
         id_new += 1
         info = str(args["info"])
         # info = bytes(info, encoding="utf-8")
-        astorage.create_file(file_name_in_the_cloud=f"{id_new}-info.txt", file_rb=info)
+        astorage.create_file(file_name_in_the_cloud=f"{id_new}-info.txt",
+                             file_rb=info)
         hp.table_exists_or_not(
             "Contact_Us",
             """
@@ -75,8 +90,7 @@ class Courses(Resource):
             )
             """,
         )
-        asql.insert_to_table(
-            f"""
+        asql.insert_to_table(f"""
             INSERT INTO [Courses]
             (   
                 [Whole_Content],
@@ -99,8 +113,7 @@ class Courses(Resource):
                 '{args['subject']}',
                 '{args['_id']}'
             )
-            """
-        )
+            """)
         return {"message": True}
 
 
