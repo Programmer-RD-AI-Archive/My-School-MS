@@ -10,19 +10,14 @@
   <center>
     <h1>Payment Options</h1></center>
   <div
-    class="jumbotron"
-    style="
-      margin-top: 10px;
-      border-radius: 100px !important;
-      text-align: center !important;
-    "
+    class="jumbotron jumbotron_main_1"
   >
     <div class="container">
       <br />
-      <button type="button" class="btn btn-primary btn-lg" style='font-size: 25px !important;' id="onetime">
+      <button type="button" class="btn btn-primary btn-lg onetime" id="onetime">
         OneTime Purchase
       </button>
-      <button type="button" class="btn btn-primary btn-lg"  style='font-size: 25px !important;' id="subscription">
+      <button type="button" class="btn btn-primary btn-lg subscription"  id="subscription">
         Subscription Purchase
       </button>
       <br />
@@ -52,8 +47,8 @@ button_subscription.addEventListener("click", (event) => {
       </script>
     </div>
     <center>
-    <div class="col" style="width: 25% !important">
-      <form method="post" style="text-align: left">
+    <div class="col col_coupon">
+      <form class="form_coupon" method="post" >
         <br />
         <div class="mb-3">
           <label for="Email" class="form-label">Coupon</label>
@@ -74,7 +69,7 @@ button_subscription.addEventListener("click", (event) => {
 </div>
 <div class="container">
   <div class="jumbotron">
-    <p>you might be trying to add a credit <br> card to the Stripe payment dont do that becuase it doesnt work becuase <br> I need to add EP as a company and alot of things <br> so you can just type 4242 4242 4242 <br> and add any year and month and any <br> CV and any email and name.</p>
+    <p>you might be trying to add a credit <br> card to the Stripe payment dont do that becuase it doesnt work becuase <br> I need to add My-School as a company and alot of things <br> so you can just type 4242 4242 4242 <br> and add any year and month and any <br> CV and any email and name.</p>
   </div>
 </div></center>
 {% endblock %}

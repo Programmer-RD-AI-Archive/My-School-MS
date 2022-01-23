@@ -1,3 +1,11 @@
+/*
+sumary_line
+
+Keyword arguments:
+argument -- description
+Return: return_description
+*/
+
 .centered {
   position: absolute;
   top: 50%;
@@ -29,4 +37,14 @@
   overflow-x: hidden;
   padding-top: 100px !important;
   right: 0;
+}
+.content_image {
+  width: 50%;
+  border-radius: 25px !important;
+}
+.rating {
+  color: gold;
+}
+.right_div {
+  padding: 25px !important;
 }

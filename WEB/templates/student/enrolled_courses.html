@@ -30,12 +30,12 @@ Return: return_description
 
 {% endblock %} {% block body %}
 <div class="split_left">
-  <div class="content" style="padding: 25px !important">
+  <div class="content">
     <center>
       <img
+        class="content_image"
         src="{{tutor[6]}}"
         alt="Mountains"
-        style="width: 50%; border-radius: 25px !important"
       />
     </center>
     <h3>{{tutor[7]}} ({{tutor[3]}})</h3>
@@ -52,12 +52,12 @@ Return: return_description
     <h4>Email - {{tutor[8]}}</h4>
     <br />
     <br />
-    <h1 style="color: gold"><b>{{ tutor[9]}}</b></h1>
+    <h1 class="rating"><b>{{ tutor[9]}}</b></h1>
   </div>
 </div>
 
 <div class="split_right">
-  <div class="right_div" style="padding: 25px !important">
+  <div class="right_div" >
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
         <button

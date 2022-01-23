@@ -1,3 +1,11 @@
+/*
+sumary_line
+
+Keyword arguments:
+argument -- description
+Return: return_description
+*/
+
 const checkout_public_key = "{{checkout_public_key}}";
 const checkout_session_id_subscription = "{{checkout_session_id_subscription}}";
 const checkout_session_id_one_time = "{{checkout_session_id_one_time}}";

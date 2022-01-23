@@ -1,3 +1,14 @@
+/*
+sumary_line
+
+Keyword arguments:
+argument -- description
+Return: return_description
+*/
+
 .already_existing_subjects {
   padding: 25px !important;
+}
+.card_1 {
+  width: 18rem;
 }

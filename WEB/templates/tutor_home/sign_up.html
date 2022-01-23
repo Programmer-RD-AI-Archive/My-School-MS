@@ -35,10 +35,9 @@ Return: return_description
           <br />
           <button
             type="button"
-            class="btn btn-outline-secondary"
-            style="border-radius: 25px !important"
+            class="btn btn-outline-secondary sign_up_btn_outline_secondary_1"
           >
-            <h2 style="color: rgb(0, 195, 255) !important">Getting Started</h2>
+            <h2 class="text_style_1">Getting Started</h2>
           </button> -->
           <h1 class="sign_up_main_title_1">
             <b>Sign Up</b>
@@ -78,6 +77,18 @@ Return: return_description
                 name="Password"
                 value="{{session['Password']}}"
                 placeholder="Password"
+                onChange="onChange()"
+              />
+            </div>
+            <div class="mb-3">
+              <!-- <label for="Password" class="form-label"><h3>Password</h3></label> -->
+              <input
+                type="password"
+                class="form-control sign_in_form_control_1"
+                id="Confirm Password"
+                name="Confirm Password"
+                placeholder="Confirm Password"
+                onChange="onChange()"
               />
             </div>
             <div class="mb-3">

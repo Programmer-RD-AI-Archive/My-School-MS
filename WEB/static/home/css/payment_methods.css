@@ -1,3 +1,11 @@
+/*
+sumary_line
+
+Keyword arguments:
+argument -- description
+Return: return_description
+*/
+
 body {
   background-color: white;
   color: black !important;
@@ -10,4 +18,21 @@ body {
   background-color: gray;
   color: white;
   text-align: center;
+}
+.jumbotron_main_1 {
+  margin-top: 10px;
+  border-radius: 100px !important;
+  text-align: center !important;
+}
+.onetime {
+  font-size: 25px !important;
+}
+.subscription {
+  font-size: 25px !important;
+}
+.col_coupon {
+  width: 25% !important;
+}
+.form_coupon {
+  text-align: left;
 }
