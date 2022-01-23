@@ -20,6 +20,12 @@ import { db } from "./firebase";
 import { useStateValue } from "./StateProvider";
 import firebase from "firebase";
 function Chat() {
+  /**
+   * Function to add two numbers
+   * @param a The first number to add
+   * @param b The second number to add
+   * @returns The sum of two numbers
+   */
   // State (Start)
   const [input, setInput] = useState("");
   const { roomId } = useParams();
@@ -53,6 +59,12 @@ function Chat() {
   /*  */
   // Functions (Start)
   const sendMessage = (event) => {
+    /**
+     * Function to add two numbers
+     * @param a The first number to add
+     * @param b The second number to add
+     * @returns The sum of two numbers
+     */
     event.preventDefault();
     const info = {
       message: input,
