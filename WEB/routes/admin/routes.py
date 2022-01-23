@@ -15,6 +15,7 @@ def admin_home():
     """
     if "Is_Admin" in session:
         return render_template("admin/home.html", session=session)
+    return abort(404)
 
 
 @app.route("/Admin/Tutors")
@@ -33,6 +34,7 @@ def admin_tutors():
         )
         already_accounts = already_accounts.json()["message"]
         return render_template("admin/tutors.html", tutors=already_accounts)
+    return abort(404)
 
 
 @app.route("/Admin/Tutors/Enable/<_id>")
@@ -69,6 +71,7 @@ def admin_tutors_enable(_id):
         )
         flash("Enabled", "success")
         return redirect("/Admin/Tutors")
+    return abort(404)
 
 
 @app.route("/Admin/Tutors/Disable/<_id>")
@@ -105,6 +108,7 @@ def admin_tutors_disable(_id):
         )
         flash("Disabled", "success")
         return redirect("/Admin/Tutors")
+    return abort(404)
 
 
 @app.route("/Admin/Accounts")
@@ -123,6 +127,7 @@ def admin_accounts():
         )
         accounts = accounts.json()["message"]
         return render_template("admin/accounts.html", accounts=accounts)
+    return abort(404)
 
 
 @app.route("/Admin/Accounts/Edit/<_id>")
@@ -142,6 +147,7 @@ def admin_account_edit():
         # accounts = accounts.json()["message"]
         flash("Not Working TODO", "success")  # TODO
         return redirect("/Admin/Accounts")
+    return abort(404)
 
 
 @app.route("/Admin/Accounts/Delete/<_id>")
@@ -161,6 +167,7 @@ def admin_account_delete(_id):
         accounts = accounts.json()["message"]
         flash("Deleted", "success")
         return redirect("/Admin/Accounts")
+    return abort(404)
 
 
 @app.route("/Admin/Subjects", methods=["GET", "POST"])
@@ -198,6 +205,7 @@ def admin_subjects():
         )
         subjects = subjects.json()["message"]
         return render_template("/admin/subjects.html", subjects=subjects)
+    return abort(404)
 
 
 @app.route("/Admin/Subjects/Delete/<_id>", methods=["GET", "POST"])
@@ -217,6 +225,7 @@ def admin_subject_delete(_id):
         subjects = subjects.json()["message"]
         flash("Deleted", "success")
         return redirect("/Admin/Subjects")
+    return abort(404)
 
 
 @app.route("/Admin/Subjects/Edit/<_id>/")
@@ -236,6 +245,7 @@ def admin_subject_edit(_id):
         # accounts = accounts.json()["message"]
         flash("Not Working TODO", "success")  # TODO
         return redirect("/Admin/Subjects")
+    return abort(404)
 
 
 @app.route("/Admin/Log/Out")
@@ -256,3 +266,4 @@ def admin_log_out():
         session.pop("Password")
         flash("Loged Out", "success")
         return redirect("/")
+    return abort(404)
