@@ -70,7 +70,10 @@ def load_data():
     for X_batch, y_batch in tqdm(data):
         X.append(bag_of_words(X_batch, X_words))
         y.append(bag_of_words(y_batch, y_words))
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, shuffle=False)
+    X_train, X_test, y_train, y_test = train_test_split(X,
+                                                        y,
+                                                        test_size=0.25,
+                                                        shuffle=False)
     X_train = torch.from_numpy(np.array(X_train)).to(device).float()
     y_train = torch.from_numpy(np.array(y_train)).to(device).float()
     X_test = torch.from_numpy(np.array(X_test)).to(device).float()
@@ -129,8 +132,8 @@ def train(
     wandb.init(project=PROJECT_NAME, name="baseline")
     for _ in tqdm(range(epochs)):
         for i in range(0, len(X_train), batch_size):
-            X_batch = X_train[i : i + batch_size].to(device)
-            y_batch = y_train[i : i + batch_size].to(device)
+            X_batch = X_train[i:i + batch_size].to(device)
+            y_batch = y_train[i:i + batch_size].to(device)
             preds = model(X_batch)
             loss = criterion(preds, y_batch)
             optimizer.zero_grad()

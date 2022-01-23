@@ -93,8 +93,8 @@ def train(epochs, X, y, model, criterion, optimizer, batch_size):
     wandb.init(project=PROJECT_NAME, name="baseline")
     for _ in tqdm(range(epochs)):
         for idx in range(0, len(X), batch_size):
-            X_batch = X[idx : idx + batch_size].to(device).float()
-            y_batch = y[idx : idx + batch_size].to(device).float()
+            X_batch = X[idx:idx + batch_size].to(device).float()
+            y_batch = y[idx:idx + batch_size].to(device).float()
             preds = model(X_batch)
             loss = criterion(preds, y_batch)
             optimizer.zero_grad()
