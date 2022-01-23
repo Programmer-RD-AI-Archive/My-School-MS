@@ -160,6 +160,7 @@ class Model:
             pass
         for file_to_remove in tqdm(files_to_remove):  # Iter over the files in the directory
             os.remove(f"./output/{file_to_remove}")  # Delete the iter file
+        return None
 
     def test(self, data_idx: int = 50) -> list:
         """
@@ -260,6 +261,7 @@ class Model:
                 files_and_object_val, f"./models/{files_and_object_key}-{self.NAME}.pth"
             )  # Save the file in .pth
         torch.cuda.empty_cache()
+        return None
 
     def create_cfg(self) -> CfgNode:
         """
