@@ -14,7 +14,7 @@ import SidebarChat from "./SidebarChat";
 import { db } from "./firebase";
 import { useStateValue } from "./StateProvider";
 function Sidebar() {
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user }, _] = useStateValue();
   const [rooms, setRooms] = useState([]);
   useEffect(() => {
     const unsubscribe = db.collection("rooms").onSnapshot((snapshot) =>
