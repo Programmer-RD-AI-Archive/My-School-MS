@@ -184,7 +184,7 @@ def home_sign_in():
         session["2FACAUTH"] = False
         return redirect("/2/Fac/Auth/")
     return render_template("home/sign_in.html", session=session, config=config)
-
+    
 
 @app.route("/2/Fac/Auth/", methods=["POST", "GET"])
 @app.route("/2/Fac/Auth", methods=["POST", "GET"])
@@ -244,7 +244,7 @@ def home_sign_two_face_auth():
             "94766428783",
         )  # TODO
         return render_template("/home/2_fac_auth.html")
-
+    return abort(404)
 
 @app.route("/payment_methods/", methods=["POST", "GET"])
 @app.route("/payment_methods", methods=["POST", "GET"])
@@ -304,7 +304,7 @@ def home_payment_methods():
             checkout_session_id_subscription=session_subscription["id"],
             checkout_public_key=app.config["STRIPE_PUBLIC_KEY"],
         )
-
+    return abort(404)
 
 @app.route("/payment_methods_success/", methods=["POST", "GET"])
 @app.route("/payment_methods_success", methods=["POST", "GET"])
@@ -349,8 +349,7 @@ def home_payment_methods_success():
             "success",
         )
         return redirect(f"/Sign/In")
-
-
+    return abort(404)
 @app.route("/payment_methods_decline/")
 @app.route("/payment_methods_decline")
 def home_payment_methods_decline():
@@ -366,3 +365,4 @@ def home_payment_methods_decline():
             return redirect("/payment_methods")
     except:
         return abort(500)
+    return abort(404)
