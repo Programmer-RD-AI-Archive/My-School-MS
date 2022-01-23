@@ -11,6 +11,12 @@ import { Link } from "react-router-dom";
 import { db } from "./firebase";
 import "./SidebarChat.css";
 function SidebarChat({ addNewChat, id, name, image }) {
+  /**
+   * Function to add two numbers
+   * @param a The first number to add
+   * @param b The second number to add
+   * @returns The sum of two numbers
+   */
   // State (Start)
   const [messages, setMessages] = useState("");
   // State (End)
