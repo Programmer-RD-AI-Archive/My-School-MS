@@ -132,6 +132,7 @@ class Help_Funcs:
         #     with smtplib.SMTP_SSL("smtp.gmail.com", 587) as smtp:
         #         smtp.login(EmailAdd, Pass)
         #         smtp.send_message(msg)
+        return None
 
     @staticmethod
     def send_sms(msg: str, number: int) -> str:
