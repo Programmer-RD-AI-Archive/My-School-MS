@@ -27,12 +27,13 @@ def bag_of_words(t_words, words):
 print(bag_of_words(["hi"], ["hi", "how", "hi"]))
 
 
-def train(epochs, X_train, y_train, X_test, y_test, batch_size, model, criterion, optimizer):
+def train(epochs, X_train, y_train, X_test, y_test, batch_size, model,
+          criterion, optimizer):
     wandb.init(project=PROJECT_NAME, name="baseline")
     for _ in tqdm(range(epochs)):
         for i in range(0, len(X_train), batch_size):
-            X_batch = X_train[i : i + batch_size]
-            y_batch = y_train[i : i + batch_size]
+            X_batch = X_train[i:i + batch_size]
+            y_batch = y_train[i:i + batch_size]
             preds = model(X_batch)
             loss = criterion(preds, y_batch)
             optimizer.zero_grad()
@@ -40,25 +41,17 @@ def train(epochs, X_train, y_train, X_test, y_test, batch_size, model, criterion
             optimizer.step()
         model.eval()
         torch.cuda.empty_cache()
-        wandb.log(
-            {
-                "Loss": (
-                    get_loss(model, X_train, y_train, criterion)
-                    + get_loss(model, X_batch, y_batch, criterion) / 2
-                )
-            }
-        )
+        wandb.log({
+            "Loss": (get_loss(model, X_train, y_train, criterion) +
+                     get_loss(model, X_batch, y_batch, criterion) / 2)
+        })
         torch.cuda.empty_cache()
         wandb.log({"Val Loss": get_loss(model, X_test, y_test, criterion)})
         torch.cuda.empty_cache()
-        wandb.log(
-            {
-                "Acc": (
-                    get_accuracy(model, X_train, y_train) + get_accuracy(model, X_batch, y_batch)
-                )
-                / 2
-            }
-        )
+        wandb.log({
+            "Acc": (get_accuracy(model, X_train, y_train) +
+                    get_accuracy(model, X_batch, y_batch)) / 2
+        })
         torch.cuda.empty_cache()
         wandb.log({"Val Acc": get_accuracy(model, X_test, y_test)})
         torch.cuda.empty_cache()
