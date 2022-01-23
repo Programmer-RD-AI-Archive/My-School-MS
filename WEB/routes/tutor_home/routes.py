@@ -259,3 +259,4 @@ def tutor_two_factor_authentication():
             session["2_Fac_Auth_Info"]["contact_number"],
         )  # TODO
         return render_template("/tutor_home/2_fac_auth.html")
+    return abort(404)
