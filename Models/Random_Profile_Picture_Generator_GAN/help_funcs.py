@@ -23,11 +23,8 @@ def train(
     wandb.init(project=PROJECT_NAME, name=f"baseline-with-backward-pass-gen")
     for epoch in tqdm(epochs):
         for idx in range(0, len(X), batch_size):
-            X_batch = (
-                torch.tensor(np.array(X[idx : idx + batch_size]))
-                .view(-1, IMG_SIZE * IMG_SIZE * 3)
-                .to(device)
-            )
+            X_batch = (torch.tensor(np.array(X[idx:idx + batch_size])).view(
+                -1, IMG_SIZE * IMG_SIZE * 3).to(device))
             batch_size = X_batch.shape[0]
             noise = torch.randn(batch_size, z_dim).to(device)
             fake = gen(noise)

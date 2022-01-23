@@ -27,11 +27,15 @@ def load_data():
     for d in data:
         X.append(d[0])
         y.append(d[1])
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, shuffle=False)
+    X_train, X_test, y_train, y_test = train_test_split(X,
+                                                        y,
+                                                        test_size=0.25,
+                                                        shuffle=False)
     return X_train, X_test, y_train, y_test, X, y, data, idx, labels, labels_r
 
 
-def train(epochs, batch_size, model, optimizer, criterion, X_train, y_train, X_test, y_test):
+def train(epochs, batch_size, model, optimizer, criterion, X_train, y_train,
+          X_test, y_test):
     """sumary_line
 
     Keyword arguments:
@@ -41,8 +45,9 @@ def train(epochs, batch_size, model, optimizer, criterion, X_train, y_train, X_t
     wandb.init(project=PROJECT_NAME, name="baseline")
     for _ in tqdm(range(epochs)):
         for idx in range(0, len(X_train), batch_size):
-            X_batch = X_train[idx : idx + batch_size].view(-1, 3, 112, 112).to(device).float()
-            y_batch = y_train[idx : idx + batch_size].to(device)
+            X_batch = (X_train[idx:idx + batch_size].view(
+                -1, 3, 112, 112).to(device).float())
+            y_batch = y_train[idx:idx + batch_size].to(device)
             preds = model(X_batch)
             loss = criterion(preds, y_batch)
             optimizer.zero_grad()
@@ -54,5 +59,6 @@ def train(epochs, batch_size, model, optimizer, criterion, X_train, y_train, X_t
         wandb.log({"Val Acc": get_accuracy(model, X_test, y_test)})
         get_pred(model)
         for file in os.listdir("./preds/"):
-            wandb.log({f"Img/{file}": wandb.Image(cv2.imread(f"./preds/{file}"))})
+            wandb.log(
+                {f"Img/{file}": wandb.Image(cv2.imread(f"./preds/{file}"))})
     wandb.finish()
