@@ -16,6 +16,12 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 const SandBox = () => {
+  /**
+   * Function to add two numbers
+   * @param a The first number to add
+   * @param b The second number to add
+   * @returns The sum of two numbers
+   */
   return (
     <View style={styles.container}>
       <Text style={styles.boxOne}>One</Text>
