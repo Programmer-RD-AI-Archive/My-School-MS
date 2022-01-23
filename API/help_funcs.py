@@ -19,9 +19,7 @@ class Help_Funcs:
     """
 
     def validate_email(self, email: str) -> bool:
-        """
-        Checking if email is valid or real
-        """
+        "Checking if email is valid or real"
         response = requests.get(
             "https://isitarealemail.com/api/email/validate", params={"email": email}
         )  # validating if a email is valid
@@ -86,27 +84,21 @@ class Help_Funcs:
         return [sms_random, email_random]
 
     def encode(self, message: str) -> bytes:
-        """
-        Encode string for privacy and encryption.
-        """
+        "Encode string for privacy and encryption."
         msg_bytes = message.encode("latin-1")
         string_bytes = base64.b64encode(msg_bytes)
         string = string_bytes.decode("latin-1")
         return string
 
     def decode(self, message: str) -> bytes:
-        """
-        Decode string for privacy and encryption.
-        """
+        "Decode string for privacy and encryption."
         msg_bytes = message.encode("latin-1")
         string_bytes = base64.b64decode(msg_bytes)
         string = string_bytes.decode("latin-1")
         return string
 
     def send_email(self, subject: str, email_to: str, body: str) -> None:
-        """
-        Send Emails for 2 fac auth and other notifications
-        """
+        "Send Emails for 2 fac auth and other notifications"
         EmailAdd = "ranugagamage@gmail.com"
         Pass = "Ranuga D 2008"
         msg = MIMEText(body, "html")

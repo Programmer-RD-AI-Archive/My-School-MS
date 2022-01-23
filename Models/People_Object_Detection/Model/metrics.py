@@ -14,9 +14,7 @@ class Metrics:
         init_mae=0,
         init_precision=0,
     ) -> None:
-        """
-        Initialize
-        """
+        "Initialize"
         if init_ious is None:
             init_ious = []
         # RMSE
@@ -68,30 +66,21 @@ class Metrics:
             raise ValueError(f"RMSE Not working {e}")
 
     def create_rmse(self, preds: torch.tensor, target: torch.tensor) -> float:
-        """
-        - create_rmse - Create Root-mean-square deviation
-        """
+        "- create_rmse - Create Root-mean-square deviation"
         try:
-            preds_new = (preds["instances"].__dict__["_fields"]
-                         ["pred_boxes"].__dict__["tensor"])
+            preds_new = preds["instances"].__dict__["_fields"]["pred_boxes"].__dict__["tensor"]
             for pred_i in tqdm(range(len(preds))):
                 pred = preds_new[pred_i]
-                if self.r_mean_squared_error(pred.to("cpu"),
-                                             target) > self.lowest_rmse:
-                    self.lowest_rmse = self.r_mean_squared_error(
-                        pred.to("cpu"), target)
+                if self.r_mean_squared_error(pred.to("cpu"), target) > self.lowest_rmse:
+                    self.lowest_rmse = self.r_mean_squared_error(pred.to("cpu"), target)
             return float(self.lowest_rmse)
         except Exception as e:
             raise ValueError(f"Some error occurred in RMSE {e}")
 
-    def create_recall(self, preds: torch.tensor,
-                      target: torch.tensor) -> float:
-        """
-        - create_recall - Create Recall
-        """
+    def create_recall(self, preds: torch.tensor, target: torch.tensor) -> float:
+        "- create_recall - Create Recall"
         try:
-            preds_new = (preds["instances"].__dict__["_fields"]
-                         ["pred_boxes"].__dict__["tensor"])
+            preds_new = preds["instances"].__dict__["_fields"]["pred_boxes"].__dict__["tensor"]
             for pred_i in tqdm(range(len(preds))):
                 pred = preds_new[pred_i]
                 if self.recall(pred.to("cpu"), target) > self.lowest_recall:
@@ -101,9 +90,7 @@ class Metrics:
             raise ValueError(f"Some error occured in Recall {e}")
 
     def create_iou(self, preds: torch.tensor, targets: torch.tensor) -> float:
-        """
-        - create_iou - Create IOU
-        """
+        "- create_iou - Create IOU"
         try:
             for pred_box, true_box in zip(preds, targets):
                 xA = max(true_box[0], pred_box[0])
@@ -111,10 +98,8 @@ class Metrics:
                 xB = min(true_box[2], pred_box[2])
                 yB = min(true_box[3], pred_box[3])
                 interArea = max(0, xB - xA + 1) * max(0, yB - yA + 1)
-                boxAArea = (true_box[2] - true_box[0] + 1) * (true_box[3] -
-                                                              true_box[1] + 1)
-                boxBArea = (pred_box[2] - pred_box[0] + 1) * (pred_box[3] -
-                                                              pred_box[1] + 1)
+                boxAArea = (true_box[2] - true_box[0] + 1) * (true_box[3] - true_box[1] + 1)
+                boxBArea = (pred_box[2] - pred_box[0] + 1) * (pred_box[3] - pred_box[1] + 1)
                 iou = interArea / float(boxAArea + boxBArea - interArea)
                 self.ious.append(iou)
             iou = np.mean(self.ious)
@@ -123,56 +108,41 @@ class Metrics:
             raise ValueError(f"Some error occured in IOU {e}")
 
     def create_mse(self, preds: torch.tensor, target: torch.tensor) -> float:
-        """
-        - create_mse - Create Mean-square deviation
-        """
+        "- create_mse - Create Mean-square deviation"
         try:
-            preds_new = (preds["instances"].__dict__["_fields"]
-                         ["pred_boxes"].__dict__["tensor"])
+            preds_new = preds["instances"].__dict__["_fields"]["pred_boxes"].__dict__["tensor"]
             for pred_i in tqdm(range(len(preds))):
                 pred = preds_new[pred_i]
-                if self.mean_squared_error(pred.to("cpu"),
-                                           target) > self.lowest_mse:
-                    self.lowest_mse = self.mean_squared_error(
-                        pred.to("cpu"), target)
+                if self.mean_squared_error(pred.to("cpu"), target) > self.lowest_mse:
+                    self.lowest_mse = self.mean_squared_error(pred.to("cpu"), target)
             return float(self.lowest_mse)
         except Exception as e:
             raise ValueError(f"Some error occured in MSE {e}")
 
-    def create_ssim(self, preds: torch.tensor, target: torch.tensor,
-                    height: int, width: int) -> float:
-        """
-        - create_ssim - create SSIM # TODO it is not done yet
-        """
+    def create_ssim(
+        self, preds: torch.tensor, target: torch.tensor, height: int, width: int
+    ) -> float:
+        "- create_ssim - create SSIM # TODO it is not done yet"
         try:
-            preds_new = (preds["instances"].__dict__["_fields"]
-                         ["pred_boxes"].__dict__["tensor"])
+            preds_new = preds["instances"].__dict__["_fields"]["pred_boxes"].__dict__["tensor"]
             for pred_i in tqdm(range(len(preds))):
                 pred = preds_new[pred_i]
                 info = self.data[self.create_target_and_preds_iter]
                 img = cv2.imread(info["Path"])
-                x, y, w, h = self.create_x_y_w_h(target[0], target[1],
-                                                 target[2], target[3])
-                crop_img_target = torch.from_numpy(
-                    self.crop_img(x, y, w, h, img))
-                x, y, w, h = self.create_x_y_w_h(pred[0], pred[1], pred[2],
-                                                 pred[3])
-                crop_img_pred = torch.from_numpy(
-                    np.array(self.crop_img(x, y, w, h, img)))
-                if self.ssim(crop_img_pred,
-                             crop_img_target) > self.lowest_ssim:
+                x, y, w, h = self.create_x_y_w_h(target[0], target[1], target[2], target[3])
+                crop_img_target = torch.from_numpy(self.crop_img(x, y, w, h, img))
+                x, y, w, h = self.create_x_y_w_h(pred[0], pred[1], pred[2], pred[3])
+                crop_img_pred = torch.from_numpy(np.array(self.crop_img(x, y, w, h, img)))
+                if self.ssim(crop_img_pred, crop_img_target) > self.lowest_ssim:
                     self.lowest_ssim = self.ssim(pred.to("cpu"), target)
             return self.lowest_ssim
         except Exception as e:
             raise ValueError(f"Some error occured in SSIM {e}")
 
     def create_psnr(self, preds: torch.tensor, target: torch.tensor) -> float:
-        """
-        - create_psnr - Peak signal-to-noise ratio (how similar is a image)
-        """
+        "- create_psnr - Peak signal-to-noise ratio (how similar is a image)"
         try:
-            preds_new = (preds["instances"].__dict__["_fields"]
-                         ["pred_boxes"].__dict__["tensor"])
+            preds_new = preds["instances"].__dict__["_fields"]["pred_boxes"].__dict__["tensor"]
             for pred_i in tqdm(range(len(preds))):
                 pred = preds_new[pred_i]
                 if self.psnr(pred.to("cpu"), target) > self.lowest_psnr:
@@ -182,12 +152,9 @@ class Metrics:
             raise ValueError(f"Some error occured in PSNR {e}")
 
     def create_mae(self, preds: torch.tensor, target: torch.tensor) -> float:
-        """
-        - create_mae - Mean absolute error
-        """
+        "- create_mae - Mean absolute error"
         try:
-            preds_new = (preds["instances"].__dict__["_fields"]
-                         ["pred_boxes"].__dict__["tensor"])
+            preds_new = preds["instances"].__dict__["_fields"]["pred_boxes"].__dict__["tensor"]
             for pred_i in tqdm(range(len(preds))):
                 pred = preds_new[pred_i]
                 if self.mae(pred.to("cpu"), target) > self.lowest_mae:
@@ -196,29 +163,20 @@ class Metrics:
         except Exception as e:
             raise ValueError(f"Some error occured in MAE {e}")
 
-    def create_precision(self, preds: torch.tensor,
-                         target: torch.tensor) -> float:
-        """
-        - create_precision - Create Precision
-        """
+    def create_precision(self, preds: torch.tensor, target: torch.tensor) -> float:
+        "- create_precision - Create Precision"
         try:
-            preds_new = (preds["instances"].__dict__["_fields"]
-                         ["pred_boxes"].__dict__["tensor"])
+            preds_new = preds["instances"].__dict__["_fields"]["pred_boxes"].__dict__["tensor"]
             for pred_i in tqdm(range(len(preds))):
                 pred = preds_new[pred_i]
-                if self.precision(pred.to("cpu"),
-                                  target) > self.lowest_precision:
-                    self.lowest_precision = self.precision(
-                        pred.to("cpu"), target)
+                if self.precision(pred.to("cpu"), target) > self.lowest_precision:
+                    self.lowest_precision = self.precision(pred.to("cpu"), target)
             return self.lowest_precision
         except Exception as e:
             raise ValueError(f"Some error occured in Precision {e}")
 
-    def create_precision_and_recall(self, preds: torch.tensor,
-                                    target: torch.tensor) -> float:
-        """
-        - create_precision_and_recall - Create Precision and recall
-        """
+    def create_precision_and_recall(self, preds: torch.tensor, target: torch.tensor) -> float:
+        "- create_precision_and_recall - Create Precision and recall"
         try:
             recall = self.create_recall(preds, target)
             precision = self.create_precision(preds, target)
@@ -232,9 +190,7 @@ class Metrics:
 
     @staticmethod
     def create_ap(preds: torch.tensor, target: torch.tensor) -> float:
-        """
-        - create_ap - Create Average Precision(AP)
-        """
+        "- create_ap - Create Average Precision(AP)"
         try:
             preds = np.array(preds)
             target = np.array(target)
@@ -244,11 +200,8 @@ class Metrics:
             raise ValueError(f"Some error occured in Average Precision {e}")
 
     @staticmethod
-    def create_confusion_matrix(preds: torch.tensor,
-                                target: torch.tensor) -> float:
-        """
-        - create_confusion_matrix - Create confusion_matrix
-        """
+    def create_confusion_matrix(preds: torch.tensor, target: torch.tensor) -> float:
+        "- create_confusion_matrix - Create confusion_matrix"
         try:
             preds = np.array(preds)
             target = np.array(target)
@@ -260,9 +213,7 @@ class Metrics:
 
     @staticmethod
     def create_auc_curve(preds: torch.tensor, target: torch) -> float:
-        """
-        - create_auc_curve - Create auc_curve
-        """
+        "- create_auc_curve - Create auc_curve"
         try:
             preds = np.array(preds)
             target = np.array(target)
@@ -272,11 +223,8 @@ class Metrics:
         except Exception as e:
             raise ValueError(f"Some error occured in confusion matrix {e}")
 
-    def create_f1_score(self, preds: torch.tensor,
-                        target: torch.tensor) -> float:
-        """
-        - create_f1_score - Create f1_score
-        """
+    def create_f1_score(self, preds: torch.tensor, target: torch.tensor) -> float:
+        "- create_f1_score - Create f1_score"
         try:
             precision = self.create_precision(preds, target)
             recall = self.create_recall(preds, target)
@@ -286,9 +234,7 @@ class Metrics:
             raise ValueError(f"Some error occured in confusion matrix {e}")
 
     def metrics(self, preds: torch.tensor, target: torch.tensor) -> dict:
-        """
-        - combines all metrics and easily return all of the metrics
-        """
+        "- combines all metrics and easily return all of the metrics"
         fpr, tpr, thresholds = self.create_auc_curve(preds, target)
 
         metrics = {
@@ -300,8 +246,7 @@ class Metrics:
             "PSNR": self.create_psnr(preds, target),
             "MAE": self.create_mae(preds, target),
             "Precision": self.create_precision(preds, target),
-            "Precision and Recall":
-            self.create_precision_and_recall(preds, target),
+            "Precision and Recall": self.create_precision_and_recall(preds, target),
             "AP": self.create_ap(preds, target),
             "Confusion Matrix": self.create_confusion_matrix(preds, target),
             "AUC Curve fpr": fpr,

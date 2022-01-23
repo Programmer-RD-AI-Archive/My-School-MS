@@ -2,7 +2,9 @@ from Model import *
 
 
 class Param_Tunning:
-    def __init__(self, ) -> None:
+    def __init__(
+        self,
+    ) -> None:
         """
         initialize the Class
         params - dict like
@@ -10,9 +12,7 @@ class Param_Tunning:
 
     @staticmethod
     def tune(params: dict) -> dict:
-        """
-        Tune all of the parameters
-        """
+        "Tune all of the parameters"
         final_metrics = []
         model = Model()
         params = ParameterGrid(params)
@@ -41,11 +41,9 @@ class Param_Tunning:
 
     @staticmethod
     def ray_tune_func(config):
-        """
-        https://docs.ray.io/en/latest/tune/index.html
-        """
+        "https://docs.ray.io/en/latest/tune/index.html"
         base_lr = config["BASE_LR"]
-        ims_per_batch = (config["IMS_PER_BATCH"], )
+        ims_per_batch = (config["IMS_PER_BATCH"],)
         batch_size_per_image = config["BATCH_SIZE_PER_IMAGE"]
         model = "COCO-Detection/" + config["MODEL"]
         model = Model(
@@ -60,15 +58,10 @@ class Param_Tunning:
         tune.report(average_precisions=ap)
 
     def ray_tune(self):
-        """
-        https://docs.ray.io/en/latest/tune/user-guide.html
-        """
-        analysis = tune.run(self.ray_tune_func,
-                            config=params,
-                            resources_per_trial={
-                                "gpu": 0,
-                                "cpu": 1
-                            })
+        "https://docs.ray.io/en/latest/tune/user-guide.html"
+        analysis = tune.run(
+            self.ray_tune_func, config=params, resources_per_trial={"gpu": 0, "cpu": 1}
+        )
         analysis.get_best_results(metrics="average_precisions", model="max")
         df = analysis.results_df
         df.to_csv("./Logs.csv")
