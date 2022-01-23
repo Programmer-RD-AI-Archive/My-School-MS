@@ -14,6 +14,12 @@ import SidebarChat from "./SidebarChat";
 import { db } from "./firebase";
 import { useStateValue } from "./StateProvider";
 function Sidebar() {
+  /**
+   * Function to add two numbers
+   * @param a The first number to add
+   * @param b The second number to add
+   * @returns The sum of two numbers
+   */
   const [{ user }, _] = useStateValue();
   const [rooms, setRooms] = useState([]);
   useEffect(() => {
