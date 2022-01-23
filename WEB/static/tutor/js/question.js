@@ -6,8 +6,8 @@ argument -- description
 Return: return_description
 */
 
-var idx = 0;
-var idx_iter = 0;
+let idx = 0;
+let idx_iter = 0;
 $("#input").click(function () {
   /**
    * Function to add two numbers
@@ -172,7 +172,7 @@ function submit_info_API(_id) {
    * @param b The second number to add
    * @returns The sum of two numbers
    */
-  console.log(_id);
+
   const info = {};
   for (idx_iter = 1; idx_iter <= idx; idx_iter++) {
     try {

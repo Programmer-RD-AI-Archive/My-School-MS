@@ -51,7 +51,7 @@ function Chat() {
         .onSnapshot(
           (snapshot) =>
             // setMessages()
-            console.log(snapshot.docs[0].data()) // snapshot.docs.map((doc) => doc.data()))
+             // snapshot.docs.map((doc) => doc.data()))
         );
     }
   }, [roomId]);
@@ -71,7 +71,7 @@ function Chat() {
       name: user.displayName,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     };
-    console.log(info);
+    
     db.collection("rooms").doc(roomId).collection("messages").add(info);
     setInput("");
   };
