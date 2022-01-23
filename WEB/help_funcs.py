@@ -21,7 +21,8 @@ class Help_Funcs:
     Return: return_description
     """
 
-    def validate_email(self, email: str) -> bool:
+    @staticmethod
+    def validate_email(email: str) -> bool:
         "Checking if email is valid or real"
         response = requests.get(
             "https://isitarealemail.com/api/email/validate", params={"email": email}
@@ -30,7 +31,8 @@ class Help_Funcs:
         # return status == "valid" # TODO
         return True
 
-    def log_ip_address(self, url_trying_to_access: str, ip_address: str) -> None:
+    @staticmethod
+    def log_ip_address(url_trying_to_access: str, ip_address: str) -> None:
         """sumary_line
 
         Keyword arguments:
@@ -89,21 +91,24 @@ class Help_Funcs:
         )
         return [sms_random, email_random]
 
-    def encode(self, message: str) -> bytes:
+    @staticmethod
+    def encode(message: str) -> bytes:
         "Encode string for privacy and encryption."
         msg_bytes = message.encode("latin-1")
         string_bytes = base64.b64encode(msg_bytes)
         string = string_bytes.decode("latin-1")
         return string
 
-    def decode(self, message: str) -> bytes:
+    @staticmethod
+    def decode(message: str) -> bytes:
         "Decode string for privacy and encryption."
         msg_bytes = message.encode("latin-1")
         string_bytes = base64.b64decode(msg_bytes)
         string = string_bytes.decode("latin-1")
         return string
 
-    def send_email(self, subject: str, email_to: str, body: str) -> None:
+    @staticmethod
+    def send_email(subject: str, email_to: str, body: str) -> None:
         "Send Emails for 2 fac auth and other notifications"
         EmailAdd = "helpyoulearnstuff@gmail.com"
         Pass = "Ranuga D 2008"
@@ -134,7 +139,8 @@ class Help_Funcs:
         #         smtp.login(EmailAdd, Pass)
         #         smtp.send_message(msg)
 
-    def send_sms(self, msg: str, number: int) -> str:
+    @staticmethod
+    def send_sms(msg: str, number: int) -> str:
         """sumary_line
 
         Keyword arguments:

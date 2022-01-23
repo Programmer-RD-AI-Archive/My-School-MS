@@ -28,7 +28,8 @@ class Accounts(Resource):
     Return: return_description
     """
 
-    def get(self) -> dict:
+    @staticmethod
+    def get() -> dict:
         """sumary_line
 
         Keyword arguments:
@@ -47,7 +48,8 @@ class Accounts(Resource):
             newaccounts.append(list(account))
         return {"""message""": newaccounts}
 
-    def post(self) -> dict:
+    @staticmethod
+    def post() -> dict:
         """sumary_line
 
         Keyword arguments:

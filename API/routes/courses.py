@@ -20,7 +20,8 @@ class Courses(Resource):
     Return: return_description
     """
 
-    def put(self) -> dict:
+    @staticmethod
+    def put() -> dict:
         """sumary_line
 
         Keyword arguments:
