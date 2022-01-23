@@ -86,4 +86,3 @@ def train(X_train, y_train, X_test, y_test, model, criterion, optimizer, epochs,
                 }
             )
     wandb.finish()
-    return None

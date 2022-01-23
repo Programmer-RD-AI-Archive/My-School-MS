@@ -153,4 +153,3 @@ def train(
     torch.save(model, "./save/model.pth")
     torch.save(model.state_dict(), "./save/model-sd.pt")
     torch.save(model.state_dict(), "./save/model-sd.pth")
-    return None

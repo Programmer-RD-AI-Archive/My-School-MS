@@ -52,4 +52,3 @@ def get_pred(model):
         plt.savefig(f"./preds/{file}")
         plt.close()
     model.train()
-    return None
