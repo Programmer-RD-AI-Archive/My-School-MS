@@ -53,9 +53,7 @@ def load_data():
 
 
 class ChatDataset(Dataset):
-    def __init__(
-        self,
-    ):
+    def __init__(self, ):
         X_train, y_train, _, _ = load_data()
         self.n_samples = len(X_train)
         self.x_data = X_train

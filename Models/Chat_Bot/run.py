@@ -4,7 +4,10 @@ from Models.Chat_Bot.help_funcs import *
 batch_size = 8
 X_train, y_train, all_words, tags = load_data()
 dataset = ChatDataset()
-train_loader = DataLoader(dataset=dataset, batch_size=batch_size, shuffle=True, num_workers=0)
+train_loader = DataLoader(dataset=dataset,
+                          batch_size=batch_size,
+                          shuffle=True,
+                          num_workers=0)
 
 num_epochs = 1000
 learning_rate = 0.001
