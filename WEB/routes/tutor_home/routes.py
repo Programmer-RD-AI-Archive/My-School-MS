@@ -222,35 +222,34 @@ def tutor_two_factor_authentication():
                     session.permanent = True
                 flash("You have loged in successfully", "success")
                 return redirect(f"/Tutor/{_id}/")
-            else:
-                email = session["2_Fac_Auth_Info"]["email"]
-                user_name = session["2_Fac_Auth_Info"]["user_name"]
-                password = session["2_Fac_Auth_Info"]["password"]
-                remember_password = session["2_Fac_Auth_Info"]["remember_password"]
-                description = session["2_Fac_Auth_Info"]["description"]
-                qualification = session["2_Fac_Auth_Info"]["qualification"]
-                profile_picture = session["2_Fac_Auth_Info"]["profile_picture"]
-                full_name = session["2_Fac_Auth_Info"]["full_name"]
-                contact_number = session["2_Fac_Auth_Info"]["contact_number"]
-                already_accounts = requests.get(
-                    "http://127.0.0.1:5000/api/azure/sql",
-                    {
-                        "Query": f"""
-                        INSERT INTO
-                            [Tutor] ([Email],[Password],[User_Name],[Description],[Qualification],[Profile Picture],[Full Name],[Contact Number],[Rating],[Enabled])
-                        VALUES
-                            (
-                                '{email}','{hp.encode(password)}','{user_name}','{description}','{qualification}','{profile_picture}','{full_name}','{contact_number}','1','False'
-                            );
-                        """,
-                        "Type": "Insert",
-                    },
-                )
-                already_accounts = already_accounts.json()
-                session["Email or User Name"] = user_name
-                session["Password"] = password
-                flash("You will be validated as soon as possible", "success")
-                return redirect("/Tutor/Sign/In")
+            email = session["2_Fac_Auth_Info"]["email"]
+            user_name = session["2_Fac_Auth_Info"]["user_name"]
+            password = session["2_Fac_Auth_Info"]["password"]
+            remember_password = session["2_Fac_Auth_Info"]["remember_password"]
+            description = session["2_Fac_Auth_Info"]["description"]
+            qualification = session["2_Fac_Auth_Info"]["qualification"]
+            profile_picture = session["2_Fac_Auth_Info"]["profile_picture"]
+            full_name = session["2_Fac_Auth_Info"]["full_name"]
+            contact_number = session["2_Fac_Auth_Info"]["contact_number"]
+            already_accounts = requests.get(
+                "http://127.0.0.1:5000/api/azure/sql",
+                {
+                    "Query": f"""
+                                    INSERT INTO
+                                        [Tutor] ([Email],[Password],[User_Name],[Description],[Qualification],[Profile Picture],[Full Name],[Contact Number],[Rating],[Enabled])
+                                    VALUES
+                                        (
+                                            '{email}','{hp.encode(password)}','{user_name}','{description}','{qualification}','{profile_picture}','{full_name}','{contact_number}','1','False'
+                                        );
+                                    """,
+                    "Type": "Insert",
+                },
+            )
+            already_accounts = already_accounts.json()
+            session["Email or User Name"] = user_name
+            session["Password"] = password
+            flash("You will be validated as soon as possible", "success")
+            return redirect("/Tutor/Sign/In")
         print(session["2_Fac_Auth_Info"])
         hf = Help_Funcs()
         hf.two_fac_auth(

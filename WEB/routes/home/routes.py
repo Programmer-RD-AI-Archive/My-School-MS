@@ -234,9 +234,8 @@ def home_sign_two_face_auth():
                     session.permanent = True
                 flash("You have loged in successfully", "success")
                 return redirect(f"/Usr/{_id}/")
-            else:
-                session["payment_methods"] = True
-                return redirect("/payment_methods")
+            session["payment_methods"] = True
+            return redirect("/payment_methods")
         hf = Help_Funcs()
         hf.two_fac_auth(
             session["2_Fac_Auth_Info"]["user_name"],
