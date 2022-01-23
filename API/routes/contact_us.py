@@ -19,7 +19,6 @@ class Contact_Us(Resource):
     argument -- description
     Return: return_description
     """
-
     @staticmethod
     def post() -> dict:
         """sumary_line
