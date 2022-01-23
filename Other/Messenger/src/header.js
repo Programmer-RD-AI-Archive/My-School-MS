@@ -7,6 +7,12 @@ Return: return_description
 */
 import React from "react";
 const Head = (props) => {
+  /**
+   * Function to add two numbers
+   * @param a The first number to add
+   * @param b The second number to add
+   * @returns The sum of two numbers
+   */
   return (
     <div>
       <h5>
