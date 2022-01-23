@@ -71,7 +71,10 @@ def load_data():
     for sentence, tag in tqdm(data):
         X.append(bag_of_words(sentence, words))
         y.append(tag)
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.125, shuffle=False)
+    X_train, X_test, y_train, y_test = train_test_split(X,
+                                                        y,
+                                                        test_size=0.125,
+                                                        shuffle=False)
     X_train = torch.from_numpy(np.array(X_train)).to(device).float()
     y_train = torch.from_numpy(np.array(y_train)).to(device).float()
     X_test = torch.from_numpy(np.array(X_test)).to(device).float()
@@ -79,7 +82,8 @@ def load_data():
     return X_train, y_train, X_test, y_test, words, labels_r, labels
 
 
-def train(epochs, X_train, y_train, X_test, y_test, model, optimizer, criterion, batch_size):
+def train(epochs, X_train, y_train, X_test, y_test, model, optimizer,
+          criterion, batch_size):
     """sumary_line
 
     Keyword arguments:
@@ -89,8 +93,8 @@ def train(epochs, X_train, y_train, X_test, y_test, model, optimizer, criterion,
     wandb.init(project=PROJECT_NAME, name="baseline")
     for _ in tqdm(range(epochs)):
         for i in range(0, len(X_train), batch_size):
-            X_batch = X_train[i : i + batch_size]
-            y_batch = y_train[i : i + batch_size]
+            X_batch = X_train[i:i + batch_size]
+            y_batch = y_train[i:i + batch_size]
             preds = model(X_batch)
             loss = criterion(preds, y_batch)
             optimizer.zero_grad()
@@ -98,25 +102,17 @@ def train(epochs, X_train, y_train, X_test, y_test, model, optimizer, criterion,
             optimizer.step()
         model.eval()
         torch.cuda.empty_cache()
-        wandb.log(
-            {
-                "Loss": (
-                    get_loss(model, X_train, y_train, criterion)
-                    + get_loss(model, X_batch, y_batch, criterion) / 2
-                )
-            }
-        )
+        wandb.log({
+            "Loss": (get_loss(model, X_train, y_train, criterion) +
+                     get_loss(model, X_batch, y_batch, criterion) / 2)
+        })
         torch.cuda.empty_cache()
         wandb.log({"Val Loss": get_loss(model, X_test, y_test, criterion)})
         torch.cuda.empty_cache()
-        wandb.log(
-            {
-                "Acc": (
-                    get_accuracy(model, X_train, y_train) + get_accuracy(model, X_batch, y_batch)
-                )
-                / 2
-            }
-        )
+        wandb.log({
+            "Acc": (get_accuracy(model, X_train, y_train) +
+                    get_accuracy(model, X_batch, y_batch)) / 2
+        })
         torch.cuda.empty_cache()
         wandb.log({"Val Acc": get_accuracy(model, X_test, y_test)})
         torch.cuda.empty_cache()
