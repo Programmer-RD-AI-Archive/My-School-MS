@@ -1,10 +1,9 @@
 from API import *
 
 get_config_request_parser = reqparse.RequestParser()
-get_config_request_parser.add_argument("password",
-                                       type=str,
-                                       help="Password is required",
-                                       required=True)
+get_config_request_parser.add_argument(
+    "password", type=str, help="Password is required", required=True
+)
 
 
 class Get_Config(Resource):
@@ -28,7 +27,7 @@ class Get_Config(Resource):
             config = open("./API/config.json")
             config = json.load(config)
             return {"config": config}
-        abort(401, message="Wrong password")
+        return abort(401, message="Wrong password")
 
 
 api.add_resource(Get_Config, "/api/get_config")
