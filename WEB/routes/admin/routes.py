@@ -28,7 +28,10 @@ def admin_tutors():
     if "Is_Admin" in session:
         already_accounts = requests.get(
             "http://127.0.0.1:5000/api/azure/sql",
-            {"Query": "SELECT * FROM Tutor", "Type": "Select"},
+            {
+                "Query": "SELECT * FROM Tutor",
+                "Type": "Select"
+            },
         )
         already_accounts = already_accounts.json()["message"]
         return render_template("admin/tutors.html", tutors=already_accounts)
@@ -47,7 +50,10 @@ def admin_tutors_enable(_id):
     if "Is_Admin" in session:
         email = requests.get(
             "http://127.0.0.1:5000/api/azure/sql",
-            {"Query": f"SELECT * FROM Tutor WHERE ID={_id}", "Type": "Select"},
+            {
+                "Query": f"SELECT * FROM Tutor WHERE ID={_id}",
+                "Type": "Select"
+            },
         ).json()["message"][0][1]
         print(email)
         hp = Help_Funcs()
@@ -59,8 +65,10 @@ def admin_tutors_enable(_id):
         requests.get(
             "http://127.0.0.1:5000/api/azure/sql",
             {
-                "Type": "Insert",
-                "Query": f"""
+                "Type":
+                "Insert",
+                "Query":
+                f"""
                 UPDATE Tutor
                 SET Enabled = 'True'
                 WHERE ID={_id};
@@ -84,7 +92,10 @@ def admin_tutors_disable(_id):
     if "Is_Admin" in session:
         email = requests.get(
             "http://127.0.0.1:5000/api/azure/sql",
-            {"Query": f"SELECT * FROM Tutor WHERE ID={_id}", "Type": "Select"},
+            {
+                "Query": f"SELECT * FROM Tutor WHERE ID={_id}",
+                "Type": "Select"
+            },
         ).json()["message"][0][1]
         print(email)
         hp = Help_Funcs()
@@ -96,8 +107,10 @@ def admin_tutors_disable(_id):
         requests.get(
             "http://127.0.0.1:5000/api/azure/sql",
             {
-                "Type": "Insert",
-                "Query": f"""
+                "Type":
+                "Insert",
+                "Query":
+                f"""
                 UPDATE Tutor
                 SET Enabled = 'False'
                 WHERE ID={_id};
@@ -121,7 +134,10 @@ def admin_accounts():
     if "Is_Admin" in session:
         accounts = requests.get(
             "http://127.0.0.1:5000/api/azure/sql",
-            {"Type": "Select", "Query": "SELECT * FROM Accounts"},
+            {
+                "Type": "Select",
+                "Query": "SELECT * FROM Accounts"
+            },
         )
         accounts = accounts.json()["message"]
         return render_template("admin/accounts.html", accounts=accounts)
@@ -160,7 +176,10 @@ def admin_account_delete(_id):
     if "Is_Admin" in session:
         accounts = requests.get(
             "http://127.0.0.1:5000/api/azure/sql",
-            {"Type": "Insert", "Query": f"DELETE FROM Accounts WHERE ID={_id}; "},
+            {
+                "Type": "Insert",
+                "Query": f"DELETE FROM Accounts WHERE ID={_id}; "
+            },
         )
         accounts = accounts.json()["message"]
         flash("Deleted", "success")
@@ -185,8 +204,10 @@ def admin_subjects():
             subjects = requests.get(
                 "http://127.0.0.1:5000/api/azure/sql",
                 {
-                    "Type": "Insert",
-                    "Query": f"""
+                    "Type":
+                    "Insert",
+                    "Query":
+                    f"""
                 INSERT INTO
                     [Subjects] ([Name],[Description],[Image])
                 VALUES
@@ -199,7 +220,10 @@ def admin_subjects():
             subjects = subjects.json()["message"]
         subjects = requests.get(
             "http://127.0.0.1:5000/api/azure/sql",
-            {"Type": "Select", "Query": "SELECT * FROM Subjects"},
+            {
+                "Type": "Select",
+                "Query": "SELECT * FROM Subjects"
+            },
         )
         subjects = subjects.json()["message"]
         return render_template("/admin/subjects.html", subjects=subjects)
@@ -218,7 +242,10 @@ def admin_subject_delete(_id):
     if "Is_Admin" in session:
         subjects = requests.get(
             "http://127.0.0.1:5000/api/azure/sql",
-            {"Type": "Insert", "Query": f"DELETE FROM Subjects WHERE ID={_id}; "},
+            {
+                "Type": "Insert",
+                "Query": f"DELETE FROM Subjects WHERE ID={_id}; "
+            },
         )
         subjects = subjects.json()["message"]
         flash("Deleted", "success")
