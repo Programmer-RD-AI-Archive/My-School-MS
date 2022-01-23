@@ -184,7 +184,7 @@ def home_sign_in():
         session["2FACAUTH"] = False
         return redirect("/2/Fac/Auth/")
     return render_template("home/sign_in.html", session=session, config=config)
-    
+
 
 @app.route("/2/Fac/Auth/", methods=["POST", "GET"])
 @app.route("/2/Fac/Auth", methods=["POST", "GET"])

@@ -46,6 +46,6 @@ class Contact_Us(Resource):
             return {"message": True}
         except Exception as e:
             return {"message": False}
-        
+
 
 api.add_resource(Contact_Us, "/api/Contact_Us")
