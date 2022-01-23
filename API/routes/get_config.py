@@ -14,7 +14,6 @@ class Get_Config(Resource):
     argument -- description
     Return: return_description
     """
-
     @staticmethod
     def get() -> dict:
         """sumary_line

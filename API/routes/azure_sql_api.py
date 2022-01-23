@@ -19,7 +19,6 @@ class Azure_SQL_API(Resource):
     argument -- description
     Return: return_description
     """
-
     @staticmethod
     def get() -> dict:
         """sumary_line

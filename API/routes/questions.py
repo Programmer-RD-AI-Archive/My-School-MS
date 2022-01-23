@@ -2,8 +2,14 @@ from API import *
 
 hp = Help_Funcs()
 questions = reqparse.RequestParser()
-questions.add_argument("html", type=str, help="html is required", required=True)
-questions.add_argument("name", type=str, help="name is required", required=True)
+questions.add_argument("html",
+                       type=str,
+                       help="html is required",
+                       required=True)
+questions.add_argument("name",
+                       type=str,
+                       help="name is required",
+                       required=True)
 
 
 class Questions(Resource):
@@ -13,7 +19,6 @@ class Questions(Resource):
     argument -- description
     Return: return_description
     """
-
     @staticmethod
     def get() -> dict:
         """sumary_line
@@ -25,16 +30,14 @@ class Questions(Resource):
         asql = Azure_SQL()
         tables = asql.get_tables()
         if "Questions" not in tables:
-            asql.create_new_table(
-                """
+            asql.create_new_table("""
                 CREATE TABLE Questions
                 (
                     [ID] int IDENTITY(1,1),
                     [html] varchar(max),
                     [name] varchar(max),
                 )
-                """
-            )
+                """)
         return {"message": asql.select_table("SELECT * FROM Questions")}
 
     @staticmethod
