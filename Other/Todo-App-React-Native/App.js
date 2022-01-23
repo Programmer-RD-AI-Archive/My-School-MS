@@ -21,6 +21,12 @@ import SandBox from "./components/sandbox";
 import TodoItem from "./components/todoItem";
 
 export default function App() {
+  /**
+   * Function to add two numbers
+   * @param a The first number to add
+   * @param b The second number to add
+   * @returns The sum of two numbers
+   */
   const [todos, setTodos] = useState([
     { text: "buy coffee", key: "1" },
     { text: "create an app", key: "2" },
