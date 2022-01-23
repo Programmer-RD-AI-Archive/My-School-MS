@@ -336,7 +336,9 @@ def tutor_test(_id):
     argument -- description
     Return: return_description
     """
-    return render_template("tutor/test.html", _id=_id)
+    if "Is_Tutor" in session:
+        return render_template("tutor/test.html", _id=_id)
+    return abort(404)
 
 
 @app.route("/Tutor/<_id>/Log/Out", methods=["GET", "POST"])
