@@ -5,13 +5,13 @@ argument -- description
 Return: return_description
 */
 
-let idx = 0;
-const idx_iter = 0;
-$("#input").click(function () {
-  idx += 1;
+let idx = 0
+const idx_iter = 0
+$('#input').click(function () {
+  idx += 1
 
-  document.getElementById("content").insertAdjacentHTML(
-    "beforeend",
+  document.getElementById('content').insertAdjacentHTML(
+    'beforeend',
     `<div class="mb-3" id="${idx.toString()}">
           <label for="${idx.toString()}-Label" class="form-label">
             <input class="form-control" id="${idx.toString()}-Input-Name"  type="text" >
@@ -21,13 +21,13 @@ $("#input").click(function () {
           <button type="button" class="btn btn-danger" onClick="removeElement(${idx.toString()})">Delete</button>
           <hr>
         </div>`
-  );
-});
-$("#text").click(function () {
-  idx += 1;
+  )
+})
+$('#text').click(function () {
+  idx += 1
 
-  document.getElementById("content").insertAdjacentHTML(
-    "beforeend",
+  document.getElementById('content').insertAdjacentHTML(
+    'beforeend',
     `<div id="${idx.toString()}">
           <input class="form-control" id="${idx.toString()}-Input-Name"  type="text" >
           <br>
@@ -36,13 +36,13 @@ $("#text").click(function () {
           <hr>
         </div>
       </div>`
-  );
-});
-$("#checkbox").click(function () {
-  idx += 1;
+  )
+})
+$('#checkbox').click(function () {
+  idx += 1
 
-  document.getElementById("content").insertAdjacentHTML(
-    "beforeend",
+  document.getElementById('content').insertAdjacentHTML(
+    'beforeend',
     `<div class="mb-3" id="${idx.toString()}">
           <div class="mb-3 form-check">
             <input type="checkbox" class="form-check-input" id="${idx.toString()}-Label">
@@ -53,13 +53,13 @@ $("#checkbox").click(function () {
           <button type="button" class="btn btn-danger" onClick="removeElement(${idx.toString()})">Delete</button>
           <hr>
         </div>`
-  );
-});
-$("#big_input").click(function () {
-  idx += 1;
+  )
+})
+$('#big_input').click(function () {
+  idx += 1
 
-  document.getElementById("content").insertAdjacentHTML(
-    "beforeend",
+  document.getElementById('content').insertAdjacentHTML(
+    'beforeend',
     `<div class="mb-3" id="${idx.toString()}">
           <label for="${idx.toString()}-Label" class="form-label">
             <input class="form-control" id="${idx.toString()}-Input-Name"  type="text" >
@@ -70,13 +70,13 @@ $("#big_input").click(function () {
           <button type="button" class="btn btn-danger" onClick="removeElement(${idx.toString()})">Delete</button>
           <hr>
         </div>`
-  );
-});
-$("#switches").click(function () {
-  idx += 1;
+  )
+})
+$('#switches').click(function () {
+  idx += 1
 
-  document.getElementById("content").insertAdjacentHTML(
-    "beforeend",
+  document.getElementById('content').insertAdjacentHTML(
+    'beforeend',
     `<div class="mb-3" id="${idx.toString()}">
         <div class="form-check form-switch">
         <input class="form-check-input" type="checkbox" role="switch" id="${idx.toString()}-Input-Name">
@@ -87,13 +87,13 @@ $("#switches").click(function () {
           <button type="button" class="btn btn-danger" onClick="removeElement(${idx.toString()})">Delete</button>
           <hr>
         </div>`
-  );
-});
-$("#checks").click(function () {
-  idx += 1;
+  )
+})
+$('#checks').click(function () {
+  idx += 1
 
-  document.getElementById("content").insertAdjacentHTML(
-    "beforeend",
+  document.getElementById('content').insertAdjacentHTML(
+    'beforeend',
     `<div class="mb-3" id="${idx.toString()}">
     <div class="form-check">
            <input type="checkbox" class="form-check-input" id="${idx.toString()}-Label">
@@ -106,13 +106,13 @@ $("#checks").click(function () {
           <button type="button" class="btn btn-danger" onClick="removeElement(${idx.toString()})">Delete</button>
           <hr>
         </div>`
-  );
-});
-$("#range").click(function () {
-  idx += 1;
+  )
+})
+$('#range').click(function () {
+  idx += 1
 
-  document.getElementById("content").insertAdjacentHTML(
-    "beforeend",
+  document.getElementById('content').insertAdjacentHTML(
+    'beforeend',
     `<div class="mb-3" id="${idx.toString()}">
     <label for="${idx.toString()}-Label" class="form-label"><input class="form-control" id="${idx.toString()}-Input-Name"  type="text" ></label></label>
 <input type="range" class="form-range" id="${idx.toString()}-Label">
@@ -120,9 +120,9 @@ $("#range").click(function () {
           <button type="button" class="btn btn-danger" onClick="removeElement(${idx.toString()})">Delete</button>
           <hr>
         </div>`
-  );
-});
-function submit_info_API(_id) {
+  )
+})
+function submit_info_API (_id) {
   /**
    * Function to add two numbers
    * @param a The first number to add
@@ -130,7 +130,7 @@ function submit_info_API(_id) {
    * @returns The sum of two numbers
    */
 
-  const info = {};
+  const info = {}
   for (
     idx_iter_question = 1;
     idx_iter_question <= idx_question;
@@ -139,42 +139,42 @@ function submit_info_API(_id) {
     try {
       var label = document.getElementById(
         `${idx_iter_question.toString()}-Input-Name`
-      ).value;
+      ).value
     } catch (error) {
-      var label = "None";
+      var label = 'None'
     }
     try {
       var content = document.getElementById(
         `${idx_iter_question.toString()}-Label`
-      ).value;
+      ).value
     } catch (error) {
-      var content = "None";
+      var content = 'None'
     }
     try {
-      var name = document.getElementById("name").value;
+      var name = document.getElementById('name').value
     } catch (error) {
-      var name = "None";
+      var name = 'None'
     }
 
-    info[idx_iter_question] = [label, content];
+    info[idx_iter_question] = [label, content]
   }
-  info.name = name;
+  info.name = name
   $.ajax({
-    type: "POST",
+    type: 'POST',
     url: `/Tutor/${_id}/Question/Post/`,
-    data: JSON.stringify({ info: info, yourdiv: $("#content").html() }),
-  });
-  alert("Are you sure ?");
-  alert("Question Added");
-  window.location.reload(0);
+    data: JSON.stringify({ info: info, yourdiv: $('#content').html() })
+  })
+  alert('Are you sure ?')
+  alert('Question Added')
+  window.location.reload(0)
 }
-function removeElement(idx_question) {
+function removeElement (idx_question) {
   /**
    * Function to add two numbers
    * @param a The first number to add
    * @param b The second number to add
    * @returns The sum of two numbers
    */
-  const element = document.getElementById(`${idx_question}`);
-  element.remove();
+  const element = document.getElementById(`${idx_question}`)
+  element.remove()
 } // TODO Redirect the POST Request to the API
