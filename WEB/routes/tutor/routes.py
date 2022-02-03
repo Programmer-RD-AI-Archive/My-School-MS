@@ -37,15 +37,24 @@ def tutor_courses(_id):
     if "Is_Tutor" in session:
         resources = requests.get(
             "http://127.0.0.1:5000/api/azure/sql",
-            {"Query": "SELECT * FROM Resources", "Type": "Select"},
+            {
+                "Query": "SELECT * FROM Resources",
+                "Type": "Select"
+            },
         ).json()["message"]
         questions = requests.get(
             "http://127.0.0.1:5000/api/azure/sql",
-            {"Query": "SELECT * FROM Questions", "Type": "Select"},
+            {
+                "Query": "SELECT * FROM Questions",
+                "Type": "Select"
+            },
         ).json()["message"]
         courses = requests.get(
             "http://127.0.0.1:5000/api/azure/sql",
-            {"Query": "SELECT * FROM Courses", "Type": "Select"},
+            {
+                "Query": "SELECT * FROM Courses",
+                "Type": "Select"
+            },
         ).json()["message"]
         new_cources = []
         iter_cources = []
@@ -59,7 +68,10 @@ def tutor_courses(_id):
         new_cources.append(iter_cources)
         subjects = requests.get(
             "http://127.0.0.1:5000/api/azure/sql",
-            {"Query": "SELECT * FROM Subjects", "Type": "Select"},
+            {
+                "Query": "SELECT * FROM Subjects",
+                "Type": "Select"
+            },
         ).json()["message"]
         return render_template(
             "tutor/courses.html",
@@ -162,9 +174,7 @@ def tutor_resources(_id):
             ).json()
             flash("Resource Added", "success")
             return redirect("/Tutor/Resources")
-        results = requests.get(
-            "http://127.0.0.1:5000/api/resources",
-        ).json()
+        results = requests.get("http://127.0.0.1:5000/api/resources", ).json()
         return render_template(
             "tutor/resources.html",
             session=session,
@@ -225,7 +235,8 @@ def tutor_resources_edit(_id, _id_resource):
             results = requests.get(
                 "http://127.0.0.1:5000/api/azure/sql",
                 {
-                    "Query": f"UPDATE Resources SET method_of_resource='{method_of_resource}', link_of_resource='{link_of_resource}', title='{title}', description='{description}' WHERE ID={_id_resource}",
+                    "Query":
+                    f"UPDATE Resources SET method_of_resource='{method_of_resource}', link_of_resource='{link_of_resource}', title='{title}', description='{description}' WHERE ID={_id_resource}",
                     "Type": "Insert",
                 },
             ).json()
@@ -260,8 +271,7 @@ def tutor_question_post(_id):
     flash("Question Added", "success")
     request_form = eval(
         list(dict(request.form).keys())[0] +
-        list(dict(request.form).values())[0]
-    )
+        list(dict(request.form).values())[0])
     print(request_form)
     info = request_form["info"]
     yourdiv = request_form["yourdiv"]
@@ -300,17 +310,16 @@ def tutor_question_post(_id):
         for input_ in inputs:
             input_.attrs["answer"] = info[str(idx)][1]
             input_.attrs["name"] = input_.attrs["id"]
-    requests.post(
-        "http://127.0.0.1:5000/api/questions", {
-            "html": str(soup), "name": str(name)}
-    ).json()
+    requests.post("http://127.0.0.1:5000/api/questions", {
+        "html": str(soup),
+        "name": str(name)
+    }).json()
     return ("", 200)
 
 
 @app.route("/Tutor/<_id>/Question/<_id_question>/Preview/")
 @app.route(
-    "/Tutor/<_id>/Question/<_id_question>/Preview",
-)
+    "/Tutor/<_id>/Question/<_id_question>/Preview", )
 def tutor_question_preview(_id, _id_question):
     """sumary_line
     Keyword arguments:
@@ -325,16 +334,15 @@ def tutor_question_preview(_id, _id_question):
                 "Type": "Select",
             },
         ).json()["message"][0]
-        return render_template(
-            "tutor/tutor_question_preview.html", code=results[1], _id=_id
-        )
+        return render_template("tutor/tutor_question_preview.html",
+                               code=results[1],
+                               _id=_id)
     return abort(404)
 
 
 @app.route("/Tutor/<_id>/Question/<_id_question>/Delete/")
 @app.route(
-    "/Tutor/<_id>/Question/<_id_question>/Delete",
-)
+    "/Tutor/<_id>/Question/<_id_question>/Delete", )
 def tutor_question_delete(_id, _id_question):
     """sumary_line
     Keyword arguments:
