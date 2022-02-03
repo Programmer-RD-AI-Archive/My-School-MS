@@ -20,13 +20,12 @@ class Help_Funcs:
     argument -- description
     Return: return_description
     """
-
     @staticmethod
     def validate_email(email: str) -> bool:
         "Checking if email is valid or real"
         response = requests.get(
-            "https://isitarealemail.com/api/email/validate", params={"email": email}
-        )  # validating if a email is valid
+            "https://isitarealemail.com/api/email/validate",
+            params={"email": email})  # validating if a email is valid
         status = response.json()["status"]  # getting the response
         status = status == "valid"  # TODO
         return status
@@ -49,36 +48,29 @@ class Help_Funcs:
         )
         return respond.json()
 
-    def two_fac_auth(self, user_name: str, email: str, phone_numer: str) -> list:
+    def two_fac_auth(self, user_name: str, email: str,
+                     phone_numer: str) -> list:
         """sumary_line
 
         Keyword arguments:
         argument -- description
         Return: return_description
         """
-        time = (
-            str(datetime.datetime.now().year)
-            + " "
-            + str(datetime.datetime.now().month)
-            + " "
-            + str(datetime.datetime.now().day)
-            + " "
-            + str(datetime.datetime.now().hour)
-            + " "
-            + str(datetime.datetime.now().minute)
-        )
+        time = (str(datetime.datetime.now().year) + " " +
+                str(datetime.datetime.now().month) + " " +
+                str(datetime.datetime.now().day) + " " +
+                str(datetime.datetime.now().hour) + " " +
+                str(datetime.datetime.now().minute))
         db = cluster["2FACAUTH"]
         collection = db["2FACAUTH"]
         email_random = random.randint(0, 10000000)
         sms_random = random.randint(0, 10000000)
-        collection.insert_one(
-            {
-                str(email): str(email_random),
-                str(phone_numer): str(sms_random),
-                "user_name": str(user_name),
-                "time": time,
-            }
-        )
+        collection.insert_one({
+            str(email): str(email_random),
+            str(phone_numer): str(sms_random),
+            "user_name": str(user_name),
+            "time": time,
+        })
         self.send_sms(
             f"{sms_random} - My-School Code for 2Auth \n\n\n\n\n Only for 5 Min",
             # "+" + str(self.decode(phone_numer)),
@@ -150,7 +142,8 @@ class Help_Funcs:
         account_sid = "ACb80fbc1d1d4c8e254c1c6160662fe399"
         auth_token = "f1964f9a1961ac6a9275f76e9849b5f6"
         client = Client(account_sid, auth_token)
-        message = client.messages.create(
-            body=msg, from_="+16065352864", to=number)
+        message = client.messages.create(body=msg,
+                                         from_="+16065352864",
+                                         to=number)
         return message.sid
         # return "Testing"
