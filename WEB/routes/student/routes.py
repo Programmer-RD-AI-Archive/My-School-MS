@@ -1,3 +1,4 @@
+import ast
 import warnings
 
 import pandas as pd
@@ -124,7 +125,7 @@ def student_subject_enroll(_id, name_of_subject):
         id_courses = courses[0]
         id_tutor = courses[-1]
         id_student = _id
-        courses_content = eval(
+        courses_content = ast.literal_eval(
             requests.get(
                 "http://127.0.0.1:5000/api/azure/storage",
                 {

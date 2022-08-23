@@ -1,3 +1,4 @@
+import ast
 import warnings
 
 import speech_recognition as sr
@@ -100,7 +101,7 @@ def tutor_courses_post(_id):
         for key, val in zip(request_forms.keys(), request_forms.values()):
             new_request_forms += key
             new_request_forms += val
-        request_forms = eval(new_request_forms)
+        request_forms = ast.literal_eval(new_request_forms)
         whole_content = request_forms["whole_content"]
         whole_content = BeautifulSoup(whole_content, "html.parser")
         info = request_forms["info"]
@@ -269,7 +270,7 @@ def tutor_question_post(_id):
     Return: return_description
     """
     flash("Question Added", "success")
-    request_form = eval(
+    request_form = ast.literal_eval(
         list(dict(request.form).keys())[0] +
         list(dict(request.form).values())[0])
     print(request_form)
