@@ -62,10 +62,6 @@ data.drop(to_delete, axis=0, inplace=True)
 
 data["Label"].value_counts()
 
-# In[12]:
-
-data.dtypes
-
 # In[13]:
 
 X = data["Review"]
