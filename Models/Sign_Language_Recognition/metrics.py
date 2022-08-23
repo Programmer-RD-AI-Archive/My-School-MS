@@ -14,9 +14,9 @@ def test(net, X, y):
     total = 0
     net.eval()
     with torch.no_grad():
-        for i in range(len(X)):
+        for i, item in enumerate(X):
             real_class = torch.argmax(y[i]).to(device)
-            net_out = net(X[i].view(-1, 1, 112, 112).to(device).float())
+            net_out = net(item.view(-1, 1, 112, 112).to(device).float())
             net_out = net_out[0]
             predictied_class = torch.argmax(net_out)
             if predictied_class == real_class:
