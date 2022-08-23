@@ -48,9 +48,7 @@ batch_size_per_images = [8, 16, 32, 64, 128, 256, 512]
 
 
 class Model:
-    """
-    This class helps anyone to train a detectron2 model for this project easily so anyone can train this model.
-    """
+    """This class helps anyone to train a detectron2 model for this project easily so anyone can train this model."""
 
     def __init__(
         self,
